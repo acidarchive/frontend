@@ -1,0 +1,69 @@
+.header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  container: header / inline-size;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--light);
+  box-shadow: var(--nav-shadow);
+}
+
+.link {
+  text-decoration: none;
+  padding: 0.15em 0.25em;
+  width: fit-content;
+  color: var(--primary);
+
+  &:hover {
+    background-color: var(--accent);
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  font-weight: 800;
+  font-size: 2rem;
+  transition: var(--transition);
+
+  span {
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    clip-path: inset(50%);
+    font-size: inherit;
+    line-height: 0;
+    transform: translateY(-0.1em);
+  }
+}
+
+.menu {
+  container: menu / inline-size;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+@container header (inline-size >= 45ch) {
+  .brand span {
+    height: auto;
+    overflow: unset;
+    position: unset;
+    clip-path: unset;
+  }
+}
+
+@container menu (inline-size >= 60ch) {
+  .menuButton {
+    display: none;
+  }
+
+  .menuList {
+    display: flex;
+  }
+}

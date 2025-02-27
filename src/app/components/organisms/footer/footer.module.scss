@@ -1,0 +1,9 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem;
+  background: var(--light);
+  text-align: center;
+  box-shadow: 0 -2px 5px rgb(0 0 0 / 10%);
+}
