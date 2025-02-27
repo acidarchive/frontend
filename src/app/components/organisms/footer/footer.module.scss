@@ -6,4 +6,11 @@
   background: var(--light);
   text-align: center;
   box-shadow: 0 -2px 5px rgb(0 0 0 / 10%);
+  color: var(--text-color-secondary, var(--primary));
+
+  p {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 }
