@@ -20,7 +20,8 @@
     "eslint-plugin-import": "^2.31.0",
     "next": "15.2.1",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "react-knob-headless": "0.3.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.5",
