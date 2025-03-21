@@ -1,0 +1,51 @@
+.select {
+  display: flex;
+  flex-direction: column;
+}
+
+.options {
+  display: flex;
+}
+
+.option {
+  width: 100%;
+  height: 100%;
+
+  input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    background-color: var(--accent);
+  }
+
+  &.active {
+    background-color: var(--accent);
+  }
+
+  &.disabled {
+    pointer-events: none;
+  }
+
+  &.disabled:hover {
+    background-color: transparent;
+  }
+}
+
+.input {
+  display: grid;
+  grid-template-areas: 'input';
+
+  > * {
+    grid-area: input;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  border: 1px solid #fff;
+}
