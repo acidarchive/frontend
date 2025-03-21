@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Add waveform select component
+
+
+## [0.0.1-alpha.4] - 2025-03-17
+
 ### ⚙️ Miscellaneous
 
 - Update packages
@@ -42,7 +49,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.3..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.4..HEAD
+[0.0.1-alpha.4]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.3..v0.0.1-alpha.4
 [0.0.1-alpha.3]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.2..v0.0.1-alpha.3
 [0.0.1-alpha.2]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.1..v0.0.1-alpha.2
 [0.0.1-alpha.1]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.0..v0.0.1-alpha.1
