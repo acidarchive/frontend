@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Add step flag component
+
+
+## [0.0.1-alpha.7] - 2025-03-24
+
 ### ⚙️ Miscellaneous
 
 - Add @testing-library/user-event package
@@ -68,7 +75,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.6..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..HEAD
+[0.0.1-alpha.7]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.6..v0.0.1-alpha.7
 [0.0.1-alpha.6]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.5..v0.0.1-alpha.6
 [0.0.1-alpha.5]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.4..v0.0.1-alpha.5
 [0.0.1-alpha.4]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.3..v0.0.1-alpha.4
