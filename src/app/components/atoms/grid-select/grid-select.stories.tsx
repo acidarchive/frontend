@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Select } from './select';
-
-const meta = {
-  title: 'Atoms/Select',
-  component: Select,
-  tags: ['autodocs'],
-} satisfies Meta<typeof Select>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+import { GridSelect } from './grid-select';
 
 const options = [
   { value: 'C', label: 'C' },
@@ -17,11 +8,27 @@ const options = [
   { value: 'E', label: 'E' },
 ];
 
+const meta = {
+  title: 'Atoms/GridSelect',
+  component: GridSelect,
+  tags: ['autodocs'],
+} satisfies Meta<typeof GridSelect>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
 export const Default: Story = {
   args: {
     value: 'C',
     options,
-    onChange: () => {},
+  },
+};
+
+export const WithEmptyOption: Story = {
+  args: {
+    value: '',
+    options,
+    allowEmpty: true,
   },
 };
 
@@ -29,7 +36,6 @@ export const Disabled: Story = {
   args: {
     value: 'E',
     options,
-    onChange: () => {},
     disabled: true,
   },
 };
