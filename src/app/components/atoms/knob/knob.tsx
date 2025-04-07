@@ -1,9 +1,9 @@
 import { mapFrom01Linear, mapTo01Linear } from '@dsp-ts/math';
+import clsx from 'clsx';
 import { useId, useState } from 'react';
 import {
   KnobHeadless,
   KnobHeadlessLabel,
-  KnobHeadlessOutput,
   useKnobKeyboardControls,
 } from 'react-knob-headless';
 
@@ -21,19 +21,21 @@ const VALUE_MIN = 0;
 const VALUE_MAX = 100;
 
 export type KnobProps = Pick<KnobHeadlessProps, 'mapTo01' | 'mapFrom01'> & {
-  readonly label: string;
-  readonly valueDefault: number;
+  readonly disabled?: boolean;
+  readonly value?: number;
+  readonly label?: string;
 };
 
 export function Knob({
   label,
-  valueDefault,
+  disabled = false,
+  value = 50,
   mapTo01 = mapTo01Linear,
   mapFrom01 = mapFrom01Linear,
 }: KnobProps) {
   const knobId = useId();
   const labelId = useId();
-  const [valueRaw, setValueRaw] = useState<number>(valueDefault);
+  const [valueRaw, setValueRaw] = useState<number>(value);
 
   const value01 = mapTo01(valueRaw, VALUE_MIN, VALUE_MAX);
 
@@ -47,28 +49,29 @@ export function Knob({
   });
 
   return (
-    <div>
-      <KnobHeadlessLabel id={labelId}>{label}</KnobHeadlessLabel>
-      <KnobHeadless
-        id={knobId}
-        aria-labelledby={labelId}
-        className={styles.knob}
-        valueMin={VALUE_MIN}
-        valueMax={VALUE_MAX}
-        valueRaw={valueRaw}
-        valueRawRoundFn={valueRawRoundFunction}
-        valueRawDisplayFn={valueRawDisplayFunction}
-        dragSensitivity={DRAG_SENSITIVITY}
-        mapTo01={mapTo01}
-        mapFrom01={mapFrom01}
-        onValueRawChange={setValueRaw}
-        {...keyboardControlHandlers}
-      >
-        <TB303Thumb value01={value01} />
-      </KnobHeadless>
-      <KnobHeadlessOutput htmlFor={knobId}>
-        {valueRawDisplayFunction(valueRaw)}
-      </KnobHeadlessOutput>
+    <div className={clsx(styles.container, { [styles.disabled]: disabled })}>
+      <KnobHeadlessLabel className={styles.label} id={labelId}>
+        {label}
+      </KnobHeadlessLabel>
+      <div className={styles.inner}>
+        <KnobHeadless
+          id={knobId}
+          aria-labelledby={labelId}
+          className={styles.knob}
+          valueMin={VALUE_MIN}
+          valueMax={VALUE_MAX}
+          valueRaw={valueRaw}
+          valueRawRoundFn={valueRawRoundFunction}
+          valueRawDisplayFn={valueRawDisplayFunction}
+          dragSensitivity={DRAG_SENSITIVITY}
+          mapTo01={mapTo01}
+          mapFrom01={mapFrom01}
+          onValueRawChange={setValueRaw}
+          {...keyboardControlHandlers}
+        >
+          <TB303Thumb value01={value01} />
+        </KnobHeadless>
+      </div>
     </div>
   );
 }
