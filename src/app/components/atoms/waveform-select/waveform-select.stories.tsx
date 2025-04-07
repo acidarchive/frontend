@@ -20,14 +20,12 @@ export const Default: Story = {
 export const Square: Story = {
   args: {
     value: Waveform.Square,
-    onChange: () => {},
   },
 };
 
 export const Sawtooth: Story = {
   args: {
     value: Waveform.Sawtooth,
-    onChange: () => {},
   },
 };
 
@@ -35,6 +33,5 @@ export const Disabled: Story = {
   args: {
     value: Waveform.Square,
     disabled: true,
-    onChange: () => {},
   },
 };
