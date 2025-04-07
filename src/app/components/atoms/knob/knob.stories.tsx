@@ -14,6 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     label: 'Resonance',
-    valueDefault: 50,
+    value: 50,
   },
 };

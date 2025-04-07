@@ -3,15 +3,12 @@ import { render, screen } from '@testing-library/react';
 import { Knob } from './knob';
 
 describe('Knob', () => {
-  it('renders', () => {
-    render(<Knob label="Resonance" valueDefault={50} />);
+  it('renders with correct label and default value', () => {
+    render(<Knob label="Resonance" value={50} />);
 
     const knob = screen.getByRole('slider');
-    const label = screen.getByText('Resonance');
-    const value = screen.getByText('50%');
-
     expect(knob).toBeInTheDocument();
-    expect(label).toBeInTheDocument();
-    expect(value).toBeInTheDocument();
+    expect(screen.getByText('Resonance')).toBeInTheDocument();
+    expect(knob).toHaveAttribute('aria-valuenow', '50');
   });
 });
