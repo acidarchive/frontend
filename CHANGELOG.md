@@ -3,6 +3,13 @@
 
 ### ⚙️ Miscellaneous
 
+- Update packages
+
+
+## [0.0.1-alpha.9] - 2025-04-13
+
+### ⚙️ Miscellaneous
+
 - Add @headlessui/react package
 
 
@@ -101,7 +108,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..HEAD
+[0.0.1-alpha.9]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..v0.0.1-alpha.9
 [0.0.1-alpha.8]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..v0.0.1-alpha.8
 [0.0.1-alpha.7]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.6..v0.0.1-alpha.7
 [0.0.1-alpha.6]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.5..v0.0.1-alpha.6
