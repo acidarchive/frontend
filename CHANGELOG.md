@@ -1,6 +1,32 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Add @headlessui/react package
+
+
+### 🌀 Added
+
+- Add tb303 pattern component
+
+- Add global font size
+
+- Add waveform select component
+
+- Add knob component
+
+- Add grid select component
+
+- Add grid input component
+
+- Add grid checkbox component
+
+- Add grid textarea component
+
+
+## [0.0.1-alpha.8] - 2025-03-25
+
 ### 🌀 Added
 
 - Add step flag component
@@ -75,7 +101,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..HEAD
+[0.0.1-alpha.8]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..v0.0.1-alpha.8
 [0.0.1-alpha.7]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.6..v0.0.1-alpha.7
 [0.0.1-alpha.6]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.5..v0.0.1-alpha.6
 [0.0.1-alpha.5]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.4..v0.0.1-alpha.5
