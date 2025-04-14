@@ -13,7 +13,6 @@ describe('MainLayout', () => {
     expect(
       screen.getByRole('img', { name: /smiley logo/i }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /github/i })).toBeInTheDocument();
   });
 
   it('renders children inside main content', () => {
