@@ -1,3 +1,4 @@
+'use client';
 import clsx from 'clsx';
 
 import { GridCheckbox } from '@/app/components/atoms/grid-checkbox';

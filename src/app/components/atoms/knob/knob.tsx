@@ -1,3 +1,4 @@
+'use client';
 import { mapFrom01Linear, mapTo01Linear } from '@dsp-ts/math';
 import clsx from 'clsx';
 import { useId, useState } from 'react';
