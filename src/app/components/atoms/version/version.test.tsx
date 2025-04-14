@@ -10,6 +10,6 @@ describe('Version', () => {
   it('displays correct version', () => {
     render(<Version />);
 
-    expect(screen.getByText('Version: 1.2.3')).toBeInTheDocument();
+    expect(screen.getByText('v1.2.3')).toBeInTheDocument();
   });
 });
