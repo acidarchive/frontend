@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Add tailwindcss
+
+
+## [0.0.1-alpha.10] - 2025-04-13
+
 ### ⚙️ Miscellaneous
 
 - Update packages
@@ -108,7 +115,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.10..HEAD
+[0.0.1-alpha.10]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..v0.0.1-alpha.10
 [0.0.1-alpha.9]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..v0.0.1-alpha.9
 [0.0.1-alpha.8]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..v0.0.1-alpha.8
 [0.0.1-alpha.7]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.6..v0.0.1-alpha.7
