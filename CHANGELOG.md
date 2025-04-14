@@ -3,6 +3,17 @@
 
 ### 🌀 Added
 
+- Show pattern in home page
+
+- Footer component
+
+- Header component
+
+
+## [0.0.1-alpha.11] - 2025-04-14
+
+### 🌀 Added
+
 - Add tailwindcss
 
 
@@ -115,7 +126,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.10..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.11..HEAD
+[0.0.1-alpha.11]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.10..v0.0.1-alpha.11
 [0.0.1-alpha.10]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..v0.0.1-alpha.10
 [0.0.1-alpha.9]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..v0.0.1-alpha.9
 [0.0.1-alpha.8]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.7..v0.0.1-alpha.8
