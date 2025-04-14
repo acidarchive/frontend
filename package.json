@@ -29,6 +29,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.24.0",
     "@headlessui/react": "^2.2.1",
+    "@heroicons/react": "^2.2.0",
     "@next/eslint-plugin-next": "^15.3.0",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
