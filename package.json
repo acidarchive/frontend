@@ -25,6 +25,7 @@
     "react-knob-headless": "0.3.0"
   },
   "devDependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.6.0",
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.24.0",

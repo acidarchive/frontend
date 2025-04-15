@@ -27,6 +27,9 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(@types/react-dom@19.1.2(@types/react@19.1.1))(@types/react@19.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
     devDependencies:
+      '@aws-amplify/adapter-nextjs':
+        specifier: ^1.6.0
+        version: 1.6.0(aws-amplify@6.14.2)(next@15.2.1(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))
       '@chromatic-com/storybook':
         specifier: ^3.2.6
         version: 3.2.6(react@19.0.0)(storybook@8.6.12(prettier@3.5.3))
@@ -211,6 +214,12 @@ packages:
 
   '@asamuzakjp/css-color@3.1.1':
     resolution: {integrity: sha512-hpRD68SV2OMcZCsrbdkccTw5FXjNDLo5OuqSHyHZfwweGsDWZwDJ2+gONyNAbazZclobMirACLw0lk8WVxIqxA==}
+
+  '@aws-amplify/adapter-nextjs@1.6.0':
+    resolution: {integrity: sha512-c5Ue5NnZb3ZItr3A/fGgy/prHu3g9Z1SrEOegmYbjNxIr3SY3tn7xJlnd0xNYBSVX4YT2n6FkZr7SbF0oo3PZg==}
+    peerDependencies:
+      aws-amplify: ^6.13.1
+      next: '>=13.5.0 <16.0.0'
 
   '@aws-amplify/analytics@7.0.78':
     resolution: {integrity: sha512-ia6ZTVIq0lhlxuw1pgnGOhD2svaFJ8MypsrscTUgyziHfzmDFqhswhxhYjqie+9ilcLjrOypMBke0dBLCY8d9A==}
@@ -2913,6 +2922,10 @@ packages:
 
   aws-amplify@6.14.2:
     resolution: {integrity: sha512-kBPTb211EdGz6TG3Syamd9h9wPSujVuTq5/iYzcSL2gEOp2XO2aPeHFuiCA5ey9GspcCcNAHvOb/3vsc6lS4hw==}
+
+  aws-jwt-verify@4.0.1:
+    resolution: {integrity: sha512-kzvi71eD3w/mCpYRUY7cz6DX4bfYihGdI2yV3FYQ2JuZZenqAqDPz0gWj0ew6vlAtdEVBNb7p+Dm2TAIxpVYMA==}
+    engines: {node: '>=14.0.0'}
 
   axe-core@4.10.3:
     resolution: {integrity: sha512-Xm7bpRXnDSX2YE2YFfBk2FnF0ep6tmG7xPh8iHee8MIcrgq762Nkce856dYtJYLkuIoYZvGfTs/PbZhideTcEg==}
@@ -6682,6 +6695,12 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.3
       lru-cache: 10.4.3
 
+  '@aws-amplify/adapter-nextjs@1.6.0(aws-amplify@6.14.2)(next@15.2.1(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3))':
+    dependencies:
+      aws-amplify: 6.14.2
+      aws-jwt-verify: 4.0.1
+      next: 15.2.1(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.86.3)
+
   '@aws-amplify/analytics@7.0.78(@aws-amplify/core@6.11.2)':
     dependencies:
       '@aws-amplify/core': 6.11.2
@@ -10176,6 +10195,8 @@ snapshots:
       tslib: 2.8.1
     transitivePeerDependencies:
       - aws-crt
+
+  aws-jwt-verify@4.0.1: {}
 
   axe-core@4.10.3: {}
 
