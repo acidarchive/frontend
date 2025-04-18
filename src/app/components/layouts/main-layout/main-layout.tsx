@@ -9,7 +9,7 @@ export const MainLayout: React.FC<{ children: React.ReactNode }> = ({
   return (
     <>
       <Header />
-      <main className="flex-grow">{children}</main>
+      <main>{children}</main>
       <Footer />
     </>
   );

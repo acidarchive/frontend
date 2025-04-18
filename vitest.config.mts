@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: './vitest.setup.ts',
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts', './src/tests/setup-tests.ts'],
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'lcov'],

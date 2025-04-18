@@ -2,11 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { UserProvider } from '@/app/context/user-context';
 
-import { Header } from './header';
+import { SigninForm } from './signin-form';
 
 const meta = {
-  title: 'Organisms/Header',
-  component: Header,
+  title: 'Organisms/Auth/SigninForm',
+  component: SigninForm,
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
   decorators: [
     Story => (
       <UserProvider>
@@ -15,11 +20,9 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof SigninForm>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = {};

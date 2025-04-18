@@ -1,12 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import SigninPage from '@/app/auth/signin/page';
 import { UserProvider } from '@/app/context/user-context';
 
-import { Header } from './header';
-
 const meta = {
-  title: 'Organisms/Header',
-  component: Header,
+  title: 'Pages/Auth/SigninPage',
+  component: SigninPage,
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+    },
+  },
   decorators: [
     Story => (
       <UserProvider>
@@ -15,11 +19,9 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof SigninPage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
-};
+export const Default: Story = {};

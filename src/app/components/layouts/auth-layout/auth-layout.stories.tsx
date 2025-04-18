@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { UserProvider } from '@/app/context/user-context';
 
-import { MainLayout } from './main-layout';
+import { AuthLayout } from './auth-layout';
 
 const meta = {
-  title: 'Layouts/MainLayout',
-  component: MainLayout,
+  title: 'Layouts/AuthLayout',
+  component: AuthLayout,
   parameters: {
     layout: 'fullscreen',
   },
@@ -18,15 +18,15 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-} satisfies Meta<typeof MainLayout>;
+} satisfies Meta<typeof AuthLayout>;
 
 export default meta;
-type Story = StoryObj<typeof MainLayout>;
+type Story = StoryObj<typeof AuthLayout>;
 
 export const Default: Story = {
   render: () => (
-    <MainLayout>
+    <AuthLayout>
       <div style={{ height: '30rem', textAlign: 'center' }}></div>
-    </MainLayout>
+    </AuthLayout>
   ),
 };
