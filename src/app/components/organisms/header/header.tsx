@@ -49,18 +49,18 @@ export const Header: React.FC = () => {
             ))}
           </nav>
           <div className="flex flex-1 items-center justify-end gap-x-8">
-            <a
-              href="#"
+            <Link
+              href="/auth/signin"
               className="font-sans hidden text-sm/6 font-semibold text-gray-900 lg:block"
             >
               Log in
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/auth/signup"
               className="font-sans rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
         <Dialog

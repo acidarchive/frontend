@@ -5,7 +5,8 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import { MainLayout } from '@/app/components/layouts/main-layout';
+import ConfigureAmplifyClientSide from '@/app/amplify-cognito-config';
+
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -25,7 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={clsx(inter.variable, 'h-full')}>
       <body className="h-full flex flex-col">
-        <MainLayout>{children}</MainLayout>
+        <>
+          <ConfigureAmplifyClientSide />
+          {children}
+        </>
       </body>
     </html>
   );
