@@ -66,6 +66,7 @@
     "eslint-plugin-unicorn": "56.0.1",
     "git-cliff": "^2.8.0",
     "globals": "^16.0.0",
+    "happy-dom": "^17.4.4",
     "jsdom": "^26.1.0",
     "lucide-react": "^0.479.0",
     "postcss": "^8.5.3",
