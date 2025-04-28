@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Wrap useSearchParams in as Suspense boundary
+
+
+## [0.0.1-alpha.13] - 2025-04-28
+
 ### 🌀 Added
 
 - Usermenu component
@@ -164,7 +171,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.12..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.13..HEAD
+[0.0.1-alpha.13]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.12..v0.0.1-alpha.13
 [0.0.1-alpha.12]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.11..v0.0.1-alpha.12
 [0.0.1-alpha.11]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.10..v0.0.1-alpha.11
 [0.0.1-alpha.10]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..v0.0.1-alpha.10
