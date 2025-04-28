@@ -3,6 +3,44 @@
 
 ### 🌀 Added
 
+- Usermenu component
+
+- Avatar component
+
+- Auth button group component
+
+- Add happy-dom package
+
+- Add success message component
+
+- Add error message component
+
+- Add react-hook-form package
+
+- Add auth pages
+
+- Add input component
+
+- Add button component
+
+- Add form-label component
+
+- Add @aws-amplify/adapter-nextjsaws-amplify
+
+- Add aws-amplify
+
+
+### 🔧 Fixed
+
+- Update input styling
+
+- Update button styling
+
+
+## [0.0.1-alpha.12] - 2025-04-14
+
+### 🌀 Added
+
 - Show pattern in home page
 
 - Footer component
@@ -126,7 +164,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.11..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.12..HEAD
+[0.0.1-alpha.12]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.11..v0.0.1-alpha.12
 [0.0.1-alpha.11]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.10..v0.0.1-alpha.11
 [0.0.1-alpha.10]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.9..v0.0.1-alpha.10
 [0.0.1-alpha.9]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.8..v0.0.1-alpha.9
