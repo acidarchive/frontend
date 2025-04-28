@@ -1,11 +1,12 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { AuthLayout } from '@/app/components/layouts/auth-layout';
 import { ConfirmPasswordResetForm } from '@/app/components/organisms/auth/confirm-password-reset-form';
 
-export default function ConfirmPasswordReset() {
+function ConfirmPasswordReset() {
   const searchParams = useSearchParams();
   const email = searchParams.get('email') || '';
 
@@ -19,5 +20,13 @@ export default function ConfirmPasswordReset() {
         <ConfirmPasswordResetForm email={email} />
       </div>
     </AuthLayout>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="text-center">Loading...</div>}>
+      <ConfirmPasswordReset />
+    </Suspense>
   );
 }
