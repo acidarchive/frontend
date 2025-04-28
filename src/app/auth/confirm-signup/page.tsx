@@ -1,10 +1,11 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { ConfirmSignupForm } from '@/app/components/organisms/auth/confirm-signup-form';
 
-export default function ConfirmSignup() {
+function ConfirmSignup() {
   const searchParams = useSearchParams();
   const username = searchParams.get('username') || '';
 
@@ -18,5 +19,13 @@ export default function ConfirmSignup() {
         <ConfirmSignupForm username={username} />
       </div>
     </>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="text-center">Loading...</div>}>
+      <ConfirmSignup />
+    </Suspense>
   );
 }
