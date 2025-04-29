@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ConfirmSignupPage from '@/app/auth/confirm-signup/page';
-import { AuthLayout } from '@/app/components/layouts/auth-layout';
+import { UserProvider } from '@/app/context/user-context';
 
 const meta = {
   title: 'Pages/Auth/ConfirmSignupPage',
@@ -13,9 +13,9 @@ const meta = {
   },
   decorators: [
     Story => (
-      <AuthLayout>
+      <UserProvider>
         <Story />
-      </AuthLayout>
+      </UserProvider>
     ),
   ],
   tags: ['autodocs'],
