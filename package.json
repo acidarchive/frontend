@@ -13,8 +13,7 @@
     "stylelint:fix": "stylelint '**/*.scss' --fix",
     "format": "prettier --write .",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "chromatic": "npx chromatic"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@dsp-ts/math": "^0.1.0",
