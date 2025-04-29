@@ -14,26 +14,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Enter your text',
-  },
-};
-
-export const WithValue: Story = {
-  args: {
-    value: 'This textarea has value',
-    placeholder: 'Enter your text',
+    value: 'Hello world',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    value: 'This textarea is disabled',
+    value: 'Hello world',
     disabled: true,
-  },
-};
-
-export const ReadOnly: Story = {
-  args: {
-    value: 'This textarea is read-only',
-    readOnly: true,
   },
 };

@@ -11,9 +11,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const Checked: Story = {
+export const Default: Story = {
   args: {
     checked: true,
   },
@@ -21,13 +19,13 @@ export const Checked: Story = {
 
 export const Disabled: Story = {
   args: {
+    checked: true,
     disabled: true,
   },
 };
 
-export const CheckedDisabled: Story = {
+export const Unchecked: Story = {
   args: {
-    checked: true,
-    disabled: true,
+    checked: false,
   },
 };
