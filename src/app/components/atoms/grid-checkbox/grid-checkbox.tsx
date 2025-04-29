@@ -1,8 +1,6 @@
 import { Checkbox } from '@headlessui/react';
 import clsx from 'clsx';
 
-import styles from './grid-checkbox.module.scss';
-
 interface GridCheckboxProps {
   checked?: boolean;
   disabled?: boolean;
@@ -16,12 +14,22 @@ export function GridCheckbox({
 }: GridCheckboxProps) {
   return (
     <Checkbox
-      className={clsx(styles.checkbox, checked && styles.checked)}
+      className={clsx(
+        'block w-full relative cursor-pointer',
+        disabled && 'cursor-default',
+      )}
       checked={checked}
       disabled={disabled}
       onChange={onChange}
     >
-      <span className={styles.checkmark}>●</span>
+      <span
+        className={clsx(
+          'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+          checked ? 'opacity-100' : 'opacity-0',
+        )}
+      >
+        ●
+      </span>
     </Checkbox>
   );
 }
