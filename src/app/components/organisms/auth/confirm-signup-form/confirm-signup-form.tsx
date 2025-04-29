@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -7,6 +8,7 @@ import { Button } from '@/app/components/atoms/button';
 import { ErrorMessage } from '@/app/components/atoms/error-message';
 import { SuccessMessage } from '@/app/components/atoms/success-message';
 import { InputElement } from '@/app/components/molecules/input-element';
+import { useUser } from '@/app/context/user-context';
 import {
   handleConfirmSignUp,
   handleSendEmailVerificationCode,
@@ -26,6 +28,7 @@ type ConfirmSignupFormValues = {
 };
 
 export function ConfirmSignupForm({ username }: ConfirmSignupFormProps) {
+  const router = useRouter();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -34,6 +37,8 @@ export function ConfirmSignupForm({ username }: ConfirmSignupFormProps) {
       username,
     },
   });
+
+  const { refreshUser } = useUser();
 
   const {
     handleSubmit,
@@ -44,8 +49,12 @@ export function ConfirmSignupForm({ username }: ConfirmSignupFormProps) {
     setError('');
     setSuccess('');
     const result = await handleConfirmSignUp(data);
+
     if (result?.error) {
       setError(result.error);
+    } else {
+      await refreshUser();
+      router.push('/');
     }
   });
 

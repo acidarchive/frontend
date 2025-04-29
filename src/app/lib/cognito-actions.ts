@@ -64,7 +64,6 @@ export async function handleConfirmSignUp(data: {
   } catch (error) {
     return { error: getErrorMessage(error) };
   }
-  redirect('/auth/signin');
 }
 
 export async function handleSignIn(data: {

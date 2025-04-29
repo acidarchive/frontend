@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import * as cognitoActions from '@/app/lib/cognito-actions';
+import { render, screen } from '@/tests/utils';
 
 vi.mock('@/app/lib/cognito-actions', async () => {
   return {
@@ -10,6 +10,15 @@ vi.mock('@/app/lib/cognito-actions', async () => {
     handleSendEmailVerificationCode: vi.fn(),
   };
 });
+
+vi.mock('next/navigation', async () => {
+  return {
+    useRouter: () => ({
+      push: vi.fn(),
+    }),
+  };
+});
+
 import { ConfirmSignupForm } from './confirm-signup-form';
 
 describe('ConfirmSignupForm', () => {
