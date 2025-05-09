@@ -3,6 +3,31 @@
 
 ### ⚙️ Miscellaneous
 
+- Remove unused packages
+
+
+### 🌀 Added
+
+- Pattern page
+
+- Add react-youtube package
+
+- Pattern details placeholder
+
+- Comments section placeholder
+
+- Grid element styling
+
+
+### 🔧 Fixed
+
+- Remove css vars
+
+
+## [0.0.1-alpha.16] - 2025-04-29
+
+### ⚙️ Miscellaneous
+
 - Enable turbosnap
 
 
@@ -185,7 +210,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.15..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.16..HEAD
+[0.0.1-alpha.16]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.15..v0.0.1-alpha.16
 [0.0.1-alpha.15]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.14..v0.0.1-alpha.15
 [0.0.1-alpha.14]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.13..v0.0.1-alpha.14
 [0.0.1-alpha.13]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.12..v0.0.1-alpha.13
