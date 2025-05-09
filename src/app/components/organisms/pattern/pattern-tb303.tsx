@@ -11,7 +11,6 @@ import {
   WaveformSelect,
 } from '@/app/components/atoms/waveform-select';
 
-import styles from './pattern-tb303.module.scss';
 import {
   HIGHLIGHT_STEPS,
   NOTE_OPTIONS,
@@ -21,49 +20,80 @@ import {
   TOTAL_STEPS,
 } from './types';
 
+function RowLabel({ label }: { label: string }) {
+  return (
+    <div
+      className={clsx(
+        'col-span-1 sm:col-span-2',
+        'border-b border-r border-gray-200',
+        'flex items-center justify-center',
+        'font-medium text-sm text-gray-900',
+      )}
+    >
+      {label}
+    </div>
+  );
+}
+
 export interface PatternTB303Props {
   pattern?: PatternTB303Type;
 }
 
 export const PatternTB303 = ({ pattern }: PatternTB303Props) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.headerRow}>
-          <div className={styles.headerLabel}>Title:</div>
-          <div className={styles.headerInput}>
+    <div className="grid sm:grid-rows-[auto_2fr_1.5fr_0.5fr] grid-rows-[auto] border-2 border-gray-200">
+      <dl className="divide-y divide-gray-200 border-b-2 border-gray-200">
+        <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
+          <dt className="text-md font-semibold text-gray-500">Title:</dt>
+          <dd className="mt-1 sm:col-span-2 sm:mt-0">
             <GridInput disabled value={pattern?.title} />
-          </div>
+          </dd>
         </div>
-        <div className={styles.headerRow}>
-          <div className={styles.headerLabel}>Author:</div>
-          <div className={styles.headerInput}>
+        <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
+          <dt className="text-md font-semibold text-gray-500">Author:</dt>
+          <dd className="mt-1  sm:col-span-2 sm:mt-0">
             <GridInput disabled value={pattern?.author} />
-          </div>
+          </dd>
         </div>
-      </div>
-      <div className={styles.body}>
-        <div className={clsx(styles.labelCell, styles.label)}></div>
+      </dl>
+      <div
+        className={clsx(
+          'grid',
+          'sm:grid-cols-[1fr_repeat(17,_1fr)] sm:grid-rows-5 sm:grid-flow-row',
+          'grid-cols-6 grid-rows-17 grid-flow-col',
+        )}
+      >
+        <div
+          className={clsx(
+            'col-span-1 sm:col-span-2',
+            'border-b border-r border-gray-200',
+          )}
+        ></div>
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              styles.label,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200',
+              'flex items-center justify-center sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
-            <span>{index + 1}</span>
+            <span className="text-sm text-gray-900 font-medium">
+              {index + 1}
+            </span>
           </div>
         ))}
 
-        <div className={clsx(styles.labelCell, styles.label)}>note</div>
+        <RowLabel label="note" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200',
+              'sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
             <GridSelect
@@ -75,14 +105,14 @@ export const PatternTB303 = ({ pattern }: PatternTB303Props) => {
             />
           </div>
         ))}
-
-        <div className={clsx(styles.labelCell, styles.label)}>octave</div>
+        <RowLabel label="octave" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200 sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
             <GridSelect
@@ -94,39 +124,41 @@ export const PatternTB303 = ({ pattern }: PatternTB303Props) => {
             />
           </div>
         ))}
-
-        <div className={clsx(styles.labelCell, styles.label)}>accent</div>
+        <RowLabel label="accent" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200 sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
             <GridCheckbox disabled checked={pattern?.steps[index]?.accent} />
           </div>
         ))}
 
-        <div className={clsx(styles.labelCell, styles.label)}>slide</div>
+        <RowLabel label="slide" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200 sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
             <GridCheckbox disabled checked={pattern?.steps[index]?.slide} />
           </div>
         ))}
-        <div className={clsx(styles.labelCell, styles.label)}>time</div>
+        <RowLabel label="time" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
             key={index}
             className={clsx(
-              styles.cell,
-              HIGHLIGHT_STEPS.has(index) && styles.highlight,
+              'border-b border-r border-gray-200 sm:aspect-square',
+              HIGHLIGHT_STEPS.has(index) && 'bg-gray-50',
+              index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
             <GridSelect
@@ -139,15 +171,15 @@ export const PatternTB303 = ({ pattern }: PatternTB303Props) => {
           </div>
         ))}
       </div>
-      <div className={styles.textarea}>
+      <div>
         <GridTextarea disabled value={pattern?.description} />
       </div>
-      <div className={styles.footer}>
-        <div className={styles.waveformColumn}>
+      <div className="grid grid-cols-[1fr_4fr] border-t-2 border-gray-200">
+        <div className="border-r-2 border-gray-200">
           <WaveformSelect disabled value={Waveform.Sawtooth} />
         </div>
 
-        <div className={styles.knobs}>
+        <div className="flex flex-row w-full justify-between gap-[6%] px-[3%]">
           <Knob label="cut off freq" disabled />
           <Knob label="resonance" disabled />
           <Knob label="env mod" disabled />

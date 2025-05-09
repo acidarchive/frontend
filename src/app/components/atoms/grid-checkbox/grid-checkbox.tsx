@@ -15,7 +15,7 @@ export function GridCheckbox({
   return (
     <Checkbox
       className={clsx(
-        'block w-full relative cursor-pointer',
+        'w-full h-full flex items-center justify-center cursor-pointer',
         disabled && 'cursor-default',
       )}
       checked={checked}
@@ -24,7 +24,7 @@ export function GridCheckbox({
     >
       <span
         className={clsx(
-          'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
+          'text-gray-500 text-center text-sm leading-none',
           checked ? 'opacity-100' : 'opacity-0',
         )}
       >

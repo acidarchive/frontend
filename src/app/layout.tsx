@@ -1,4 +1,3 @@
-import '@/app/styles/index.scss';
 import '@/app/styles/globals.css';
 
 import clsx from 'clsx';
