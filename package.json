@@ -69,6 +69,7 @@
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "react-hook-form": "^7.56.1",
+    "react-youtube": "^10.1.0",
     "sass": "^1.86.3",
     "semantic-release": "^24.2.3",
     "storybook": "^8.6.12",
