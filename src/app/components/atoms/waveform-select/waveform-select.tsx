@@ -3,7 +3,6 @@ import clsx from 'clsx';
 
 import { Sawtooth } from './sawtooth';
 import { Square } from './square';
-import styles from './waveform-select.module.scss';
 
 export enum Waveform {
   Square = 'square',
@@ -16,6 +15,7 @@ export interface WaveformSelectProps {
   onChange?: (value: Waveform) => void;
   disabled?: boolean;
 }
+
 export const WaveformSelect = ({
   value,
   defaultValue = Waveform.Sawtooth,
@@ -25,19 +25,28 @@ export const WaveformSelect = ({
   const handleChange = (selectedValue: Waveform) => {
     onChange?.(selectedValue);
   };
+
   return (
     <RadioGroup
       value={value || defaultValue}
-      className={clsx(styles.waveformSelect, { [styles.disabled]: disabled })}
+      className={clsx(
+        'flex flex-col items-center justify-center h-full p-4 gap-6',
+        disabled && 'pointer-events-none',
+      )}
       disabled={disabled}
       onChange={handleChange}
     >
-      <div className={styles.label}>Waveform</div>
-      <div className={styles.options}>
+      <div className="uppercase text-xs font-semibold text-center text-gray-500">
+        Waveform
+      </div>
+      <div className="flex gap-4">
         <Radio
           value={Waveform.Sawtooth}
           className={({ checked }) =>
-            clsx(styles.option, { [styles.active]: checked })
+            clsx(
+              'w-full h-full hover:bg-gray-200',
+              checked && 'border border-black',
+            )
           }
         >
           <Sawtooth />
@@ -45,7 +54,10 @@ export const WaveformSelect = ({
         <Radio
           value={Waveform.Square}
           className={({ checked }) =>
-            clsx(styles.option, { [styles.active]: checked })
+            clsx(
+              'w-full h-full hover:bg-gray-200',
+              checked && 'border border-black',
+            )
           }
         >
           <Square />

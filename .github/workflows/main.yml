@@ -33,9 +33,6 @@ jobs:
       - name: Run lint
         run: pnpm lint
 
-      - name: Run stylelint
-        run: pnpm stylelint
-
       - name: Run commitlint
         uses: opensource-nepal/commitlint@v1
 

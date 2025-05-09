@@ -8,7 +8,6 @@ import {
   useKnobKeyboardControls,
 } from 'react-knob-headless';
 
-import styles from './knob.module.scss';
 import { TB303Thumb } from './tb303-thumb';
 
 type KnobHeadlessProps = React.ComponentProps<typeof KnobHeadless>;
@@ -50,15 +49,23 @@ export function Knob({
   });
 
   return (
-    <div className={clsx(styles.container, { [styles.disabled]: disabled })}>
-      <KnobHeadlessLabel className={styles.label} id={labelId}>
+    <div
+      className={clsx(
+        'relative w-full h-auto outline-none cursor-pointer m-[1%] mb-0',
+        { 'pointer-events-none': disabled },
+      )}
+    >
+      <KnobHeadlessLabel
+        className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-500"
+        id={labelId}
+      >
         {label}
       </KnobHeadlessLabel>
-      <div className={styles.inner}>
+      <div className="p-[2%] pt-[12%]">
         <KnobHeadless
           id={knobId}
           aria-labelledby={labelId}
-          className={styles.knob}
+          className="relative w-full h-auto outline-none cursor-pointer aspect-square"
           valueMin={VALUE_MIN}
           valueMax={VALUE_MAX}
           valueRaw={valueRaw}

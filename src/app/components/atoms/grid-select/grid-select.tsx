@@ -1,4 +1,5 @@
 import { Select } from '@headlessui/react';
+import clsx from 'clsx';
 
 export interface GridSelectOption {
   value: string;
@@ -14,9 +15,10 @@ export function GridSelect({ options, allowEmpty, ...props }: GridSelectProps) {
   return (
     <Select
       {...props}
-      className="appearance-none bg-transparent border-none p-0 text-center w-full h-full outline-none 
-        disabled:text-gray-950 disabled:opacity-100
-     "
+      className={clsx(
+        'appearance-none bg-transparent border-none p-0',
+        'text-center w-full h-full outline-none text-gray-500 disabled:opacity-100 text-md text-gray-500',
+      )}
     >
       {allowEmpty && <option value=""> </option>}
       {options.map(option => (
