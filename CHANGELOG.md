@@ -3,6 +3,18 @@
 
 ### ⚙️ Miscellaneous
 
+- Update packages
+
+
+### 🌀 Added
+
+- 404 page
+
+
+## [0.0.1-alpha.17] - 2025-05-09
+
+### ⚙️ Miscellaneous
+
 - Remove unused packages
 
 
@@ -210,7 +222,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.16..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.17..HEAD
+[0.0.1-alpha.17]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.16..v0.0.1-alpha.17
 [0.0.1-alpha.16]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.15..v0.0.1-alpha.16
 [0.0.1-alpha.15]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.14..v0.0.1-alpha.15
 [0.0.1-alpha.14]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.13..v0.0.1-alpha.14
