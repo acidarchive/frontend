@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable import/named */
 import React from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';

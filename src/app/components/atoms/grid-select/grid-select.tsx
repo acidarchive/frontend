@@ -11,10 +11,16 @@ type GridSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
   allowEmpty?: boolean;
 };
 
-export function GridSelect({ options, allowEmpty, ...props }: GridSelectProps) {
+export function GridSelect({
+  options,
+  allowEmpty,
+  value,
+  ...props
+}: GridSelectProps) {
   return (
     <Select
       {...props}
+      value={value ?? undefined}
       className={clsx(
         'appearance-none bg-transparent border-none p-0',
         'text-center w-full h-full outline-none text-gray-500 disabled:opacity-100 text-md text-gray-500',
