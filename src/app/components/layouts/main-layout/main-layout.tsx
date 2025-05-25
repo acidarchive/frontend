@@ -7,10 +7,12 @@ export const MainLayout: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main>{children}</main>
+      <main className="flex-1 flex items-center justify-center">
+        {children}
+      </main>
       <Footer />
-    </>
+    </div>
   );
 };
