@@ -56,7 +56,7 @@ export function Knob({
       )}
     >
       <KnobHeadlessLabel
-        className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-500"
+        className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-900"
         id={labelId}
       >
         {label}

@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google';
 
 import ConfigureAmplifyClientSide from '@/app/amplify-cognito-config';
 import { UserProvider } from '@/app/context/user-context';
+import QueryProvider from '@/app/providers/query-provider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,7 +28,10 @@ export default function RootLayout({
     <html lang="en" className={clsx(inter.variable, 'h-full')}>
       <body className="h-full flex flex-col">
         <ConfigureAmplifyClientSide />
-        <UserProvider>{children}</UserProvider>
+
+        <UserProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </UserProvider>
       </body>
     </html>
   );

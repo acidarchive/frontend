@@ -23,7 +23,7 @@ export function GridSelect({
       value={value ?? undefined}
       className={clsx(
         'appearance-none bg-transparent border-none p-0',
-        'text-center w-full h-full outline-none text-gray-500 disabled:opacity-100 text-md text-gray-500',
+        'text-center w-full h-full outline-none text-gray-900 text-sm',
       )}
     >
       {allowEmpty && <option value=""> </option>}
