@@ -11,6 +11,8 @@ type FetchRandomPatternResponse = {
   data: PatternTB303Type;
   status: string;
 };
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 
 import { Button } from '@/app/components/atoms/button';
 
@@ -50,11 +52,13 @@ export default function PatternPage() {
               disabled={isFetching}
               aria-disabled={isFetching}
             >
-              Refresh
+              <ArrowPathIcon
+                className={clsx('h-6 w-6', { 'animate-spin': isFetching })}
+              />
             </Button>
           </div>
         </div>
-        <PatternTB303 pattern={data?.data} isLoading={isFetching} />
+        <PatternTB303 pattern={isFetching ? undefined : data?.data} />
       </div>
     </MainLayout>
   );

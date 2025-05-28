@@ -37,29 +37,22 @@ function RowLabel({ label }: { label: string }) {
 
 export interface PatternTB303Props {
   pattern?: PatternTB303Type;
-  isLoading?: boolean;
 }
 
-export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
+export const PatternTB303 = ({ pattern }: PatternTB303Props) => {
   return (
     <div
       className={clsx(
         'grid sm:grid-rows-[2fr_6fr_5fr_2.5fr] grid-rows-[auto] border border-gray-950 relative',
-        { 'border-0': isLoading },
       )}
     >
-      {isLoading && (
-        <div className="absolute w-full h-full bg-white flex items-center justify-center z-2">
-          <h1 className="text-2xl font-bold text-gray-900">Loading...</h1>
-        </div>
-      )}
       <dl className="divide-y divide-gray-200 border-b border-gray-200">
         <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
           <dt className="text-sm font-semibold text-gray-900 flex items-center">
             Title:
           </dt>
           <dd className="mt-1 sm:col-span-2 sm:mt-0">
-            <GridInput disabled value={pattern?.title} />
+            <GridInput disabled value={pattern?.title ?? ''} />
           </dd>
         </div>
         <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
@@ -67,7 +60,7 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
             Author:
           </dt>
           <dd className="mt-1  sm:col-span-2 sm:mt-0">
-            <GridInput disabled value={pattern?.author} />
+            <GridInput disabled value={pattern?.author ?? ''} />
           </dd>
         </div>
       </dl>
@@ -99,7 +92,6 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
             </span>
           </div>
         ))}
-
         <RowLabel label="note" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
@@ -116,7 +108,7 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
               allowEmpty
               disabled
               options={NOTE_OPTIONS}
-              value={pattern?.steps[index]?.note}
+              value={pattern?.steps?.[index]?.note ?? ''}
             />
           </div>
         ))}
@@ -135,7 +127,7 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
               allowEmpty
               disabled
               options={OCTAVE_OPTIONS}
-              value={pattern?.steps[index]?.octave}
+              value={pattern?.steps?.[index]?.octave ?? ''}
             />
           </div>
         ))}
@@ -149,10 +141,12 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
               index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
-            <GridCheckbox disabled checked={pattern?.steps[index]?.accent} />
+            <GridCheckbox
+              disabled
+              checked={pattern?.steps?.[index]?.accent ?? false}
+            />
           </div>
         ))}
-
         <RowLabel label="slide" />
         {Array.from({ length: TOTAL_STEPS }, (_, index) => (
           <div
@@ -163,7 +157,10 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
               index === TOTAL_STEPS - 1 && 'border-r-0',
             )}
           >
-            <GridCheckbox disabled checked={pattern?.steps[index]?.slide} />
+            <GridCheckbox
+              disabled
+              checked={pattern?.steps?.[index]?.slide ?? false}
+            />
           </div>
         ))}
         <RowLabel label="time" />
@@ -181,7 +178,7 @@ export const PatternTB303 = ({ pattern, isLoading }: PatternTB303Props) => {
               options={TIME_OPTIONS}
               allowEmpty
               disabled
-              value={pattern?.steps[index]?.time}
+              value={pattern?.steps?.[index]?.time ?? ''}
             />
           </div>
         ))}
