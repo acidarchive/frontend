@@ -36,7 +36,7 @@ export const WaveformSelect = ({
       disabled={disabled}
       onChange={handleChange}
     >
-      <div className="uppercase text-xs font-semibold text-center text-gray-500">
+      <div className="uppercase text-xs font-semibold text-center text-gray-900">
         Waveform
       </div>
       <div className="flex gap-4">
