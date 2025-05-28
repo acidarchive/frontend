@@ -3,6 +3,17 @@
 
 ### 🌀 Added
 
+- Show random pattern
+
+- Add react-query
+
+- Random page layout
+
+
+## [0.0.1-alpha.19] - 2025-05-21
+
+### 🌀 Added
+
 - Fetch random pattern in home page
 
 
@@ -229,7 +240,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.18..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.19..HEAD
+[0.0.1-alpha.19]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.18..v0.0.1-alpha.19
 [0.0.1-alpha.18]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.17..v0.0.1-alpha.18
 [0.0.1-alpha.17]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.16..v0.0.1-alpha.17
 [0.0.1-alpha.16]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.15..v0.0.1-alpha.16
