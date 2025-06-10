@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Update packages
+
+
+## [0.0.1-alpha.21] - 2025-05-28
+
 ### 🔧 Fixed
 
 - Random pattern page
@@ -247,7 +254,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.20..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.21..HEAD
+[0.0.1-alpha.21]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.20..v0.0.1-alpha.21
 [0.0.1-alpha.20]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.19..v0.0.1-alpha.20
 [0.0.1-alpha.19]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.18..v0.0.1-alpha.19
 [0.0.1-alpha.18]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.17..v0.0.1-alpha.18
