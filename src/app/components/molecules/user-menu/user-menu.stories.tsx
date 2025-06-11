@@ -21,6 +21,14 @@ export default meta;
 type Story = StoryObj<typeof UserMenu>;
 
 export const Default: Story = {
+  parameters: {
+    nextjs: {
+      appDirectory: true,
+      router: {
+        basePath: '/',
+      },
+    },
+  },
   args: {
     user: {
       username: 'testuser',
