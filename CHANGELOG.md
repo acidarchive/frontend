@@ -1,6 +1,20 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Dashboard layout
+
+- Sidebar component
+
+
+### 🔧 Fixed
+
+- Remove unused rules
+
+
+## [0.0.1-alpha.22] - 2025-06-10
+
 ### ⚙️ Miscellaneous
 
 - Update packages
@@ -254,7 +268,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.21..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.22..HEAD
+[0.0.1-alpha.22]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.21..v0.0.1-alpha.22
 [0.0.1-alpha.21]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.20..v0.0.1-alpha.21
 [0.0.1-alpha.20]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.19..v0.0.1-alpha.20
 [0.0.1-alpha.19]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.18..v0.0.1-alpha.19
