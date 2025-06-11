@@ -1,4 +1,5 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@/app/components/atoms/avatar';
 import { useUser } from '@/app/context/user-context';
@@ -16,10 +17,12 @@ export interface UserMenuProps {
   user: AuthUser;
 }
 export function UserMenu({ user }: UserMenuProps) {
+  const router = useRouter();
   const { refreshUser } = useUser();
 
   const handleSignOutClick = async () => {
     await handleSignOut();
+    await router.push('/');
     await refreshUser();
   };
 
