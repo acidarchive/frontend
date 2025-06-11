@@ -38,7 +38,7 @@ export function SigninForm() {
       setError(result.error);
     } else {
       await refreshUser();
-      router.push('/');
+      router.push('/dashboard/tb303');
     }
   });
 
