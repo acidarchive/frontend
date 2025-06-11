@@ -1,5 +1,5 @@
-/* eslint-disable import/named */
 'use client';
+
 import {
   fetchAuthSession,
   fetchUserAttributes,
