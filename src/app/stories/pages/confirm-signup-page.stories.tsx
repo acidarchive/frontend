@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import ConfirmSignupPage from '@/app/auth/confirm-signup/page';
 import { UserProvider } from '@/app/context/user-context';

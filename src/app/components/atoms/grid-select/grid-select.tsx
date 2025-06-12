@@ -1,34 +1,44 @@
-import { Select } from '@headlessui/react';
-import clsx from 'clsx';
+'use client';
 
-export interface GridSelectOption {
-  value: string;
+import { Select } from '@headlessui/react';
+import { clsx } from 'clsx';
+import { useFormContext } from 'react-hook-form';
+
+export interface GridSelectOption<T = string> {
+  value: T;
   label: string;
 }
 
-type GridSelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
-  options: GridSelectOption[];
-  allowEmpty?: boolean;
-};
+type GridSelectProps<T = string> =
+  React.SelectHTMLAttributes<HTMLSelectElement> & {
+    options: GridSelectOption<T>[];
+    allowEmpty?: boolean;
+    id: string;
+    name: string;
+  };
 
-export function GridSelect({
+export function GridSelect<T = string>({
   options,
   allowEmpty,
-  value,
-  ...props
-}: GridSelectProps) {
+  id,
+  name,
+  disabled,
+}: GridSelectProps<T>) {
+  const { register } = useFormContext();
+
   return (
     <Select
-      {...props}
-      value={value ?? undefined}
+      id={id}
+      disabled={disabled}
       className={clsx(
         'appearance-none bg-transparent border-none p-0',
         'text-center w-full h-full outline-none text-gray-900 text-sm',
       )}
+      {...register(name, {})}
     >
       {allowEmpty && <option value=""> </option>}
       {options.map(option => (
-        <option key={option.value} value={option.value}>
+        <option key={String(option.value)} value={String(option.value)}>
           {option.label}
         </option>
       ))}

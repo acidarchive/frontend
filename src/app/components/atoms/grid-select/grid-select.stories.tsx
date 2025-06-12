@@ -1,6 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { GridSelect } from './grid-select';
+
+const FormWrapper = ({ children }: { children: React.ReactNode }) => {
+  const methods = useForm();
+  return <FormProvider {...methods}>{children}</FormProvider>;
+};
 
 const options = [
   { value: 'C', label: 'C' },
@@ -11,6 +17,13 @@ const options = [
 const meta = {
   title: 'Atoms/GridSelect',
   component: GridSelect,
+  decorators: [
+    Story => (
+      <FormWrapper>
+        <Story />
+      </FormWrapper>
+    ),
+  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof GridSelect>;
 
@@ -19,23 +32,26 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    value: 'C',
+    id: 'grid-select-default',
+    name: 'grid-select-default',
     options,
   },
 };
 
 export const WithEmptyOption: Story = {
   args: {
-    value: '',
     options,
     allowEmpty: true,
+    id: 'grid-select-empty',
+    name: 'grid-select-empty',
   },
 };
 
 export const Disabled: Story = {
   args: {
-    value: 'E',
     options,
     disabled: true,
+    id: 'grid-select-disabled',
+    name: 'grid-select-disabled',
   },
 };

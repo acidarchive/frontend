@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { Button } from './button';
 
@@ -14,5 +14,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Click Me, Please',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    children: 'Click Me, Please',
+    variant: 'secondary',
   },
 };

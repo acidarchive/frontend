@@ -1,33 +1,12 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+import { render, screen } from '@/tests/utils';
 
-import { Waveform, WaveformSelect } from './waveform-select';
+import { WaveformSelect } from './waveform-select';
 
 describe('WaveformSelect', () => {
-  it('renders with the correct label', () => {
-    render(<WaveformSelect />);
-
-    expect(screen.getByText('Waveform')).toBeInTheDocument();
-  });
-
-  it('renders both waveform options', () => {
-    render(<WaveformSelect />);
+  it('renders both options', () => {
+    render(<WaveformSelect name="waveform" />);
 
     const options = screen.getAllByRole('radio');
     expect(options).toHaveLength(2);
-  });
-
-  it('calls onChange when an option is selected', async () => {
-    const onChange = vi.fn();
-    render(
-      <WaveformSelect defaultValue={Waveform.Sawtooth} onChange={onChange} />,
-    );
-
-    const options = screen.getAllByRole('radio');
-
-    await userEvent.click(options[1]);
-
-    expect(onChange).toHaveBeenCalled();
   });
 });

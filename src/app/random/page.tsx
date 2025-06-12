@@ -1,33 +1,17 @@
 'use client';
-import { useQuery } from '@tanstack/react-query';
 
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
+import { clsx } from 'clsx';
+
+import { useGetRandomTb303Pattern } from '@/api/generated/acid';
+import { Button } from '@/app/components/atoms/button';
 import { Loader } from '@/app/components/atoms/loader';
 import { MainLayout } from '@/app/components/layouts/main-layout';
-import {
-  PatternTB303,
-  PatternTB303Type,
-} from '@/app/components/organisms/pattern';
-type FetchRandomPatternResponse = {
-  data: PatternTB303Type;
-  status: string;
-};
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
+import { ReadonlyTB303PatternGrid } from '@/app/components/organisms/readonly-tb303-pattern-grid';
 
-import { Button } from '@/app/components/atoms/button';
-
-async function fetchPattern(): Promise<FetchRandomPatternResponse> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_HOST}/v1/patterns/tb303/random`,
-  );
-
-  return response.json();
-}
 export default function PatternPage() {
-  const { data, error, isLoading, isError, refetch, isFetching } = useQuery({
-    queryKey: ['random-pattern'],
-    queryFn: fetchPattern,
-  });
+  const { data, isError, isLoading, isFetching, refetch } =
+    useGetRandomTb303Pattern();
 
   if (isLoading) {
     return (
@@ -38,7 +22,6 @@ export default function PatternPage() {
   }
 
   if (isError) {
-    console.error('Error fetching pattern:', error);
     return <MainLayout>Something went wrong</MainLayout>;
   }
   return (
@@ -58,7 +41,11 @@ export default function PatternPage() {
             </Button>
           </div>
         </div>
-        <PatternTB303 pattern={isFetching ? undefined : data?.data} />
+        {data ? (
+          <ReadonlyTB303PatternGrid pattern={data} />
+        ) : (
+          <div className="text-gray-500">No pattern found</div>
+        )}
       </div>
     </MainLayout>
   );
