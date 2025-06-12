@@ -6,7 +6,7 @@ import {
   DialogPanel,
   TransitionChild,
 } from '@headlessui/react';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
+// import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
@@ -55,7 +55,6 @@ export default function DashboardLayout({
         </div>
       </Dialog>
 
-      {/* Static sidebar for desktop */}
       <Sidebar isStatic />
 
       <div className="lg:pl-72">
@@ -69,7 +68,6 @@ export default function DashboardLayout({
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
 
-          {/* Separator */}
           <div
             aria-hidden="true"
             className="h-6 w-px bg-gray-900/10 lg:hidden"
@@ -80,14 +78,14 @@ export default function DashboardLayout({
               <input
                 name="search"
                 type="search"
-                placeholder="Search by author or title..."
+                //placeholder="Search by author or title..."
                 aria-label="Search"
                 className="col-start-1 row-start-1 block size-full bg-white pl-8 text-base text-gray-900 outline-hidden placeholder:text-gray-400 sm:text-sm/6"
               />
-              <MagnifyingGlassIcon
+              {/* <MagnifyingGlassIcon
                 aria-hidden="true"
                 className="pointer-events-none col-start-1 row-start-1 size-5 self-center text-gray-400"
-              />
+              /> */}
             </form>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               {!isLoading && user ? (
@@ -103,8 +101,8 @@ export default function DashboardLayout({
           </div>
         </div>
 
-        <main className="py-10">
-          <div className="px-4 sm:px-6 lg:px-8">{children}</div>
+        <main>
+          <div className="px-0">{children}</div>
         </main>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { ExclamationCircleIcon } from '@heroicons/react/16/solid';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 import { InputHTMLAttributes } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

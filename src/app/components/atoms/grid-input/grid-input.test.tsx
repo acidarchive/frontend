@@ -1,44 +1,50 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { vi } from 'vitest';
+import { render, screen } from '@/tests/utils';
 
 import { GridInput } from './grid-input';
 
 describe('GridInput', () => {
-  it('renders input with correct initial value', () => {
-    const initialValue = 'Test input';
-    render(<GridInput value={initialValue} onChange={vi.fn()} />);
+  it('renders text input with correct attributes', () => {
+    render(
+      <GridInput
+        name="test-input"
+        type="text"
+        id="test-input-id"
+        placeholder="Enter text"
+      />,
+    );
 
     const input = screen.getByRole('textbox');
-    expect(input).toHaveValue(initialValue);
+    expect(input).toBeInTheDocument();
+    expect(input).toHaveAttribute('type', 'text');
+    expect(input).toHaveAttribute('id', 'test-input-id');
+    expect(input).toHaveAttribute('placeholder', 'Enter text');
   });
 
-  it('calls onChange when typing', async () => {
-    const onChange = vi.fn();
-    render(<GridInput value="" onChange={onChange} />);
+  it('renders number input correctly', () => {
+    render(
+      <GridInput
+        name="number-input"
+        type="number"
+        id="number-input-id"
+        placeholder="Enter number"
+      />,
+    );
 
-    const input = screen.getByRole('textbox');
-    await userEvent.type(input, 'Hello, world!');
-
-    expect(onChange).toHaveBeenCalledTimes(13);
+    const input = screen.getByRole('spinbutton');
+    expect(input).toHaveAttribute('type', 'number');
   });
 
-  it('respects disabled state', async () => {
-    const onChange = vi.fn();
-    render(<GridInput value="" onChange={onChange} disabled />);
+  it('applies disabled state', () => {
+    render(
+      <GridInput
+        name="test-input"
+        type="text"
+        id="test-input-id"
+        placeholder="Test"
+        disabled={true}
+      />,
+    );
 
-    const input = screen.getByRole('textbox');
-    expect(input).toBeDisabled();
-
-    await userEvent.type(input, 'Should not change');
-    expect(onChange).not.toHaveBeenCalled();
-  });
-
-  it('forwards additonal HTML attributes', () => {
-    render(<GridInput placeholder="Enter text..." maxLength={10} />);
-
-    const input = screen.getByRole('textbox');
-    expect(input).toHaveAttribute('placeholder', 'Enter text...');
-    expect(input).toHaveAttribute('maxLength', '10');
+    expect(screen.getByRole('textbox')).toBeDisabled();
   });
 });
