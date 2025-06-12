@@ -1,5 +1,8 @@
+'use client';
+
 import { Radio, RadioGroup } from '@headlessui/react';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
+import { Controller, useFormContext } from 'react-hook-form';
 
 import { Sawtooth } from './sawtooth';
 import { Square } from './square';
@@ -10,59 +13,60 @@ export enum Waveform {
 }
 
 export interface WaveformSelectProps {
-  value?: Waveform;
+  name: string;
   defaultValue?: Waveform;
-  onChange?: (value: Waveform) => void;
   disabled?: boolean;
 }
 
 export const WaveformSelect = ({
-  value,
+  name,
   defaultValue = Waveform.Sawtooth,
-  onChange,
   disabled = false,
 }: WaveformSelectProps) => {
-  const handleChange = (selectedValue: Waveform) => {
-    onChange?.(selectedValue);
-  };
+  const { control } = useFormContext();
 
   return (
-    <RadioGroup
-      value={value || defaultValue}
-      className={clsx(
-        'flex flex-col items-center justify-center h-full p-4 gap-6',
-        disabled && 'pointer-events-none',
+    <Controller
+      name={name}
+      control={control}
+      defaultValue={defaultValue}
+      render={({ field: { onChange, value } }) => (
+        <RadioGroup
+          name={name}
+          value={value}
+          className={clsx(
+            'flex items-center justify-center',
+            disabled && 'pointer-events-none',
+          )}
+          disabled={disabled}
+          onChange={onChange}
+        >
+          <div className="flex gap-4">
+            <Radio
+              value={Waveform.Sawtooth}
+              className={({ checked }) =>
+                clsx(
+                  'w-8 h-6 hover:bg-gray-200',
+                  checked && 'border border-black',
+                )
+              }
+            >
+              <Sawtooth />
+            </Radio>
+            <Radio
+              value={Waveform.Square}
+              className={({ checked }) =>
+                clsx(
+                  'w-8 h-6 hover:bg-gray-200',
+                  checked && 'border border-black',
+                )
+              }
+            >
+              <Square />
+            </Radio>
+          </div>
+        </RadioGroup>
       )}
-      disabled={disabled}
-      onChange={handleChange}
-    >
-      <div className="uppercase text-xs font-semibold text-center text-gray-900">
-        Waveform
-      </div>
-      <div className="flex gap-4">
-        <Radio
-          value={Waveform.Sawtooth}
-          className={({ checked }) =>
-            clsx(
-              'w-full h-full hover:bg-gray-200',
-              checked && 'border border-black',
-            )
-          }
-        >
-          <Sawtooth />
-        </Radio>
-        <Radio
-          value={Waveform.Square}
-          className={({ checked }) =>
-            clsx(
-              'w-full h-full hover:bg-gray-200',
-              checked && 'border border-black',
-            )
-          }
-        >
-          <Square />
-        </Radio>
-      </div>
-    </RadioGroup>
+    />
   );
 };

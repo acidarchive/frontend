@@ -1,7 +1,6 @@
-'use client';
 import { mapFrom01Linear, mapTo01Linear } from '@dsp-ts/math';
-import clsx from 'clsx';
-import { useId, useState } from 'react';
+import { clsx } from 'clsx';
+import { useId } from 'react';
 import {
   KnobHeadless,
   KnobHeadlessLabel,
@@ -24,28 +23,40 @@ export type KnobProps = Pick<KnobHeadlessProps, 'mapTo01' | 'mapFrom01'> & {
   readonly disabled?: boolean;
   readonly value?: number;
   readonly label?: string;
+  readonly onChange?: (value: number) => void;
+  readonly id?: string;
+  readonly 'aria-labelledby'?: string;
 };
 
 export function Knob({
   label,
   disabled = false,
   value = 50,
+  onChange,
   mapTo01 = mapTo01Linear,
   mapFrom01 = mapFrom01Linear,
+  id,
+  'aria-labelledby': ariaLabelledBy,
 }: KnobProps) {
   const knobId = useId();
   const labelId = useId();
-  const [valueRaw, setValueRaw] = useState<number>(value);
 
-  const value01 = mapTo01(valueRaw, VALUE_MIN, VALUE_MAX);
+  const finalKnobId = id || knobId;
+  const finalLabelId = ariaLabelledBy || labelId;
+
+  const value01 = mapTo01(value, VALUE_MIN, VALUE_MAX);
+
+  const handleValueChange = (newValue: number) => {
+    onChange?.(Math.round(newValue));
+  };
 
   const keyboardControlHandlers = useKnobKeyboardControls({
-    valueRaw,
+    valueRaw: value,
     valueMin: VALUE_MIN,
     valueMax: VALUE_MAX,
     step: 1,
     stepLarger: 10,
-    onValueRawChange: setValueRaw,
+    onValueRawChange: handleValueChange,
   });
 
   return (
@@ -55,26 +66,28 @@ export function Knob({
         { 'pointer-events-none': disabled },
       )}
     >
-      <KnobHeadlessLabel
-        className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-900"
-        id={labelId}
-      >
-        {label}
-      </KnobHeadlessLabel>
+      {label && (
+        <KnobHeadlessLabel
+          className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-900 -translate-y-[30%]"
+          id={finalLabelId}
+        >
+          {label}
+        </KnobHeadlessLabel>
+      )}
       <div className="p-[2%] pt-[12%]">
         <KnobHeadless
-          id={knobId}
-          aria-labelledby={labelId}
+          id={finalKnobId}
+          aria-labelledby={finalLabelId}
           className="relative w-full h-auto outline-none cursor-pointer aspect-square"
           valueMin={VALUE_MIN}
           valueMax={VALUE_MAX}
-          valueRaw={valueRaw}
+          valueRaw={value}
           valueRawRoundFn={valueRawRoundFunction}
           valueRawDisplayFn={valueRawDisplayFunction}
           dragSensitivity={DRAG_SENSITIVITY}
           mapTo01={mapTo01}
           mapFrom01={mapFrom01}
-          onValueRawChange={setValueRaw}
+          onValueRawChange={handleValueChange}
           {...keyboardControlHandlers}
         >
           <TB303Thumb value01={value01} />

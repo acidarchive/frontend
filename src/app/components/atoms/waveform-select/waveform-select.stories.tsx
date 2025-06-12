@@ -1,10 +1,23 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/nextjs';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { Waveform, WaveformSelect } from './waveform-select';
+import { WaveformSelect } from './waveform-select';
+
+const FormWrapper = ({ children }: { children: React.ReactNode }) => {
+  const methods = useForm();
+  return <FormProvider {...methods}>{children}</FormProvider>;
+};
 
 const meta = {
   title: 'Atoms/WaveformSelect',
   component: WaveformSelect,
+  decorators: [
+    Story => (
+      <FormWrapper>
+        <Story />
+      </FormWrapper>
+    ),
+  ],
   tags: ['autodocs'],
 } satisfies Meta<typeof WaveformSelect>;
 
@@ -13,25 +26,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    onChange: () => {},
-  },
-};
-
-export const Square: Story = {
-  args: {
-    value: Waveform.Square,
-  },
-};
-
-export const Sawtooth: Story = {
-  args: {
-    value: Waveform.Sawtooth,
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    value: Waveform.Square,
-    disabled: true,
+    name: 'waveform',
   },
 };
