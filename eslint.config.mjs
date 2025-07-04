@@ -13,6 +13,7 @@ const eslintConfig = [
       'plugin:prettier/recommended',
     ],
     plugins: ['simple-import-sort'],
+    ignorePatterns: ['src/api/**/*'],
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',

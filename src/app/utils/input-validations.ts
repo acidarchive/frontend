@@ -3,7 +3,7 @@ import { type RegisterOptions } from 'react-hook-form';
 type Validation = {
   name: string;
   label: string;
-  type: string;
+  type: 'text' | 'email' | 'password' | 'number';
   id: string;
   placeholder: string;
   validation: RegisterOptions;
@@ -99,4 +99,35 @@ export const signin_password_validation: Validation = {
       message: 'Must be at least 8 characters',
     },
   },
+};
+
+export const pattern_name_validation: Validation = {
+  name: 'name',
+  label: 'Pattern Name',
+  type: 'text',
+  id: 'name',
+  placeholder: 'Enter pattern name',
+  validation: {
+    required: 'Pattern name is required',
+    minLength: { value: 3, message: 'Minimum 3 characters' },
+    maxLength: { value: 50, message: 'Maximum 50 characters' },
+  },
+};
+
+export const pattern_title_validation: Validation = {
+  name: 'title',
+  label: 'Pattern Title',
+  type: 'text',
+  id: 'title',
+  placeholder: 'Enter pattern title',
+  validation: {},
+};
+
+export const pattern_author_validation: Validation = {
+  name: 'author',
+  label: 'Author',
+  type: 'text',
+  id: 'author',
+  placeholder: 'Enter author name',
+  validation: {},
 };
