@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.3
+ * OpenAPI spec version: 0.0.1-alpha.4
  */
 
 export type TB303PatternTuning = number | null;
