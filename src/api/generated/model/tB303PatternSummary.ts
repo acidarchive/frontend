@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.3
+ * OpenAPI spec version: 0.0.1-alpha.4
  */
 import type { TB303PatternSummaryAuthor } from './tB303PatternSummaryAuthor';
 import type { TB303PatternSummaryTitle } from './tB303PatternSummaryTitle';
@@ -11,6 +11,8 @@ import type { TB303PatternSummaryTitle } from './tB303PatternSummaryTitle';
 export interface TB303PatternSummary {
   author?: TB303PatternSummaryAuthor;
   created_at: string;
+  is_public: boolean;
+  name: string;
   pattern_id: string;
   title?: TB303PatternSummaryTitle;
   updated_at: string;

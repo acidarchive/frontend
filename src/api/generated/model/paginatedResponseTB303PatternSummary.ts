@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.3
+ * OpenAPI spec version: 0.0.1-alpha.4
  */
 import type { PaginatedResponseTB303PatternSummaryRecordsItem } from './paginatedResponseTB303PatternSummaryRecordsItem';
 import type { PaginatedResponseTB303PatternSummaryTotal } from './paginatedResponseTB303PatternSummaryTotal';

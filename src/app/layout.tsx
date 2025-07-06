@@ -3,6 +3,7 @@ import '@/app/styles/globals.css';
 import { clsx } from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import ConfigureAmplifyClientSide from '@/app/amplify-cognito-config';
 import { UserProvider } from '@/app/context/user-context';
@@ -30,7 +31,9 @@ export default function RootLayout({
         <ConfigureAmplifyClientSide />
 
         <UserProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <NuqsAdapter>{children}</NuqsAdapter>
+          </QueryProvider>
         </UserProvider>
       </body>
     </html>

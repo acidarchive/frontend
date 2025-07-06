@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.3
+ * OpenAPI spec version: 0.0.1-alpha.4
  */
 
 export type ListTb303PatternsParams = {
@@ -33,4 +33,8 @@ search?: string;
  * Columns to search in (title, author)
  */
 search_columns?: string;
+/**
+ * Filter by public/private patterns
+ */
+is_public?: boolean;
 };

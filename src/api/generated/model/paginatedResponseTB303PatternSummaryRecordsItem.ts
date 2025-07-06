@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.3
+ * OpenAPI spec version: 0.0.1-alpha.4
  */
 import type { PaginatedResponseTB303PatternSummaryRecordsItemAuthor } from './paginatedResponseTB303PatternSummaryRecordsItemAuthor';
 import type { PaginatedResponseTB303PatternSummaryRecordsItemTitle } from './paginatedResponseTB303PatternSummaryRecordsItemTitle';
@@ -11,6 +11,8 @@ import type { PaginatedResponseTB303PatternSummaryRecordsItemTitle } from './pag
 export type PaginatedResponseTB303PatternSummaryRecordsItem = {
   author?: PaginatedResponseTB303PatternSummaryRecordsItemAuthor;
   created_at: string;
+  is_public: boolean;
+  name: string;
   pattern_id: string;
   title?: PaginatedResponseTB303PatternSummaryRecordsItemTitle;
   updated_at: string;
