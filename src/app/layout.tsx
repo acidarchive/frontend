@@ -1,4 +1,4 @@
-import '@/app/styles/globals.css';
+import '@/styles/globals.css';
 
 import { clsx } from 'clsx';
 import type { Metadata } from 'next';
