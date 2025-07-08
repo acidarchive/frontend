@@ -1,5 +1,5 @@
-import { AuthLayout } from '@/app/components/layouts/auth-layout';
-import { SubmitPasswordResetForm } from '@/app/components/organisms/auth/submit-password-reset-form';
+import { AuthLayout } from '@/components/layouts/auth-layout';
+import { SubmitPasswordResetForm } from '@/components/organisms/auth/submit-password-reset-form';
 
 export default function SubmitPasswordReset() {
   return (

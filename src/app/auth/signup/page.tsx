@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { AuthLayout } from '@/app/components/layouts/auth-layout';
-import { SignupForm } from '@/app/components/organisms/auth/signup-form';
+import { AuthLayout } from '@/components/layouts/auth-layout';
+import { SignupForm } from '@/components/organisms/auth/signup-form';
 
 export default function Login() {
   return (

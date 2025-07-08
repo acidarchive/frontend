@@ -11,7 +11,7 @@ import {
 import { Suspense, useCallback } from 'react';
 
 import { useListTb303Patterns } from '@/api/generated/acid';
-import { columns, DataTable } from '@/app/components/organisms/data-table';
+import { columns, DataTable } from '@/components/organisms/data-table';
 
 const SORT_DIRECTIONS = ['ascending', 'descending'] as const;
 type SortDirection = (typeof SORT_DIRECTIONS)[number];

@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { AuthLayout } from '@/app/components/layouts/auth-layout';
-import { ConfirmSignupForm } from '@/app/components/organisms/auth/confirm-signup-form';
+import { AuthLayout } from '@/components/layouts/auth-layout';
+import { ConfirmSignupForm } from '@/components/organisms/auth/confirm-signup-form';
 
 function ConfirmSignup() {
   const searchParams = useSearchParams();
