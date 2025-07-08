@@ -1,4 +1,4 @@
-import '../src/app/styles/globals.css';
+import '../src/styles/globals.css';
 process.env.NEXT_PUBLIC_APP_VERSION = 'storybook-version';
 
 import type { Preview } from '@storybook/nextjs';
