@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { Button } from '@/app/components/atoms/button';
 import { InputElement } from '@/app/components/molecules/input-element';
 import { SwitchElement } from '@/app/components/molecules/switch-element';
-import { pattern_name_validation } from '@/app/utils/input-validations';
+import { pattern_name_validation } from '@/utils/input-validations';
 
 export function EditableTB303PatternDetails() {
   const {
