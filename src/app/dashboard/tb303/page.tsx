@@ -8,7 +8,7 @@ import {
   parseAsStringEnum,
   useQueryStates,
 } from 'nuqs';
-import { useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 
 import { useListTb303Patterns } from '@/api/generated/acid';
 import { columns, DataTable } from '@/app/components/organisms/data-table';
@@ -41,7 +41,7 @@ const ErrorState = ({ message }: { message: string }) => (
   </div>
 );
 
-export default function TB303ListPage() {
+function TB303ListPageContent() {
   const [filters, setFilters] = useQueryStates(filterParsers, {
     history: 'replace',
     shallow: true,
@@ -165,5 +165,14 @@ export default function TB303ListPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Main page component with Suspense boundary
+export default function TB303ListPage() {
+  return (
+    <Suspense fallback={<LoadingState message="Loading patterns..." />}>
+      <TB303ListPageContent />
+    </Suspense>
   );
 }
