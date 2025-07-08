@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Upgrade packages
+
+
+## [0.0.1-alpha.27] - 2025-07-08
+
 ### 🔧 Fixed
 
 - Move components to src
@@ -312,7 +319,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.26..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.27..HEAD
+[0.0.1-alpha.27]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.26..v0.0.1-alpha.27
 [0.0.1-alpha.26]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.25..v0.0.1-alpha.26
 [0.0.1-alpha.25]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.24..v0.0.1-alpha.25
 [0.0.1-alpha.24]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.23..v0.0.1-alpha.24
