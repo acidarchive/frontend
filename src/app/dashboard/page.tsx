@@ -1,3 +1,7 @@
-export default function DashboardPage() {
-  return <h1>DashboardPage</h1>;
+export const metadata = {
+  title: 'Dashboard',
+};
+
+export default async function Page() {
+  return <div></div>;
 }
