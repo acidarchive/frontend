@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- List tb303 patterns
+
+
+## [0.0.1-alpha.24] - 2025-07-05
+
+### 🌀 Added
+
 - Save tb303 pattern
 
 
@@ -275,7 +282,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.23..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.24..HEAD
+[0.0.1-alpha.24]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.23..v0.0.1-alpha.24
 [0.0.1-alpha.23]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.22..v0.0.1-alpha.23
 [0.0.1-alpha.22]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.21..v0.0.1-alpha.22
 [0.0.1-alpha.21]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.20..v0.0.1-alpha.21
