@@ -4,7 +4,7 @@ import type { RenderOptions } from '@testing-library/react/types';
 import React, { ReactElement } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { UserProvider } from '@/app/context/user-context';
+import { UserProvider } from '@/context/user-context';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   const methods = useForm();

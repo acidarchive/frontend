@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import SigninPage from '@/app/auth/signin/page';
-import { UserProvider } from '@/app/context/user-context';
+import { UserProvider } from '@/context/user-context';
 
 const meta = {
   title: 'Pages/Auth/SigninPage',

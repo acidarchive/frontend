@@ -6,8 +6,8 @@ import { Inter } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import ConfigureAmplifyClientSide from '@/app/amplify-cognito-config';
-import { UserProvider } from '@/app/context/user-context';
 import QueryProvider from '@/app/providers/query-provider';
+import { UserProvider } from '@/context/user-context';
 
 const inter = Inter({
   subsets: ['latin'],
