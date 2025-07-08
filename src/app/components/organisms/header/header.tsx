@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { Smiley } from '@/app/components/atoms/smiley';
-import { useUser } from '@/app/context/user-context';
+import { useUser } from '@/context/user-context';
 
 const navigation = [
   { name: 'Home', href: '/' },

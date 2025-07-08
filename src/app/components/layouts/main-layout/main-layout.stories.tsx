@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
-import { UserProvider } from '@/app/context/user-context';
+import { UserProvider } from '@/context/user-context';
 
 import { MainLayout } from './main-layout';
 

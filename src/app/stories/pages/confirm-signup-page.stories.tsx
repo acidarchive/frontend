@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import ConfirmSignupPage from '@/app/auth/confirm-signup/page';
-import { UserProvider } from '@/app/context/user-context';
+import { UserProvider } from '@/context/user-context';
 
 const meta = {
   title: 'Pages/Auth/ConfirmSignupPage',

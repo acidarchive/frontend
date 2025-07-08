@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 import { UserMenu } from '@/app/components/molecules/user-menu';
 import { Sidebar } from '@/app/components/organisms/sidebar';
-import { useUser } from '@/app/context/user-context';
+import { useUser } from '@/context/user-context';
 
 export default function DashboardLayout({
   children,

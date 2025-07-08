@@ -2,8 +2,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { useRouter } from 'next/navigation';
 
 import { Avatar } from '@/app/components/atoms/avatar';
-import { useUser } from '@/app/context/user-context';
 import { handleSignOut } from '@/app/lib/cognito-actions';
+import { useUser } from '@/context/user-context';
 
 export type AuthUser = {
   username: string;

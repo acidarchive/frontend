@@ -34,7 +34,7 @@ vi.mock('aws-amplify/auth', () => ({
   })),
 }));
 
-vi.mock('@/app/context/user-context', () => {
+vi.mock('@/context/user-context', () => {
   const mockUser = {
     username: 'testuser',
     email: 'test@example.com',

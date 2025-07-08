@@ -8,7 +8,6 @@ import { Button } from '@/app/components/atoms/button';
 import { ErrorMessage } from '@/app/components/atoms/error-message';
 import { SuccessMessage } from '@/app/components/atoms/success-message';
 import { InputElement } from '@/app/components/molecules/input-element';
-import { useUser } from '@/app/context/user-context';
 import {
   handleConfirmSignUp,
   handleSendEmailVerificationCode,
@@ -17,6 +16,7 @@ import {
   username_validation,
   verification_code_validation,
 } from '@/app/utils/input-validations';
+import { useUser } from '@/context/user-context';
 
 interface ConfirmSignupFormProps {
   username: string;
