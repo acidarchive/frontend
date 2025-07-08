@@ -78,6 +78,7 @@
     "happy-dom": "^17.6.3",
     "jsdom": "^26.1.0",
     "lucide-react": "^0.479.0",
+    "nextjs-toploader": "^3.8.16",
     "nuqs": "^2.4.3",
     "orval": "^7.10.0",
     "postcss": "^8.5.6",
