@@ -65,7 +65,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const refreshUser = async () => {
     setIsLoading(true);
-    console.log('refreshing user');
     await fetchUser();
   };
 

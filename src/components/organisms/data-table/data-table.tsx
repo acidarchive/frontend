@@ -8,6 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import {
   Table,
   TableBody,
@@ -16,28 +17,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { useDataTableFilters } from '@/hooks/use-data-table-filters';
 
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
-type SortDirection = 'ascending' | 'descending';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
   totalPages?: number;
-  currentPage?: number;
-  pageSize?: number;
-  onPageChange?: (page: number) => void;
-  onPageSizeChange?: (pageSize: number) => void;
   isLoading?: boolean;
-  sortColumn?: string;
-  sortDirection?: SortDirection;
-  onSortChange?: (column: string, direction: SortDirection) => void;
-  searchValue?: string;
-  onSearchChange?: (search: string) => void;
-  onResetFilters?: () => void;
-  visibilityValue?: boolean;
-  onVisibilityChange?: (visibility?: boolean) => void;
 }
 
 const DEFAULT_VALUES = {
@@ -56,23 +45,18 @@ export function DataTable<TData, TValue>({
   columns,
   data = DEFAULT_VALUES.data,
   totalPages = DEFAULT_VALUES.totalPages,
-  currentPage = DEFAULT_VALUES.currentPage,
-  pageSize = DEFAULT_VALUES.pageSize,
-  onPageChange,
-  onPageSizeChange,
   isLoading = DEFAULT_VALUES.isLoading,
-  sortColumn,
-  sortDirection,
-  onSortChange,
-  searchValue,
-  onSearchChange,
-  onResetFilters,
-  visibilityValue,
-  onVisibilityChange,
 }: DataTableProps<TData, TValue>) {
+  const { filters, handlers } = useDataTableFilters();
+
   const createSortingState = () => {
-    return sortColumn
-      ? [{ id: sortColumn, desc: sortDirection === 'descending' }]
+    return filters.sortColumn
+      ? [
+          {
+            id: filters.sortColumn,
+            desc: filters.sortDirection === 'descending',
+          },
+        ]
       : [];
   };
 
@@ -81,13 +65,17 @@ export function DataTable<TData, TValue>({
       const currentSorting = createSortingState();
       const newSorting = updater(currentSorting);
 
-      if (newSorting.length > 0 && onSortChange) {
+      if (newSorting.length > 0 && handlers.onSortChange) {
         const { id, desc } = newSorting[0];
-        onSortChange(id, desc ? 'descending' : 'ascending');
+        handlers.onSortChange(id, desc ? 'descending' : 'ascending');
       }
-    } else if (Array.isArray(updater) && updater.length > 0 && onSortChange) {
+    } else if (
+      Array.isArray(updater) &&
+      updater.length > 0 &&
+      handlers.onSortChange
+    ) {
       const { id, desc } = updater[0];
-      onSortChange(id, desc ? 'descending' : 'ascending');
+      handlers.onSortChange(id, desc ? 'descending' : 'ascending');
     }
   };
 
@@ -154,28 +142,22 @@ export function DataTable<TData, TValue>({
   };
 
   return (
-    <div className="flex flex-col gap-4">
-      <DataTableToolbar
-        table={table}
-        searchValue={searchValue}
-        onSearchChange={onSearchChange}
-        onResetFilters={onResetFilters}
-        visibilityValue={visibilityValue}
-        onVisibilityChange={onVisibilityChange}
-      />
-      <div className="rounded-md border">
-        <Table className="w-full table-fixed">
-          {renderTableHeader()}
-          <TableBody>{renderTableRows()}</TableBody>
-        </Table>
+    <div className="flex flex-1 flex-col space-y-4">
+      <DataTableToolbar table={table} />
+      <div className="relative flex flex-1">
+        <div className="absolute inset-0 flex overflow-hidden rounded-lg border">
+          <ScrollArea className="h-full w-full">
+            <Table>
+              {renderTableHeader()}
+              <TableBody>{renderTableRows()}</TableBody>
+            </Table>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
       </div>
       <DataTablePagination
         table={table}
         totalPages={totalPages}
-        currentPage={currentPage}
-        pageSize={pageSize}
-        onPageChange={onPageChange}
-        onPageSizeChange={onPageSizeChange}
         isLoading={isLoading}
       />
     </div>

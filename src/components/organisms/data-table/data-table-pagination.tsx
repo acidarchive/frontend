@@ -14,26 +14,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { useDataTableFilters } from '@/hooks/use-data-table-filters';
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
   totalPages: number;
-  currentPage: number;
-  pageSize: number;
-  onPageChange?: (page: number) => void;
-  onPageSizeChange?: (pageSize: number) => void;
   isLoading?: boolean;
 }
 
 export function DataTablePagination<TData>({
   table,
   totalPages,
-  currentPage,
-  pageSize,
-  onPageChange,
-  onPageSizeChange,
   isLoading = false,
 }: DataTablePaginationProps<TData>) {
+  const { filters, handlers } = useDataTableFilters();
+  const { page: currentPage, pageSize } = filters;
+  const { onPageChange, onPageSizeChange } = handlers;
   const selectedRowsCount = table.getFilteredSelectedRowModel().rows.length;
   const filteredRowsCount = table.getFilteredRowModel().rows.length;
   const isFirstPage = currentPage === 1;

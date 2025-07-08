@@ -8,6 +8,7 @@ import { useDebounce } from 'react-use';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useDataTableFilters } from '@/hooks/use-data-table-filters';
 
 import { DataTableFilter } from './data-table-filter';
 
@@ -27,28 +28,18 @@ export const visibilities = [
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
-  searchValue?: string;
-  onSearchChange?: (value: string) => void;
-  onResetFilters?: () => void;
-  visibilityValue?: boolean;
-  onVisibilityChange?: (visibility?: boolean) => void;
 }
 
-function useSearchInput(
-  initialValue: string,
-  onSearchChange?: (value: string) => void,
-) {
-  const [searchInput, setSearchInput] = useState(initialValue);
+export function DataTableToolbar<TData>({
+  table,
+}: DataTableToolbarProps<TData>) {
+  const { filters, handlers } = useDataTableFilters();
+  const [searchInput, setSearchInput] = useState(filters.search || '');
 
   useDebounce(
     () => {
-      if (onSearchChange && searchInput !== initialValue) {
-        const shouldSearch =
-          searchInput.length >= MIN_SEARCH_LENGTH || searchInput.length === 0;
-
-        if (shouldSearch) {
-          onSearchChange(searchInput);
-        }
+      if (searchInput.length >= MIN_SEARCH_LENGTH || searchInput.length === 0) {
+        handlers.onSearchChange(searchInput);
       }
     },
     SEARCH_DEBOUNCE_DELAY,
@@ -56,41 +47,22 @@ function useSearchInput(
   );
 
   useEffect(() => {
-    setSearchInput(initialValue);
-  }, [initialValue]);
-
-  return {
-    searchInput,
-    setSearchInput,
-  };
-}
-
-export function DataTableToolbar<TData>({
-  table,
-  searchValue = '',
-  onSearchChange,
-  onResetFilters,
-  visibilityValue,
-  onVisibilityChange,
-}: DataTableToolbarProps<TData>) {
-  const { searchInput, setSearchInput } = useSearchInput(
-    searchValue,
-    onSearchChange,
-  );
+    setSearchInput(filters.search || '');
+  }, [filters.search]);
 
   const tableState = table.getState();
   const visibilityColumn = table.getColumn('is_public');
 
   const hasColumnFilters = tableState.columnFilters.length > 0;
-  const hasSearchFilter = Boolean(searchValue);
-  const hasVisibilityFilter = visibilityValue !== undefined;
+  const hasSearchFilter = Boolean(filters.search);
+  const hasVisibilityFilter = filters.isPublic !== undefined;
   const isFiltered = hasColumnFilters || hasSearchFilter || hasVisibilityFilter;
 
   const handleReset = useCallback(() => {
     setSearchInput('');
     table.resetColumnFilters();
-    onResetFilters?.();
-  }, [setSearchInput, table, onResetFilters]);
+    handlers.onResetFilters();
+  }, [setSearchInput, table, handlers]);
 
   const handleSearchChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,8 +85,8 @@ export function DataTableToolbar<TData>({
           <DataTableFilter
             title="Visibility"
             options={visibilities}
-            value={visibilityValue}
-            onValueChange={onVisibilityChange}
+            value={filters.isPublic}
+            onValueChange={handlers.onVisibilityChange}
           />
         )}
 
