@@ -2,7 +2,7 @@
 
 import { Amplify } from 'aws-amplify';
 
-import { authConfig } from '@/app/utils/auth-config';
+import { authConfig } from '@/utils/auth-config';
 
 Amplify.configure(
   {

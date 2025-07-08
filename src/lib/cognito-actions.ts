@@ -10,7 +10,7 @@ import {
 } from 'aws-amplify/auth';
 import { redirect } from 'next/navigation';
 
-import { getErrorMessage } from '@/app/utils/get-error-message';
+import { getErrorMessage } from '@/utils/get-error-message';
 
 export async function handleSignUp(data: {
   username: string;

@@ -13,8 +13,8 @@ export interface InputElementProps {
 
 import { FormLabel } from '@/app/components/atoms/form-label';
 import { Input } from '@/app/components/atoms/input';
-import { findInputError } from '@/app/utils/find-input-error';
-import { isFormInvalid } from '@/app/utils/is-form-invalid';
+import { findInputError } from '@/utils/find-input-error';
+import { isFormInvalid } from '@/utils/is-form-invalid';
 
 export function InputElement({
   label,

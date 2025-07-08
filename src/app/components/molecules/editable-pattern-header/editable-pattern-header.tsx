@@ -2,7 +2,7 @@ import { GridInput } from '@/app/components/atoms/grid-input';
 import {
   pattern_author_validation,
   pattern_title_validation,
-} from '@/app/utils/input-validations';
+} from '@/utils/input-validations';
 
 export function EditablePatternHeader() {
   return (
