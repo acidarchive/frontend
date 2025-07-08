@@ -3,12 +3,12 @@ import '@/styles/globals.css';
 import { clsx } from 'clsx';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { UserProvider } from '@/context/user-context';
 import ConfigureAmplifyClientSide from '@/lib/cognito-config';
 import QueryProvider from '@/providers/query-provider';
-
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={clsx(inter.variable, 'h-full')}>
       <body className="h-full flex flex-col">
+        <NextTopLoader showSpinner={false} />
         <ConfigureAmplifyClientSide />
 
         <UserProvider>
