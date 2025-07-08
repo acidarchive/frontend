@@ -5,8 +5,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '@/app/components/atoms/button';
 import { ErrorMessage } from '@/app/components/atoms/error-message';
 import { InputElement } from '@/app/components/molecules/input-element';
-import { handleResetPassword } from '@/app/lib/cognito-actions';
 import { email_validation } from '@/app/utils/input-validations';
+import { handleResetPassword } from '@/lib/cognito-actions';
 
 type SubmitPasswordResetFormValues = {
   email: string;

@@ -5,12 +5,12 @@ import { FormProvider, useForm, useWatch } from 'react-hook-form';
 import { Button } from '@/app/components/atoms/button';
 import { ErrorMessage } from '@/app/components/atoms/error-message';
 import { InputElement } from '@/app/components/molecules/input-element';
-import { handleSignUp } from '@/app/lib/cognito-actions';
 import {
   email_validation,
   password_validation,
   username_validation,
 } from '@/app/utils/input-validations';
+import { handleSignUp } from '@/lib/cognito-actions';
 
 type SignupFormValues = {
   username: string;
