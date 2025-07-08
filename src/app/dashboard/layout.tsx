@@ -10,8 +10,8 @@ import {
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
-import { UserMenu } from '@/app/components/molecules/user-menu';
-import { Sidebar } from '@/app/components/organisms/sidebar';
+import { UserMenu } from '@/components/molecules/user-menu';
+import { Sidebar } from '@/components/organisms/sidebar';
 import { useUser } from '@/context/user-context';
 
 export default function DashboardLayout({

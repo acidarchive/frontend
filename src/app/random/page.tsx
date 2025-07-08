@@ -4,10 +4,10 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import { clsx } from 'clsx';
 
 import { useGetRandomTb303Pattern } from '@/api/generated/acid';
-import { Button } from '@/app/components/atoms/button';
-import { Loader } from '@/app/components/atoms/loader';
-import { MainLayout } from '@/app/components/layouts/main-layout';
-import { ReadonlyTB303PatternGrid } from '@/app/components/organisms/readonly-tb303-pattern-grid';
+import { Button } from '@/components/atoms/button';
+import { Loader } from '@/components/atoms/loader';
+import { MainLayout } from '@/components/layouts/main-layout';
+import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
 
 export default function PatternPage() {
   const { data, isError, isLoading, isFetching, refetch } =

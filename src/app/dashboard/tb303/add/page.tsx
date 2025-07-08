@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { PatternTB303Form } from '@/app/components/organisms/pattern-tb303-form';
+import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 
 export default function AddTB303PatternPage() {
   return (

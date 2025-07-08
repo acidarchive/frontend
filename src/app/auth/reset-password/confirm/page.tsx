@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-import { AuthLayout } from '@/app/components/layouts/auth-layout';
-import { ConfirmPasswordResetForm } from '@/app/components/organisms/auth/confirm-password-reset-form';
+import { AuthLayout } from '@/components/layouts/auth-layout';
+import { ConfirmPasswordResetForm } from '@/components/organisms/auth/confirm-password-reset-form';
 
 function ConfirmPasswordReset() {
   const searchParams = useSearchParams();
