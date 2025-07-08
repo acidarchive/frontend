@@ -1,12 +1,12 @@
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import * as cognitoActions from '@/app/lib/cognito-actions';
+import * as cognitoActions from '@/lib/cognito-actions';
 import { render, screen } from '@/tests/utils';
 
 import { UserMenu } from './user-menu';
 
-vi.mock('@/app/lib/cognito-actions', async () => {
+vi.mock('@/lib/cognito-actions', async () => {
   return {
     handleSignOut: vi.fn(),
   };

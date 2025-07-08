@@ -2,11 +2,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import * as cognitoActions from '@/app/lib/cognito-actions';
+import * as cognitoActions from '@/lib/cognito-actions';
 
 import { SignupForm } from './signup-form';
 
-vi.mock('@/app/lib/cognito-actions', async () => {
+vi.mock('@/lib/cognito-actions', async () => {
   return {
     handleSignUp: vi.fn(),
   };

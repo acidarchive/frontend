@@ -2,11 +2,11 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-import * as cognitoActions from '@/app/lib/cognito-actions';
+import * as cognitoActions from '@/lib/cognito-actions';
 
 import { ConfirmPasswordResetForm } from './confirm-password-reset-form';
 
-vi.mock('@/app/lib/cognito-actions', async () => {
+vi.mock('@/lib/cognito-actions', async () => {
   return {
     handleConfirmResetPassword: vi.fn(),
   };
