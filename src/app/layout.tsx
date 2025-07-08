@@ -5,8 +5,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
-import ConfigureAmplifyClientSide from '@/app/amplify-cognito-config';
 import { UserProvider } from '@/context/user-context';
+import ConfigureAmplifyClientSide from '@/lib/cognito-config';
 import QueryProvider from '@/providers/query-provider';
 
 const inter = Inter({
