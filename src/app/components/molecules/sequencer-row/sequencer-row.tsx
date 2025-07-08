@@ -1,7 +1,7 @@
 import { TB303Step } from '@/api/generated/model';
 import { RowLabel } from '@/app/components/atoms/row-label';
 import { StepCell } from '@/app/components/atoms/step-cell';
-import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/app/enums';
+import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
 
 interface SequencerRowProps {
   label: string;

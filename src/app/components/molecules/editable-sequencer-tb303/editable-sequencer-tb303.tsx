@@ -2,7 +2,7 @@ import { GridCheckbox } from '@/app/components/atoms/grid-checkbox';
 import { GridSelect } from '@/app/components/atoms/grid-select';
 import { SequencerRow } from '@/app/components/molecules/sequencer-row';
 import { StepNumberRow } from '@/app/components/molecules/step-number-row';
-import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/app/enums';
+import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/enums';
 
 export function EditableSequencerTB303() {
   return (
