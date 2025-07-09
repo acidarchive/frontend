@@ -1,6 +1,15 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- New dashboard layout
+
+- Added top loader
+
+
+## [0.0.1-alpha.28] - 2025-07-08
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -319,7 +328,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.27..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.28..HEAD
+[0.0.1-alpha.28]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.27..v0.0.1-alpha.28
 [0.0.1-alpha.27]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.26..v0.0.1-alpha.27
 [0.0.1-alpha.26]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.25..v0.0.1-alpha.26
 [0.0.1-alpha.25]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.24..v0.0.1-alpha.25
