@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.4
+ * OpenAPI spec version: 0.0.1-alpha.8
  */
 
 export type PaginatedResponseTB303PatternSummaryRecordsItemAuthor = string | null;
