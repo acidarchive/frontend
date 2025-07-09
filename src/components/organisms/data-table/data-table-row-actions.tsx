@@ -1,6 +1,7 @@
 'use client';
 
 import { MoreHorizontal } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -17,10 +18,6 @@ interface DataTableRowActionsProps {
 }
 
 export function DataTableRowActions({ id }: DataTableRowActionsProps) {
-  const handleEdit = () => {
-    console.log('Edit pattern:', id);
-  };
-
   const handleCopy = () => {
     console.log('Copy pattern:', id);
   };
@@ -46,7 +43,9 @@ export function DataTableRowActions({ id }: DataTableRowActionsProps) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href={`/dashboard/tb303/${id}/edit`}>Edit</Link>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleCopy}>Make a copy</DropdownMenuItem>
         <DropdownMenuItem onClick={handleFavorite}>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
