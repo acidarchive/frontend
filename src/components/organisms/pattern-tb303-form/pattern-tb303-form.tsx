@@ -38,9 +38,7 @@ const ErrorState = ({ message }: { message: string }) => (
   </div>
 );
 
-export function PatternTB303Form({
-  editPatternId,
-}: PatternTB303FormProps = {}) {
+export function PatternTB303Form({ editPatternId }: PatternTB303FormProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const isEditMode = Boolean(editPatternId);
