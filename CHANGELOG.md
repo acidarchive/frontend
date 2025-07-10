@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Storybook type error
+
+
+## [0.0.1-alpha.30] - 2025-07-10
+
 ### ⚙️ Miscellaneous
 
 - Generate types
@@ -340,7 +347,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.29..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.30..HEAD
+[0.0.1-alpha.30]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.29..v0.0.1-alpha.30
 [0.0.1-alpha.29]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.28..v0.0.1-alpha.29
 [0.0.1-alpha.28]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.27..v0.0.1-alpha.28
 [0.0.1-alpha.27]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.26..v0.0.1-alpha.27
