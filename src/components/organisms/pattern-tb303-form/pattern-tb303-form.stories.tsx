@@ -4,6 +4,10 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import { PatternTB303Form } from './pattern-tb303-form';
 
+type PatternTB303FormProps = {
+  editPatternId?: string;
+};
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -35,12 +39,15 @@ const meta = {
     ),
   ],
   tags: ['autodocs'],
-} satisfies Meta<typeof PatternTB303Form>;
+} satisfies Meta<PatternTB303FormProps>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    editPatternId: undefined,
+  },
   parameters: {
     nextjs: {
       appDirectory: true,
