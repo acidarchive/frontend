@@ -1,6 +1,18 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Generate types
+
+
+### 🌀 Added
+
+- Edit pattern page
+
+
+## [0.0.1-alpha.29] - 2025-07-09
+
 ### 🌀 Added
 
 - New dashboard layout
@@ -328,7 +340,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.28..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.29..HEAD
+[0.0.1-alpha.29]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.28..v0.0.1-alpha.29
 [0.0.1-alpha.28]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.27..v0.0.1-alpha.28
 [0.0.1-alpha.27]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.26..v0.0.1-alpha.27
 [0.0.1-alpha.26]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.25..v0.0.1-alpha.26
