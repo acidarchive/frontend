@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Pattern list header
+
+
+## [0.0.1-alpha.33] - 2025-07-11
+
 ### 🔧 Fixed
 
 - Prevent empty search param appearing on load
@@ -361,7 +368,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..HEAD
+[0.0.1-alpha.33]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..v0.0.1-alpha.33
 [0.0.1-alpha.32]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.31..v0.0.1-alpha.32
 [0.0.1-alpha.31]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.30..v0.0.1-alpha.31
 [0.0.1-alpha.30]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.29..v0.0.1-alpha.30
