@@ -22,13 +22,18 @@ export default function TB303EditPage() {
   }
 
   return (
-    <PageContainer>
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold">Edit TB303 Pattern</h1>
-          <p className="text-gray-600">Pattern ID: {uuid}</p>
+    <PageContainer scrollable={false}>
+      <div className="flex flex-1 flex-col gap-8 max-w-8xl mx-auto">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Edit TB-303 Pattern
+            </h2>
+            <p className="text-muted-foreground">
+              You can edit your TB-303 pattern here.
+            </p>
+          </div>
         </div>
-
         <PatternTB303Form editPatternId={uuid} />
       </div>
     </PageContainer>
