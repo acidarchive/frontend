@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Create pattern page layout
+
+
+## [0.0.1-alpha.34] - 2025-07-11
+
+### 🌀 Added
+
 - Pattern list header
 
 
@@ -368,7 +375,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..HEAD
+[0.0.1-alpha.34]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..v0.0.1-alpha.34
 [0.0.1-alpha.33]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..v0.0.1-alpha.33
 [0.0.1-alpha.32]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.31..v0.0.1-alpha.32
 [0.0.1-alpha.31]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.30..v0.0.1-alpha.31
