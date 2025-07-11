@@ -2,7 +2,6 @@
 
 import { Table } from '@tanstack/react-table';
 import { X } from 'lucide-react';
-import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 
@@ -96,12 +95,6 @@ export function DataTableToolbar<TData>({
             <X className="h-4 w-4" />
           </Button>
         )}
-      </div>
-
-      <div className="flex items-center gap-2">
-        <Link href="/dashboard/tb303/add">
-          <Button size="sm">Add Pattern</Button>
-        </Link>
       </div>
     </div>
   );
