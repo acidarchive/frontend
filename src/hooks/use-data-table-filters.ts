@@ -16,7 +16,7 @@ const filterParsers = {
   page_size: parseAsInteger.withDefault(10),
   sort_column: parseAsString,
   sort_direction: parseAsStringEnum([...SORT_DIRECTIONS]),
-  search: parseAsString.withDefault(''),
+  search: parseAsString,
   is_public: parseAsBoolean,
 };
 
@@ -50,7 +50,7 @@ export function useDataTableFilters() {
 
   const handleSearchChange = useCallback(
     (search: string) => {
-      setFilters({ page: 1, search: search.trim() || undefined });
+      setFilters({ page: 1, search: search.trim() || null });
     },
     [setFilters],
   );
