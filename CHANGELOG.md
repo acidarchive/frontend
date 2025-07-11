@@ -6,6 +6,13 @@
 - Prevent empty search param appearing on load
 
 
+## [0.0.1-alpha.32] - 2025-07-10
+
+### 🔧 Fixed
+
+- Prevent empty search param appearing on load
+
+
 ## [0.0.1-alpha.31] - 2025-07-10
 
 ### 🔧 Fixed
@@ -354,7 +361,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.31..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..HEAD
+[0.0.1-alpha.32]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.31..v0.0.1-alpha.32
 [0.0.1-alpha.31]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.30..v0.0.1-alpha.31
 [0.0.1-alpha.30]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.29..v0.0.1-alpha.30
 [0.0.1-alpha.29]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.28..v0.0.1-alpha.29
