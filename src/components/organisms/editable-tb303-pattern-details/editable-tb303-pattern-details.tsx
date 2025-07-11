@@ -12,14 +12,16 @@ export function EditableTB303PatternDetails() {
   } = useFormContext();
 
   return (
-    <div>
-      <InputElement {...pattern_name_validation} />
-      <SwitchElement
-        label="Make this pattern public"
-        description="If enabled, this pattern will be visible to other users."
-        name="is_public"
-      />
-      <div className="mt-8 flex gap-2">
+    <div className="flex flex-col justify-between h-full">
+      <div>
+        <InputElement {...pattern_name_validation} />
+        <SwitchElement
+          label="Make this pattern public"
+          description="If enabled, this pattern will be visible to other users."
+          name="is_public"
+        />
+      </div>
+      <div className="mt-8 flex gap-8">
         <Button type="button" variant="secondary" onClick={() => reset()}>
           Reset
         </Button>
