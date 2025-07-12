@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.8
+ * OpenAPI spec version: 0.0.1-alpha.9
  */
 import {
   useMutation,
@@ -400,6 +400,62 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
 
       const mutationOptions = getUpdateTb303PatternMutationOptions(options);
+
+      return useMutation(mutationOptions , queryClient);
+    }
+    
+export const deleteTb303Pattern = (
+    patternId: string,
+ options?: SecondParameter<typeof customInstance>,) => {
+      
+      
+      return customInstance<void>(
+      {url: `/v1/patterns/tb303/${patternId}`, method: 'DELETE'
+    },
+      options);
+    }
+  
+
+
+export const getDeleteTb303PatternMutationOptions = <TError = void,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteTb303Pattern>>, TError,{patternId: string}, TContext>, request?: SecondParameter<typeof customInstance>}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteTb303Pattern>>, TError,{patternId: string}, TContext> => {
+
+const mutationKey = ['deleteTb303Pattern'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteTb303Pattern>>, {patternId: string}> = (props) => {
+          const {patternId} = props ?? {};
+
+          return  deleteTb303Pattern(patternId,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteTb303PatternMutationResult = NonNullable<Awaited<ReturnType<typeof deleteTb303Pattern>>>
+    
+    export type DeleteTb303PatternMutationError = void
+
+    export const useDeleteTb303Pattern = <TError = void,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteTb303Pattern>>, TError,{patternId: string}, TContext>, request?: SecondParameter<typeof customInstance>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof deleteTb303Pattern>>,
+        TError,
+        {patternId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteTb303PatternMutationOptions(options);
 
       return useMutation(mutationOptions , queryClient);
     }
