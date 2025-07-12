@@ -25,12 +25,38 @@ const routeMapping: Record<string, BreadcrumbItem[]> = {
   ],
 };
 
+const dynamicRouteHandlers: {
+  regex: RegExp;
+  handler: (pathname: string, matches: RegExpMatchArray) => BreadcrumbItem[];
+}[] = [
+  {
+    regex: /^\/dashboard\/(tb303|tr606)\/([^/]+)\/edit$/,
+    handler: (pathname, matches) => {
+      const model = matches[1];
+      const modelName = model === 'tb303' ? 'TB-303' : 'TR-606';
+
+      return [
+        { title: 'Dashboard', link: '/dashboard' },
+        { title: modelName, link: `/dashboard/${model}` },
+        { title: 'Edit pattern', link: pathname },
+      ];
+    },
+  },
+];
+
 export function useBreadcrumbs() {
   const pathname = usePathname();
 
   const breadcrumbs = useMemo(() => {
     if (routeMapping[pathname]) {
       return routeMapping[pathname];
+    }
+
+    for (const dynamicRoute of dynamicRouteHandlers) {
+      const matches = pathname.match(dynamicRoute.regex);
+      if (matches) {
+        return dynamicRoute.handler(pathname, matches);
+      }
     }
 
     const segments = pathname.split('/').filter(Boolean);
