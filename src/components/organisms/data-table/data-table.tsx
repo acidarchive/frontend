@@ -1,14 +1,15 @@
 'use client';
 
-import type { SortingState, Updater } from '@tanstack/react-table';
+import type { ColumnDef, SortingState, Updater } from '@tanstack/react-table';
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { Key } from 'react';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -22,7 +23,7 @@ import { useDataTableFilters } from '@/hooks/use-data-table-filters';
 import { DataTablePagination } from './data-table-pagination';
 import { DataTableToolbar } from './data-table-toolbar';
 
-interface DataTableProps<TData, TValue> {
+export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data?: TData[];
   totalPages?: number;
@@ -40,6 +41,19 @@ const DEFAULT_VALUES = {
 const getCellStyle = (size: number) => ({
   width: size === 0 ? 'auto' : `${size}px`,
 });
+
+const getColumnKey = <TData, TValue>(
+  column: ColumnDef<TData, TValue>,
+  index: number,
+): Key => {
+  if ('id' in column && column.id) {
+    return column.id;
+  }
+  if ('accessorKey' in column && column.accessorKey) {
+    return String(column.accessorKey);
+  }
+  return index;
+};
 
 export function DataTable<TData, TValue>({
   columns,
@@ -115,6 +129,20 @@ export function DataTable<TData, TValue>({
   );
 
   const renderTableRows = () => {
+    if (isLoading) {
+      return Array.from({ length: filters.pageSize }).map((_, rowIndex) => (
+        <TableRow key={rowIndex}>
+          {columns.map((column, colIndex) => (
+            <TableCell
+              key={getColumnKey(column, colIndex)}
+              style={getCellStyle(column.size ?? 0)}
+            >
+              <Skeleton className="h-5 w-full" />
+            </TableCell>
+          ))}
+        </TableRow>
+      ));
+    }
     const rows = table.getRowModel().rows;
 
     if (!rows?.length) {
@@ -143,7 +171,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-1 flex-col space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} isLoading={isLoading} />
       <div className="relative flex flex-1">
         <div className="absolute inset-0 flex overflow-hidden rounded-lg border">
           <ScrollArea className="h-full w-full">

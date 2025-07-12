@@ -3,22 +3,12 @@
 import { keepPreviousData } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 import { useListTb303Patterns } from '@/api/generated/acid';
 import { PageContainer } from '@/components/layouts/page-container';
-import { columns } from '@/components/organisms/data-table';
-import { DataTable } from '@/components/organisms/data-table/data-table';
+import { columns, DataTable } from '@/components/organisms/data-table';
 import { Button } from '@/components/ui/button';
 import { useDataTableFilters } from '@/hooks/use-data-table-filters';
-
-const LoadingState = ({ message }: { message: string }) => (
-  <div className="px-4 sm:px-6 lg:px-8 py-8">
-    <div className="flex items-center justify-center h-64">
-      <div className="text-gray-500">{message}</div>
-    </div>
-  </div>
-);
 
 const ErrorState = ({ message }: { message: string }) => (
   <div className="px-4 sm:px-6 lg:px-8 py-8">
@@ -30,7 +20,7 @@ const ErrorState = ({ message }: { message: string }) => (
 
 function TB303ListPageContent() {
   const { filters, handlers } = useDataTableFilters();
-  const { data, isLoading, error } = useListTb303Patterns(
+  const { data, error, isFetching } = useListTb303Patterns(
     {
       page_size: filters.pageSize,
       sort_column: filters.sortColumn ?? undefined,
@@ -45,14 +35,23 @@ function TB303ListPageContent() {
     },
   );
 
-  if (isLoading && !data) {
-    return <LoadingState message="Loading patterns..." />;
-  }
-
   if (error) {
     return <ErrorState message="Error loading patterns" />;
   }
 
+  return (
+    <DataTable
+      columns={columns}
+      data={data?.records}
+      totalPages={data?.total_pages || 0}
+      isLoading={isFetching}
+      {...handlers}
+      {...filters}
+    />
+  );
+}
+
+export default function TB303ListPage() {
   return (
     <PageContainer scrollable={false}>
       <div className="flex flex-1 flex-col gap-8">
@@ -72,23 +71,8 @@ function TB303ListPageContent() {
             </Button>
           </Link>
         </div>
-        <DataTable
-          columns={columns}
-          data={data?.records}
-          totalPages={data?.total_pages || 0}
-          isLoading={isLoading}
-          {...handlers}
-          {...filters}
-        />
+        <TB303ListPageContent />
       </div>
     </PageContainer>
-  );
-}
-
-export default function TB303ListPage() {
-  return (
-    <Suspense fallback={<LoadingState message="Loading patterns..." />}>
-      <TB303ListPageContent />
-    </Suspense>
   );
 }

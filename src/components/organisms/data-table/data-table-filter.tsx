@@ -30,6 +30,7 @@ interface DataTableFilterProps {
   }[];
   value?: boolean;
   onValueChange?: (value?: boolean) => void;
+  disabled?: boolean;
 }
 
 const getSelectionClasses = (isSelected: boolean) => {
@@ -46,6 +47,7 @@ export function DataTableFilter({
   options,
   value,
   onValueChange,
+  disabled,
 }: DataTableFilterProps) {
   const selectedOption = options.find(option => option.value === value);
   const hasFilter = value !== undefined;
@@ -75,7 +77,12 @@ export function DataTableFilter({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8 border-dashed">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 border-dashed"
+          disabled={disabled}
+        >
           <PlusCircle className="h-4 w-4" />
           {title}
           {selectedOption && (
