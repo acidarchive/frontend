@@ -1,17 +1,56 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import { useQueryClient } from '@tanstack/react-query';
+import { ColumnDef, Row } from '@tanstack/react-table';
 
+import {
+  getListTb303PatternsQueryKey,
+  useDeleteTb303Pattern,
+} from '@/api/generated/acid';
 import { PaginatedResponseTB303PatternSummaryRecordsItem } from '@/api/generated/model';
-
-dayjs.extend(relativeTime);
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { formatRelativeTime } from '@/lib/date';
 
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
+
+const TB303ActionsCell = ({
+  row,
+}: {
+  row: Row<PaginatedResponseTB303PatternSummaryRecordsItem>;
+}) => {
+  const queryClient = useQueryClient();
+  const id = row.original.pattern_id;
+
+  const { mutate: deletePattern, isPending: isDeleting } =
+    useDeleteTb303Pattern({
+      mutation: {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: getListTb303PatternsQueryKey(),
+          });
+        },
+        onError: error => {
+          console.error('Error deleting pattern:', error);
+        },
+      },
+    });
+
+  const handleDelete = () => {
+    deletePattern({ patternId: id });
+  };
+
+  return (
+    <div className="text-center">
+      <DataTableRowActions
+        editUrl={`/dashboard/tb303/${id}/edit`}
+        onDelete={handleDelete}
+        isDeleting={isDeleting}
+      />
+    </div>
+  );
+};
 
 export const columns: ColumnDef<PaginatedResponseTB303PatternSummaryRecordsItem>[] =
   [
@@ -76,18 +115,14 @@ export const columns: ColumnDef<PaginatedResponseTB303PatternSummaryRecordsItem>
       ),
       cell: ({ row }) => (
         <div className="text-right text-muted-foreground whitespace-nowrap pr-4">
-          {dayjs(row.getValue('updated_at')).fromNow()}
+          {formatRelativeTime(row.getValue('updated_at'))}
         </div>
       ),
       size: 160,
     },
     {
       id: 'actions',
-      cell: ({ row }) => (
-        <div className="text-center">
-          <DataTableRowActions id={row.original.pattern_id} />
-        </div>
-      ),
+      cell: ({ row }) => <TB303ActionsCell row={row} />,
       enableSorting: false,
       enableHiding: false,
       size: 70,
