@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Data table loading state
+
+
+## [0.0.1-alpha.37] - 2025-07-12
+
 ### ⚙️ Miscellaneous
 
 - Generate types
@@ -394,7 +401,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.37..HEAD
+[0.0.1-alpha.37]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..v0.0.1-alpha.37
 [0.0.1-alpha.36]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..v0.0.1-alpha.36
 [0.0.1-alpha.35]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..v0.0.1-alpha.35
 [0.0.1-alpha.34]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..v0.0.1-alpha.34
