@@ -1,6 +1,18 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Generate types
+
+
+### 🌀 Added
+
+- Delete pattern
+
+
+## [0.0.1-alpha.36] - 2025-07-12
+
 ### 🔧 Fixed
 
 - Correct breadcrumbs in dynamic routes
@@ -382,7 +394,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..HEAD
+[0.0.1-alpha.36]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..v0.0.1-alpha.36
 [0.0.1-alpha.35]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..v0.0.1-alpha.35
 [0.0.1-alpha.34]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..v0.0.1-alpha.34
 [0.0.1-alpha.33]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..v0.0.1-alpha.33
