@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Correct breadcrumbs in dynamic routes
+
+
+## [0.0.1-alpha.35] - 2025-07-11
+
 ### 🌀 Added
 
 - Create pattern page layout
@@ -375,7 +382,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..HEAD
+[0.0.1-alpha.35]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..v0.0.1-alpha.35
 [0.0.1-alpha.34]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.33..v0.0.1-alpha.34
 [0.0.1-alpha.33]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.32..v0.0.1-alpha.33
 [0.0.1-alpha.32]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.31..v0.0.1-alpha.32
