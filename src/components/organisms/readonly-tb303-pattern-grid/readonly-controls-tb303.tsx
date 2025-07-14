@@ -1,3 +1,5 @@
+'use client';
+
 import {
   TB303PatternAccent,
   TB303PatternCutOffFreq,
@@ -26,7 +28,7 @@ export function ReadonlyControlsTB303({
   accent,
 }: ReadonlyControlsTB303Props) {
   return (
-    <div className="border-t border-gray-950 flex flex-col items-center justify-center">
+    <div className="border-t flex flex-col items-center justify-center">
       <div className="flex flex-row w-full justify-between gap-2 sm:gap-6 px-1 py-2 sm:px-8">
         <Knob label="tuning" value={tuning || 50} />
         <Knob label="cut off freq" value={cut_off_freq || 50} />
