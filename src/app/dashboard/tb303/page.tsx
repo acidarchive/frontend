@@ -27,6 +27,7 @@ function TB303ListPageContent() {
       sort_direction: filters.sortDirection ?? undefined,
       search: filters.search ?? undefined,
       is_public: filters.isPublic ?? undefined,
+      page: filters.page,
     },
     {
       query: {
