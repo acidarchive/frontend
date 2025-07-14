@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Pattern list pagination
+
+
+## [0.0.1-alpha.39] - 2025-07-14
+
 ### 🌀 Added
 
 - Pattern view page
@@ -408,7 +415,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.38..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.39..HEAD
+[0.0.1-alpha.39]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.38..v0.0.1-alpha.39
 [0.0.1-alpha.38]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.37..v0.0.1-alpha.38
 [0.0.1-alpha.37]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..v0.0.1-alpha.37
 [0.0.1-alpha.36]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..v0.0.1-alpha.36
