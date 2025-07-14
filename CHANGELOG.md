@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Pattern view page
+
+
+## [0.0.1-alpha.38] - 2025-07-12
+
+### 🌀 Added
+
 - Data table loading state
 
 
@@ -401,7 +408,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.37..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.38..HEAD
+[0.0.1-alpha.38]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.37..v0.0.1-alpha.38
 [0.0.1-alpha.37]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..v0.0.1-alpha.37
 [0.0.1-alpha.36]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.35..v0.0.1-alpha.36
 [0.0.1-alpha.35]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.34..v0.0.1-alpha.35
