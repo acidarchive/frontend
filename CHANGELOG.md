@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Change font to oxanium
+
+
+## [0.0.1-alpha.40] - 2025-07-14
+
 ### 🔧 Fixed
 
 - Pattern list pagination
@@ -415,7 +422,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.39..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.40..HEAD
+[0.0.1-alpha.40]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.39..v0.0.1-alpha.40
 [0.0.1-alpha.39]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.38..v0.0.1-alpha.39
 [0.0.1-alpha.38]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.37..v0.0.1-alpha.38
 [0.0.1-alpha.37]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.36..v0.0.1-alpha.37
