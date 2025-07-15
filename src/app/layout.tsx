@@ -9,6 +9,7 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { UserProvider } from '@/context/user-context';
 import ConfigureAmplifyClientSide from '@/lib/cognito-config';
 import QueryProvider from '@/providers/query-provider';
+import { ThemeProvider } from '@/providers/theme-provider';
 
 const oxanium = Oxanium({
   subsets: ['latin'],
@@ -35,17 +36,24 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={clsx(oxanium.variable, firaCode.variable, 'h-full')}
     >
       <body className="h-full flex flex-col">
-        <NextTopLoader showSpinner={false} />
-        <ConfigureAmplifyClientSide />
-
-        <UserProvider>
-          <QueryProvider>
-            <NuqsAdapter>{children}</NuqsAdapter>
-          </QueryProvider>
-        </UserProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextTopLoader showSpinner={false} />
+          <ConfigureAmplifyClientSide />
+          <UserProvider>
+            <QueryProvider>
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </QueryProvider>
+          </UserProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

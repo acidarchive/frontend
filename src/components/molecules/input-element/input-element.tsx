@@ -12,7 +12,7 @@ export interface InputElementProps {
 }
 
 import { FormLabel } from '@/components/atoms/form-label';
-import { Input } from '@/components/atoms/input';
+import { Input } from '@/components/ui/input';
 import { findInputError } from '@/utils/find-input-error';
 import { isFormInvalid } from '@/utils/is-form-invalid';
 
@@ -45,7 +45,6 @@ export function InputElement({
           id={id}
           type={type}
           placeholder={placeholder}
-          error={isInvalid}
           disabled={disabled}
           {...register(name, validation)}
         />

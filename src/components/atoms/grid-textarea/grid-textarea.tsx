@@ -6,7 +6,7 @@ export function GridTextarea({ ...props }: GridTextareaProps) {
   return (
     <HeadlessTextarea
       {...props}
-      className="w-full h-full border-none text-sm text-gray-900 bg-transparent p-4 resize-none focus:ring-0 focus:outline-none"
+      className="w-full h-full border-none text-sm bg-transparent p-4 resize-none focus:ring-0 focus:outline-none"
     />
   );
 }

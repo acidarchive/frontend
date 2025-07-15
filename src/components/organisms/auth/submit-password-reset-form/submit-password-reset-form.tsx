@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button';
 import { ErrorMessage } from '@/components/atoms/error-message';
 import { InputElement } from '@/components/molecules/input-element';
+import { Button } from '@/components/ui/button';
 import { handleResetPassword } from '@/lib/cognito-actions';
 import { email_validation } from '@/utils/input-validations';
 
@@ -42,6 +42,7 @@ export function SubmitPasswordResetForm() {
           <div className="mt-6">
             <Button
               type="submit"
+              className="w-full"
               onClick={onSubmit}
               disabled={isSubmitting}
               aria-disabled={isSubmitting}

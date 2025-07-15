@@ -10,14 +10,14 @@ export function StepNumber({ number, isHighlighted, isLast }: StepNumberProps) {
   return (
     <div
       className={clsx(
-        'border-b border-r border-gray-200',
+        'border-b border-r',
         'flex items-center justify-center',
         'sm:aspect-square',
-        isHighlighted && 'bg-gray-50',
+        isHighlighted && 'bg-accent',
         isLast && 'sm:border-r-0',
       )}
     >
-      <span className="text-sm text-gray-900 font-semibold">{number}</span>
+      <span className="text-sm font-semibold">{number}</span>
     </div>
   );
 }

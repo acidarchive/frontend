@@ -27,15 +27,11 @@ export function SwitchElement({
         render={({ field: { onChange, value } }) => (
           <Field className="flex items-center justify-between">
             <span className="flex grow flex-col">
-              <Label
-                as="span"
-                passive
-                className="text-sm/6 font-medium text-gray-900"
-              >
+              <Label as="span" passive className="text-sm/6 font-medium">
                 {label}
               </Label>
               {description && (
-                <Description as="span" className="text-sm text-gray-500">
+                <Description as="span" className="text-sm">
                   {description}
                 </Description>
               )}

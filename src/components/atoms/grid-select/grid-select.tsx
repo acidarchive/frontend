@@ -32,13 +32,17 @@ export function GridSelect<T = string>({
       disabled={disabled}
       className={clsx(
         'appearance-none bg-transparent border-none p-0',
-        'text-center w-full h-full outline-none text-gray-900 text-sm',
+        'text-center w-full h-full outline-none text-md',
       )}
       {...register(name, {})}
     >
       {allowEmpty && <option value=""> </option>}
       {options.map(option => (
-        <option key={String(option.value)} value={String(option.value)}>
+        <option
+          key={String(option.value)}
+          value={String(option.value)}
+          className="text-black"
+        >
           {option.label}
         </option>
       ))}

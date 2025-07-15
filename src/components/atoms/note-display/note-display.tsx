@@ -5,9 +5,5 @@ interface ReadonlyNoteDisplayProps {
 }
 
 export function NoteDisplay({ note }: ReadonlyNoteDisplayProps) {
-  return (
-    <span className="text-gray-900 text-sm">
-      {note === Note.Chigh ? "C'" : note}
-    </span>
-  );
+  return <span className="text-md">{note === Note.Chigh ? "C'" : note}</span>;
 }

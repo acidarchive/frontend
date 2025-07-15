@@ -3,5 +3,5 @@ export interface CheckmarkDisplayProps {
 }
 
 export function CheckmarkDisplay({ value }: CheckmarkDisplayProps) {
-  return <span className="text-gray-900 text-sm ">{value ? '●' : ''}</span>;
+  return <span className="text-sm ">{value ? '●' : ''}</span>;
 }

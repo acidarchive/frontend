@@ -12,7 +12,5 @@ const options: Record<string, string> = {
 };
 
 export function TimeDisplay({ time }: TimeDisplayProps) {
-  return (
-    <span className="text-gray-900 text-sm">{time ? options[time] : ''}</span>
-  );
+  return <span className="text-sm">{time ? options[time] : ''}</span>;
 }

@@ -4,7 +4,7 @@ import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
 export function StepNumberRow() {
   return (
     <>
-      <div className="col-span-1 sm:col-span-2 border-b border-r border-gray-200" />
+      <div className="col-span-1 sm:col-span-2 border-b border-r" />
       {Array.from({ length: TOTAL_STEPS }, (_, index) => (
         <StepNumber
           key={index}

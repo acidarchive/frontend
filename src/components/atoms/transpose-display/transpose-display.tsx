@@ -11,9 +11,5 @@ const options: Record<string, string> = {
 };
 
 export function TransposeDisplay({ transpose }: TransposeDisplayProps) {
-  return (
-    <span className="text-gray-900 text-sm">
-      {transpose ? options[transpose] : ''}
-    </span>
-  );
+  return <span className="text-sm">{transpose ? options[transpose] : ''}</span>;
 }

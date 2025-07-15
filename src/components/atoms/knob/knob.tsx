@@ -68,7 +68,7 @@ export function Knob({
     >
       {label && (
         <KnobHeadlessLabel
-          className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap text-gray-900 -translate-y-[30%]"
+          className="absolute left-1/2 transform -translate-x-1/2 text-center uppercase text-[0.6rem] font-semibold whitespace-nowrap -translate-y-[30%]"
           id={finalLabelId}
         >
           {label}

@@ -11,7 +11,7 @@ export function EditableControlsTB303() {
   ];
 
   return (
-    <div className="border-t border-gray-950 flex flex-col items-center justify-center">
+    <div className="border-t flex flex-col items-center justify-center">
       <div className="flex flex-row w-full justify-between gap-2 sm:gap-6 px-1 py-2 sm:px-8">
         {knobs.map(({ name, label }) => (
           <KnobElement key={label} name={name} label={label} />

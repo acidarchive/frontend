@@ -16,7 +16,7 @@ export function ReadonlyTB303PatternGrid({
     <div className="grid sm:grid-rows-[auto_6fr_5fr_auto] grid-rows-[auto] border relative">
       <ReadonlyPatternHeader {...pattern} />
       <ReadonlySequencerTB303 {...pattern} />
-      <div className="p-4 text-sm text-gray-700">{pattern?.description}</div>
+      <div className="p-4 text-sm">{pattern?.description}</div>
       <ReadonlySettingsTB303 {...pattern} />
       <ReadonlyControlsTB303 {...pattern} />
     </div>
