@@ -16,7 +16,7 @@ const navigation = [
 
 import { ModeToggle } from '@/components/atoms/mode-toggle/mode-toggle';
 import { AuthButtonGroup } from '@/components/molecules/auth-button-group';
-import { UserMenu } from '@/components/molecules/user-menu';
+import { UserNavigation } from '@/components/molecules/user-navigation';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -54,7 +54,7 @@ export const Header: React.FC = () => {
           </nav>
           <div className="flex flex-1 items-center justify-end gap-x-4">
             {user && !isLoading ? (
-              <UserMenu user={user} />
+              <UserNavigation />
             ) : isLoading ? (
               <div className="h-4 w-16" />
             ) : (
