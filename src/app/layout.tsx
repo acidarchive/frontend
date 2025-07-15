@@ -2,17 +2,24 @@ import '@/styles/globals.css';
 
 import { clsx } from 'clsx';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Fira_Code, Oxanium } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { UserProvider } from '@/context/user-context';
 import ConfigureAmplifyClientSide from '@/lib/cognito-config';
 import QueryProvider from '@/providers/query-provider';
-const inter = Inter({
+
+const oxanium = Oxanium({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-oxanium',
+});
+
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-fira-code',
 });
 
 export const metadata: Metadata = {
@@ -26,7 +33,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={clsx(inter.variable, 'h-full')}>
+    <html
+      lang="en"
+      className={clsx(oxanium.variable, firaCode.variable, 'h-full')}
+    >
       <body className="h-full flex flex-col">
         <NextTopLoader showSpinner={false} />
         <ConfigureAmplifyClientSide />
