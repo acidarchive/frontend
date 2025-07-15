@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button';
 import { ErrorMessage } from '@/components/atoms/error-message';
 import { InputElement } from '@/components/molecules/input-element';
+import { Button } from '@/components/ui/button';
 import { useUser } from '@/context/user-context';
 import { handleSignIn } from '@/lib/cognito-actions';
 import {
@@ -57,14 +57,19 @@ export function SigninForm() {
             labelAction={
               <Link
                 href="/auth/reset-password/submit"
-                className="font-semibold text-gray-900 hover:text-gray-500"
+                className="font-semibold hover:underline"
               >
                 Forgot password?
               </Link>
             }
           />
           <div className="mt-6">
-            <Button type="submit" onClick={onSubmit} disabled={isSubmitting}>
+            <Button
+              className="w-full"
+              type="submit"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+            >
               {isSubmitting ? 'Signing in...' : 'Sign in'}
             </Button>
           </div>

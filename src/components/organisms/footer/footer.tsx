@@ -22,17 +22,19 @@ const navigation = {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full border-t border-gray-900/10 bg-white">
-      <div className="max-w-7xl m-auto px-4 py-6 sm:px-6 lg:px-8 flex flex-col items-center justify-center md:flex-row md:justify-between md:items-center">
-        <p className="font-sans text-md text-gray-600 text-center">
-          &copy; {new Date().getFullYear()} Acid Archive <Version />
+    <footer className="w-full border-t">
+      <div className="max-w-7xl m-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center md:flex-row md:justify-between md:items-center">
+        <p className="font-sans text-md text-center">
+          &copy; {new Date().getFullYear()} Acid Archive{' '}
+          <span className="ml-4">
+            <Version />
+          </span>
         </p>
         <div className="mt-4 flex gap-x-6 md:mt-0">
           {navigation.social.map(item => (
             <a
               key={item.name}
               href={item.href}
-              className="text-gray-600 hover:text-gray-800"
               target="_blank"
               rel="noopener noreferrer"
             >

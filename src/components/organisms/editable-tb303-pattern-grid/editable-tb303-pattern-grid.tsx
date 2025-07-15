@@ -6,7 +6,7 @@ import { EditableSettingsTB303 } from '@/components/molecules/editable-settings-
 
 export function EditableTB303PatternGrid() {
   return (
-    <div className="grid sm:grid-rows-[auto_6fr_5fr_auto] grid-rows-[auto] border border-gray-950 relative">
+    <div className="grid sm:grid-rows-[auto_6fr_5fr_auto] grid-rows-[auto] border relative">
       <EditablePatternHeader />
       <EditableSequencerTB303 />
       <GridTextarea />

@@ -1,13 +1,13 @@
 'use client';
 
-import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import { clsx } from 'clsx';
+import { RefreshCwIcon } from 'lucide-react';
 
 import { useGetRandomTb303Pattern } from '@/api/generated/acid';
-import { Button } from '@/components/atoms/button';
 import { Loader } from '@/components/atoms/loader';
 import { MainLayout } from '@/components/layouts/main-layout';
 import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
+import { Button } from '@/components/ui/button';
 
 export default function PatternPage() {
   const { data, isError, isLoading, isFetching, refetch } =
@@ -28,23 +28,22 @@ export default function PatternPage() {
     <MainLayout>
       <div className="w-full max-w-3xl px-4">
         <div className="mb-8 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-950">TB-303 pattern</h1>
+          <h1 className="text-2xl font-bold">TB-303 pattern</h1>
           <div className="w-24">
             <Button
               onClick={() => refetch()}
               disabled={isFetching}
               aria-disabled={isFetching}
             >
-              <ArrowPathIcon
-                className={clsx('h-6 w-6', { 'animate-spin': isFetching })}
-              />
+              Refresh
+              <RefreshCwIcon className={clsx({ 'animate-spin': isFetching })} />
             </Button>
           </div>
         </div>
         {data ? (
           <ReadonlyTB303PatternGrid pattern={data} />
         ) : (
-          <div className="text-gray-500">No pattern found</div>
+          <div>No pattern found</div>
         )}
       </div>
     </MainLayout>

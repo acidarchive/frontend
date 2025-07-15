@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button';
 import { ErrorMessage } from '@/components/atoms/error-message';
 import { SuccessMessage } from '@/components/atoms/success-message';
 import { InputElement } from '@/components/molecules/input-element';
+import { Button } from '@/components/ui/button';
 import { useUser } from '@/context/user-context';
 import {
   handleConfirmSignUp,
@@ -85,7 +85,7 @@ export function ConfirmSignupForm({ username }: ConfirmSignupFormProps) {
             {...verification_code_validation}
             labelAction={
               <button
-                className="font-semibold text-gray-900 hover:text-gray-500"
+                className="font-semibold hover:underline"
                 onClick={onResendCode}
               >
                 Resend Verification Code
@@ -94,7 +94,12 @@ export function ConfirmSignupForm({ username }: ConfirmSignupFormProps) {
           />
 
           <div className="mt-6">
-            <Button type="submit" onClick={onSubmit} disabled={isSubmitting}>
+            <Button
+              className="w-full"
+              type="submit"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+            >
               {isSubmitting ? 'Confirming...' : 'Confirm'}
             </Button>
           </div>

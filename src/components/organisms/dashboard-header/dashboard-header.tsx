@@ -1,3 +1,4 @@
+import { ModeToggle } from '@/components/atoms/mode-toggle/mode-toggle';
 import { Breadcrumbs } from '@/components/molecules/breadcrumbs';
 import { UserNavigation } from '@/components/molecules/user-navigation';
 import { Separator } from '@/components/ui/separator';
@@ -14,6 +15,7 @@ export function DashboardHeader() {
 
       <div className="flex items-center gap-2 px-4">
         <div className="hidden md:flex"></div>
+        <ModeToggle />
         <UserNavigation />
       </div>
     </header>

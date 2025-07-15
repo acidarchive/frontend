@@ -14,6 +14,7 @@ const navigation = [
   { name: 'About', href: '/about' },
 ];
 
+import { ModeToggle } from '@/components/atoms/mode-toggle/mode-toggle';
 import { AuthButtonGroup } from '@/components/molecules/auth-button-group';
 import { UserMenu } from '@/components/molecules/user-menu';
 
@@ -24,7 +25,7 @@ export const Header: React.FC = () => {
 
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50 flex h-16 border-b border-gray-900/10">
+      <header className="absolute inset-x-0 top-0 z-50 flex h-16 border-b">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex flex-1 items-center gap-x-6">
             <button
@@ -32,30 +33,26 @@ export const Header: React.FC = () => {
               onClick={() => setMobileMenuOpen(true)}
               className="-m-3 p-3 md:hidden"
             >
-              <Bars3Icon aria-hidden="true" className="size-5 text-gray-900" />
+              <Bars3Icon aria-hidden="true" className="size-5" />
             </button>
             <Link
               href="/"
               className="font-sans inline-flex items-center gap-[0.3em]"
             >
               <Smiley />
-              <h1 className="hidden text-[1.65rem] font-bold text-gray-900 md:block absolute translate-x-[1.5em] translate-y-[0.1em]">
+              <h1 className="hidden text-[1.65rem] font-bold md:block absolute translate-x-[1.5em] translate-y-[0.1em]">
                 Acid Archive
               </h1>
             </Link>
           </div>
-          <nav className="hidden md:flex md:gap-x-11 md:text-sm/6 md:font-semibold md:text-gray-700">
+          <nav className="hidden md:flex md:gap-x-11 md:text-sm/6 md:font-semibold">
             {navigation.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="font-sans text-gray-900"
-              >
+              <Link key={index} href={item.href} className="font-sans">
                 {item.name}
               </Link>
             ))}
           </nav>
-          <div className="flex flex-1 items-center justify-end gap-x-8">
+          <div className="flex flex-1 items-center justify-end gap-x-4">
             {user && !isLoading ? (
               <UserMenu user={user} />
             ) : isLoading ? (
@@ -63,6 +60,7 @@ export const Header: React.FC = () => {
             ) : (
               <AuthButtonGroup />
             )}
+            <ModeToggle />
           </div>
         </div>
         <Dialog
@@ -71,7 +69,7 @@ export const Header: React.FC = () => {
           className="lg:hidden"
         >
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 left-0 z-50 w-full overflow-y-auto bg-white px-4 pb-6 sm:max-w-sm sm:px-6 sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 left-0 z-50 w-full overflow-y-auto bg-accent px-4 pb-6 sm:max-w-sm sm:px-6 sm:ring-1">
             <div className="-ml-0.5 flex h-16 items-center gap-x-6">
               <button
                 type="button"
@@ -91,7 +89,7 @@ export const Header: React.FC = () => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2 font-semibold hover:underline"
                 >
                   {item.name}
                 </a>

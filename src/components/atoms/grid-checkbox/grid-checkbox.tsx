@@ -38,7 +38,7 @@ export function GridCheckbox({
         >
           <span
             className={clsx(
-              'text-gray-900 text-center text-sm leading-none transition-opacity duration-150',
+              'text-center text-sm transition-opacity duration-150',
               value || false ? 'opacity-100' : 'opacity-0',
             )}
           >

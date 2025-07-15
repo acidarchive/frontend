@@ -4,7 +4,7 @@ import { SubmitPasswordResetForm } from '@/components/organisms/auth/submit-pass
 export default function SubmitPasswordReset() {
   return (
     <AuthLayout>
-      <h2 className="mb-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900 font-sans">
+      <h2 className="mb-10 text-center text-2xl/9 font-bold">
         Please enter your email to get confirmation code.
       </h2>
 

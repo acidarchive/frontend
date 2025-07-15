@@ -31,13 +31,13 @@ export function TB303Thumb({ value01 }: TB303ThumbProps) {
           cx="50"
           cy="50"
           r={OUTER_RADIUS}
-          className="fill-white stroke-black stroke-[3]"
+          className="fill-transparent stroke-black dark:stroke-foreground stroke-[3]"
         />
         <circle
           cx="50"
           cy="50"
           r={INNER_RADIUS}
-          className="fill-gray-200 stroke-black stroke-[2]"
+          className="fill-accent dark:fill-transparent stroke-black dark:stroke-foreground stroke-[2]"
         />
 
         {markerPositions.map(({ x1, y1, x2, y2 }, index) => (
@@ -47,7 +47,7 @@ export function TB303Thumb({ value01 }: TB303ThumbProps) {
             y1={y1}
             x2={x2}
             y2={y2}
-            className="stroke-black stroke-[3]"
+            className="stroke-black dark:stroke-foreground stroke-[3]"
           />
         ))}
       </svg>
@@ -57,7 +57,7 @@ export function TB303Thumb({ value01 }: TB303ThumbProps) {
           rotate: `${angle}deg`,
         }}
       >
-        <div className="absolute left-1/2 top-0 h-[46%] w-[3%] mt-[4%] -translate-x-1/2 rounded bg-black" />
+        <div className="absolute left-1/2 top-0 h-[46%] w-[3%] mt-[4%] -translate-x-1/2 rounded bg-black dark:bg-foreground" />
       </div>
     </div>
   );

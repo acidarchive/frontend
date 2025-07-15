@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button';
 import { InputElement } from '@/components/molecules/input-element';
 import { SwitchElement } from '@/components/molecules/switch-element';
+import { Button } from '@/components/ui/button';
 import { pattern_name_validation } from '@/utils/input-validations';
 
 export function EditableTB303PatternDetails() {

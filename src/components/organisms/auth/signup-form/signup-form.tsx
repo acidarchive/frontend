@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
-import { Button } from '@/components/atoms/button';
 import { ErrorMessage } from '@/components/atoms/error-message';
 import { InputElement } from '@/components/molecules/input-element';
+import { Button } from '@/components/ui/button';
 import { handleSignUp } from '@/lib/cognito-actions';
 import {
   email_validation,
@@ -67,7 +67,12 @@ export function SignupForm() {
             }}
           />
           <div className="mt-6">
-            <Button type="submit" onClick={onSubmit} disabled={isSubmitting}>
+            <Button
+              className="w-full"
+              type="submit"
+              onClick={onSubmit}
+              disabled={isSubmitting}
+            >
               {isSubmitting ? 'Signing up...' : 'Sign up'}
             </Button>
           </div>

@@ -1,7 +1,8 @@
 'use client';
 
-import { Input } from '@headlessui/react';
 import { type RegisterOptions, useFormContext } from 'react-hook-form';
+
+import { Input } from '@/components/ui/input';
 
 export interface GridInputProps {
   id: string;
@@ -36,10 +37,10 @@ export function GridInput({
       <Input
         id={id}
         type={type}
+        className="w-full h-full border-none focus:ring-0 focus:outline-none"
         placeholder={placeholder}
         disabled={disabled}
         {...register(name, options)}
-        className="w-full h-full border-none text-sm text-gray-900 bg-transparent focus:ring-0 focus:outline-none placeholder:text-gray-400"
       />
     </div>
   );
