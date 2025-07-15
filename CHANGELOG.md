@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Correct user menu in header
+
+
+## [0.0.1-alpha.42] - 2025-07-15
+
 ### 🌀 Added
 
 - Dark mode
@@ -431,7 +438,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.41..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.42..HEAD
+[0.0.1-alpha.42]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.41..v0.0.1-alpha.42
 [0.0.1-alpha.41]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.40..v0.0.1-alpha.41
 [0.0.1-alpha.40]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.39..v0.0.1-alpha.40
 [0.0.1-alpha.39]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.38..v0.0.1-alpha.39
