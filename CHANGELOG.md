@@ -3,6 +3,27 @@
 
 ### 🔧 Fixed
 
+- Remove dropdown menu from mode-toggle
+
+
+## [0.0.1-alpha.45] - 2025-07-20
+
+### 🌀 Added
+
+- Use shadcn switch
+
+
+## [0.0.1-alpha.44] - 2025-07-19
+
+### 🌀 Added
+
+- Update edit page layout
+
+
+## [0.0.1-alpha.43] - 2025-07-15
+
+### 🔧 Fixed
+
 - Correct user menu in header
 
 
@@ -438,7 +459,10 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.42..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..HEAD
+[0.0.1-alpha.45]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.44..v0.0.1-alpha.45
+[0.0.1-alpha.44]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.43..v0.0.1-alpha.44
+[0.0.1-alpha.43]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.42..v0.0.1-alpha.43
 [0.0.1-alpha.42]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.41..v0.0.1-alpha.42
 [0.0.1-alpha.41]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.40..v0.0.1-alpha.41
 [0.0.1-alpha.40]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.39..v0.0.1-alpha.40
