@@ -1,7 +1,6 @@
-'use client';
-
-import { Switch } from '@headlessui/react';
 import { Controller, useFormContext } from 'react-hook-form';
+
+import { Switch } from '@/components/ui/switch';
 
 export interface GridSwitchProps {
   name: string;
@@ -25,15 +24,9 @@ export function GridSwitch({
         <Switch
           name={name}
           checked={value ?? false}
-          onChange={onChange}
+          onCheckedChange={onChange}
           disabled={disabled}
-          className="group relative inline-flex h-6 w-11 shrink-0 cursor-pointer border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-hidden data-checked:bg-gray-600"
-        >
-          <span
-            aria-hidden="true"
-            className="pointer-events-none inline-block size-5 transform bg-white shadow-sm transition duration-200 ease-in-out group-data-checked:translate-x-5"
-          />
-        </Switch>
+        />
       )}
     />
   );
