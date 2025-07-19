@@ -1,6 +1,6 @@
 import { KnobElement } from '@/components/molecules/knob-element';
 
-export function EditableControlsTB303() {
+export function EditableTB303Controls() {
   const knobs = [
     { label: 'tuning', name: 'tuning' },
     { label: 'cut off freq', name: 'cut_off_freq' },

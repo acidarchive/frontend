@@ -133,12 +133,12 @@ export function PatternTB303Form({ editPatternId }: PatternTB303FormProps) {
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="max-w-6xl">
+        <div className="max-w-7xl">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:flex-1">
               <EditableTB303PatternGrid />
             </div>
-            <div className="lg:w-80 lg:flex-shrink-0">
+            <div className="lg:w-100 lg:flex-shrink-0">
               <EditableTB303PatternDetails />
             </div>
           </div>
