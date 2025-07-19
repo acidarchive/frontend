@@ -1,5 +1,6 @@
 import {
   ChevronDown,
+  ChevronLeft,
   ChevronRight,
   Command,
   CreditCard,
@@ -17,6 +18,7 @@ export const Icons = {
 
   logo: Command,
   logout: X,
+  chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
   chevronDown: ChevronDown,
   userCircle: UserCircle,

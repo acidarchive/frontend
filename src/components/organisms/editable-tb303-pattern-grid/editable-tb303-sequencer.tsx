@@ -4,7 +4,7 @@ import { SequencerRow } from '@/components/molecules/sequencer-row';
 import { StepNumberRow } from '@/components/molecules/step-number-row';
 import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/enums';
 
-export function EditableSequencerTB303() {
+export function EditableTB303Sequencer() {
   return (
     <div className="grid sm:grid-cols-[1fr_repeat(17,_1fr)] sm:grid-rows-5 sm:grid-flow-row grid-cols-6 grid-rows-17 grid-flow-col">
       <StepNumberRow />
