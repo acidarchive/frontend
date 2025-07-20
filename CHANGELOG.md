@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Use shadcn switch
+
+
+## [0.0.1-alpha.44] - 2025-07-19
+
+### 🌀 Added
+
 - Update edit page layout
 
 
@@ -445,7 +452,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.43..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.44..HEAD
+[0.0.1-alpha.44]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.43..v0.0.1-alpha.44
 [0.0.1-alpha.43]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.42..v0.0.1-alpha.43
 [0.0.1-alpha.42]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.41..v0.0.1-alpha.42
 [0.0.1-alpha.41]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.40..v0.0.1-alpha.41
