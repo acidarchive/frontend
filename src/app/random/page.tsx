@@ -8,6 +8,7 @@ import { Loader } from '@/components/atoms/loader';
 import { MainLayout } from '@/components/layouts/main-layout';
 import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
 import { Button } from '@/components/ui/button';
+import { MidiPlayer } from '@/features/midi-player';
 
 export default function PatternPage() {
   const { data, isError, isLoading, isFetching, refetch } =
@@ -41,7 +42,10 @@ export default function PatternPage() {
           </div>
         </div>
         {data ? (
-          <ReadonlyTB303PatternGrid pattern={data} />
+          <>
+            <ReadonlyTB303PatternGrid pattern={data} />
+            <MidiPlayer pattern={data} />
+          </>
         ) : (
           <div>No pattern found</div>
         )}
