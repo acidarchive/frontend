@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- MIDI player
+
+
+## [0.0.1-alpha.46] - 2025-07-20
+
 ### 🔧 Fixed
 
 - Remove dropdown menu from mode-toggle
@@ -459,7 +466,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..HEAD
+[0.0.1-alpha.46]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..v0.0.1-alpha.46
 [0.0.1-alpha.45]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.44..v0.0.1-alpha.45
 [0.0.1-alpha.44]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.43..v0.0.1-alpha.44
 [0.0.1-alpha.43]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.42..v0.0.1-alpha.43
