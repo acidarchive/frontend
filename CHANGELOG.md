@@ -1,6 +1,20 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Upgrade packages
+
+
+### 🌀 Added
+
+- Use shadcn sheet instead of headless ui dialog
+
+- Update links in menus
+
+
+## [0.0.1-alpha.48] - 2025-07-24
+
 ### 🌀 Added
 
 - Update random page layout
@@ -473,7 +487,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..HEAD
+[0.0.1-alpha.48]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..v0.0.1-alpha.48
 [0.0.1-alpha.47]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..v0.0.1-alpha.47
 [0.0.1-alpha.46]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..v0.0.1-alpha.46
 [0.0.1-alpha.45]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.44..v0.0.1-alpha.45
