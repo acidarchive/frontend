@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Update random page layout
+
+
+## [0.0.1-alpha.47] - 2025-07-20
+
+### 🌀 Added
+
 - MIDI player
 
 
@@ -466,7 +473,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..HEAD
+[0.0.1-alpha.47]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..v0.0.1-alpha.47
 [0.0.1-alpha.46]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..v0.0.1-alpha.46
 [0.0.1-alpha.45]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.44..v0.0.1-alpha.45
 [0.0.1-alpha.44]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.43..v0.0.1-alpha.44
