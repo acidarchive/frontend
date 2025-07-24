@@ -13,8 +13,10 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/auth/signin', request.nextUrl));
     return response;
   }
+
+  return response;
 }
 
 export const config = {
-  matcher: [String.raw`/((?!api|_next/static|_next/image|.*\.png$).*)`],
+  matcher: ['/((?!api|_next/static|_next/image|.*\.png$).*)'],
 };
