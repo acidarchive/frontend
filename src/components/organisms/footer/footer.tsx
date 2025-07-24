@@ -23,14 +23,14 @@ const navigation = {
 export const Footer: React.FC = () => {
   return (
     <footer className="w-full border-t">
-      <div className="max-w-7xl m-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center md:flex-row md:justify-between md:items-center">
+      <div className="max-w-7xl m-auto px-4 py-2 flex flex-row justify-between items-center">
         <p className="font-sans text-md text-center">
           &copy; {new Date().getFullYear()} Acid Archive{' '}
           <span className="ml-4">
             <Version />
           </span>
         </p>
-        <div className="mt-4 flex gap-x-6 md:mt-0">
+        <div className="flex gap-x-6">
           {navigation.social.map(item => (
             <a
               key={item.name}
