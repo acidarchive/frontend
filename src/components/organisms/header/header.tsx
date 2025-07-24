@@ -1,27 +1,25 @@
 'use client';
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon } from '@heroicons/react/20/solid';
-import { XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { Smiley } from '@/components/atoms/smiley';
-import { useUser } from '@/context/user-context';
-
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Patterns', href: '/patterns' },
-  { name: 'About', href: '/about' },
-];
-
+import { Icons } from '@/components/atoms/icons';
 import { ModeToggle } from '@/components/atoms/mode-toggle/mode-toggle';
+import { Smiley } from '@/components/atoms/smiley';
 import { AuthButtonGroup } from '@/components/molecules/auth-button-group';
 import { UserNavigation } from '@/components/molecules/user-navigation';
+import { useUser } from '@/context/user-context';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { user, isLoading } = useUser();
+
+  const navigation = [
+    { name: 'Home', href: '/' },
+    ...(user ? [{ name: 'Dashboard', href: '/dashboard' }] : []),
+    { name: 'About', href: '/about' },
+  ];
 
   return (
     <>
@@ -33,7 +31,7 @@ export const Header: React.FC = () => {
               onClick={() => setMobileMenuOpen(true)}
               className="-m-3 p-3 md:hidden"
             >
-              <Bars3Icon aria-hidden="true" className="size-5" />
+              <Icons.menu aria-hidden="true" className="size-5" />
             </button>
             <Link
               href="/"
@@ -74,25 +72,25 @@ export const Header: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 p-2.5 text-gray-700"
+                className="-m-2.5 p-2.5"
               >
-                <XMarkIcon aria-hidden="true" className="size-6" />
+                <Icons.x aria-hidden="true" className="size-6" />
               </button>
               <div className="-ml-0.5">
-                <a href="#" className="-m-1.5 block p-1.5">
+                <Link href="/" className="-m-1.5 block p-1.5">
                   <Smiley />
-                </a>
+                </Link>
               </div>
             </div>
             <div className="mt-2 space-y-2">
               {navigation.map(item => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className="-mx-3 block rounded-lg px-3 py-2 font-semibold hover:underline"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </DialogPanel>

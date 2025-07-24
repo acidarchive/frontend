@@ -165,7 +165,7 @@ export function AppSidebar() {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Icons.logout className="mr-2 h-4 w-4" />
+                  <Icons.x className="mr-2 h-4 w-4" />
                   <SignOutButton>Sign Out</SignOutButton>
                 </DropdownMenuItem>
               </DropdownMenuContent>
