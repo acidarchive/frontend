@@ -3,6 +3,13 @@
 
 ### ⚙️ Miscellaneous
 
+- Init playwright
+
+
+## [0.0.1-alpha.49] - 2025-07-24
+
+### ⚙️ Miscellaneous
+
 - Upgrade packages
 
 
@@ -487,7 +494,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..HEAD
+[0.0.1-alpha.49]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..v0.0.1-alpha.49
 [0.0.1-alpha.48]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..v0.0.1-alpha.48
 [0.0.1-alpha.47]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..v0.0.1-alpha.47
 [0.0.1-alpha.46]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.45..v0.0.1-alpha.46
