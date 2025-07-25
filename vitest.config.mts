@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
@@ -8,6 +8,7 @@ export default defineConfig({
     globals: true,
     environment: 'happy-dom',
     setupFiles: ['./vitest.setup.ts', './src/tests/setup-tests.ts'],
+    exclude: [...configDefaults.exclude, '**/e2e/**'],
     coverage: {
       provider: 'istanbul',
       reporter: ['text', 'lcov'],
