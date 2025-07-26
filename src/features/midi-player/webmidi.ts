@@ -8,6 +8,7 @@ import {
   patternTicksPerSecond,
 } from '@/features/midi-player/pattern-parser';
 import {
+  SequencerMidiIter,
   sequencerMidiIter,
   sequencerNoteOffs,
 } from '@/features/midi-player/sequencer';
@@ -19,6 +20,108 @@ interface Cancellable {
 interface CancellableDelay extends Cancellable {
   delay: (duration: number) => Promise<boolean>;
 }
+
+interface SeqParams {
+  pattern: TB303Pattern;
+  midiOutput: MidiOutput;
+  tempo: number;
+}
+
+type SeqState =
+  | { type: 'initializing'; pattern: TB303Pattern }
+  | {
+      type: 'playing';
+      iter: SequencerMidiIter;
+      midiOutput: MIDIOutput;
+      params: SeqParams;
+    }
+  | { type: 'finished' }
+  | { type: 'failed'; error: string };
+
+type SeqCtion =
+  | { type: 'stop' }
+  | { type: 'set-tempo'; tempo: number }
+  | { type: 'initialize-err'; error: string }
+  | { type: 'initialize-ok'; params: SeqParams; midiOutput: MIDIOutput };
+
+interface Seq {
+  dispatch: (action: SeqCtion) => void;
+}
+
+const update = (state: SeqState, action: SeqCtion): SeqState => {
+  switch (state.type) {
+    case 'initializing': {
+      switch (action.type) {
+        case 'initialize-ok': {
+          return {
+            type: 'playing',
+            iter: sequencerMidiIter(parseSteps(state.pattern.steps)),
+            midiOutput: action.midiOutput,
+            params: action.params,
+          };
+        }
+        case 'initialize-err': {
+          return { type: 'failed', error: action.error };
+        }
+        default: {
+          return state;
+        }
+      }
+    }
+    case 'playing': {
+      switch (action.type) {
+        case 'stop': {
+          throw new Error('not implemented');
+        }
+        case 'set-tempo': {
+          throw new Error('not implemented');
+        }
+        default: {
+          throw new Error('not implemented');
+        }
+      }
+    }
+    case 'finished': {
+      return state;
+    }
+  }
+  return state;
+};
+
+const init = async (seq: Seq, params: SeqParams) => {
+  const midiAccess = await navigator.requestMIDIAccess();
+  const midiOutputs = midiAccess.outputs
+    .entries()
+    .map(([, midiOutput]) => midiOutput)
+    .toArray();
+  const output = midiOutputs.find(item => item.id === params.midiOutput.id);
+  if (output === undefined) {
+    const avail = midiOutputs
+      .map(midiOutput => `"${midiOutput.name}"`)
+      .join(', ');
+    seq.dispatch({
+      type: 'initialize-err',
+      error: `Could not find a midi output "${params.midiOutput.name}". Available outputs are: ${avail}.`,
+    });
+  } else {
+    seq.dispatch({
+      type: 'initialize-ok',
+      midiOutput: output,
+      params,
+    });
+  }
+};
+
+const createSeq = (params: SeqParams): Seq => {
+  let state: SeqState = { type: 'initializing' };
+  const seq = {
+    dispatch: (action: SeqCtion) => {
+      state = update(state, action);
+    },
+  };
+  init(seq, params);
+  return seq;
+};
 
 const createCancellableDelay = (): CancellableDelay => {
   let cancelled = false;

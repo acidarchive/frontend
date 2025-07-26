@@ -215,11 +215,14 @@ const advanceN = (init: State, steps: Step[]): SequencerStepResult =>
 export const stepsToMessages = (steps: Step[]): MidiMessage[] =>
   advanceN(IDLE, steps).messages;
 
+export type SequencerMidiIter = {
+  [Symbol.iterator](): Iterator<SequencerStepResult>;
+};
 /**
  * Infinitely loops over the given steps producing state updates with midi messages.
  * This should play the "infinity" note correctly.
  */
-export const sequencerMidiIter = (steps: Step[]) => {
+export const sequencerMidiIter = (steps: Step[]): SequencerMidiIter => {
   return {
     [Symbol.iterator]() {
       let state = sequencerInit();
