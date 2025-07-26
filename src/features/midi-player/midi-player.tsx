@@ -19,6 +19,7 @@ import {
   useMidiOutputs,
   useMidiPlayer,
 } from '@/features/midi-player/webmidi';
+import { TempoInput } from '@/features/midi-player/tempo-input';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -46,27 +47,30 @@ const MidiOutputSelect = (props: {
   selected: MidiOutput;
   all: MidiOutput[];
   onChange: (midiOutput: MidiOutput) => void;
+  className?: string;
 }) => {
   const handleValueChange = (id: string) => {
     const newSelected = props.all.find(item => item.id === id);
     if (newSelected !== undefined) props.onChange(newSelected);
   };
   return (
-    <Select value={props.selected.id} onValueChange={handleValueChange}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select MIDI output" />
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>MIDI Outputs</SelectLabel>
-            {props.all.map(o => (
-              <SelectItem key={o.id} value={o.id}>
-                {o.name}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </SelectTrigger>
-    </Select>
+    <div className={props.className}>
+      <Select value={props.selected.id} onValueChange={handleValueChange}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select MIDI output" />
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>MIDI Outputs</SelectLabel>
+              {props.all.map(o => (
+                <SelectItem key={o.id} value={o.id}>
+                  {o.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </SelectTrigger>
+      </Select>
+    </div>
   );
 };
 
@@ -150,15 +154,17 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
       </>
     ) : (
       <>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <PlayButton
             isPlaying={state.playing}
             onClick={handleClickPlayButton}
           />
+          <TempoInput />
           <MidiOutputSelect
             selected={state.selectedMidiOutput}
             all={midiOutputsState.outputs}
             onChange={handleSelectMidiOutput}
+            className="grow"
           />
         </div>
       </>
