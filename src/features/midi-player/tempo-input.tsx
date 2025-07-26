@@ -43,7 +43,7 @@ export const TempoInput = () => {
     if (Number.isNaN(parsed)) {
       return state.oldValue;
     }
-    return parsed;
+    return Math.min(Math.max(parsed, 0), 666);
   };
   const finishEditing = (state: State): State => {
     return idle(parseEditedValue(state));
