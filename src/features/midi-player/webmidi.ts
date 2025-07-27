@@ -6,10 +6,12 @@ import {
   MidiMessage,
   parseSteps,
   patternTicksPerSecond,
+  stepDurationSeconds,
+  tempoToTicksPerSecond,
 } from '@/features/midi-player/pattern-parser';
 import {
-  SequencerMidiIter,
-  sequencerMidiIter,
+  makeSequencerIterable,
+  SequencerIterator,
   sequencerNoteOffs,
 } from '@/features/midi-player/sequencer';
 
@@ -27,13 +29,92 @@ interface SeqParams {
   tempo: number;
 }
 
+type TimeoutId = ReturnType<typeof setTimeout>;
+
+interface Clock {
+  stop(): void;
+
+  setInterval(newIntervalMs: number): void;
+}
+
+const createClock = (callback: () => void, intervalMs: number): Clock => {
+  let clockId: TimeoutId | undefined = undefined;
+  let nextAt = performance.now();
+  let done = false;
+  let inCallback = false;
+  const clear = () => {
+    if (clockId !== undefined) {
+      globalThis.clearTimeout(clockId);
+      clockId = undefined;
+    }
+  };
+  const next = () => {
+    if (done) return;
+    inCallback = true;
+    callback();
+    inCallback = false;
+
+    // Not using now() should compensate drifting, but will make muhtiple
+    // notes to be output instantly. Maybe the sequencer should calculate timestamps?
+    nextAt += intervalMs;
+    clockId = globalThis.setTimeout(next, intervalMs);
+  };
+  clockId = globalThis.setTimeout(next, 0);
+  return {
+    stop: () => {
+      done = true;
+      clear();
+    },
+    setInterval: (newIntervalMs: number) => {
+      if (done) return;
+      if (inCallback) {
+        intervalMs = newIntervalMs;
+      } else {
+        clear();
+        const now = performance.now();
+        // Calculate the amount of interval that is remaining using old
+        // interval and finish the remainder with the new interval
+        //
+        // Since NoteOn is never scheduled ahead this should be safe but
+        // need to test it somehow.
+        const remaining = (nextAt - now) / intervalMs;
+        const remainingMs = remaining * newIntervalMs;
+        nextAt = now + remainingMs;
+        intervalMs = newIntervalMs;
+        clockId = globalThis.setTimeout(next, remainingMs);
+      }
+    },
+  };
+};
+
+const advance = (
+  iter: SequencerIterator,
+  tempo: number,
+  midiOutput: MIDIOutput,
+) => {
+  const x = iter.next();
+  if (x.done === true) {
+    throw new Error("didn't expect iterator to finish");
+  } else {
+    const { messages } = x.value;
+    const ticksPerSecond = tempoToTicksPerSecond(tempo);
+    for (const message of messages) {
+      midiOutput.send(
+        message.data,
+        performance.now() + (message.tick / ticksPerSecond) * 1000,
+      );
+    }
+  }
+};
+
 type SeqState =
-  | { type: 'initializing'; pattern: TB303Pattern }
+  | { type: 'initializing' }
   | {
       type: 'playing';
-      iter: SequencerMidiIter;
+      iter: SequencerIterator;
       midiOutput: MIDIOutput;
       params: SeqParams;
+      clock: Clock;
     }
   | { type: 'finished' }
   | { type: 'failed'; error: string };
@@ -42,22 +123,33 @@ type SeqCtion =
   | { type: 'stop' }
   | { type: 'set-tempo'; tempo: number }
   | { type: 'initialize-err'; error: string }
-  | { type: 'initialize-ok'; params: SeqParams; midiOutput: MIDIOutput };
+  | { type: 'initialize-ok'; params: SeqParams; midiOutput: MIDIOutput }
+  | { type: 'play-next-step' };
 
 interface Seq {
   dispatch: (action: SeqCtion) => void;
 }
 
-const update = (state: SeqState, action: SeqCtion): SeqState => {
+const update = (seq: Seq, state: SeqState, action: SeqCtion): SeqState => {
   switch (state.type) {
     case 'initializing': {
       switch (action.type) {
         case 'initialize-ok': {
+          const iter = makeSequencerIterable(
+            parseSteps(action.params.pattern.steps),
+          )[Symbol.iterator]();
+          // This will only fire on next tick, it would be better that it
+          // fired immediately.
+          const clock = createClock(
+            () => seq.dispatch({ type: 'play-next-step' }),
+            stepDurationSeconds(action.params.tempo),
+          );
           return {
             type: 'playing',
-            iter: sequencerMidiIter(parseSteps(state.pattern.steps)),
+            iter,
             midiOutput: action.midiOutput,
             params: action.params,
+            clock,
           };
         }
         case 'initialize-err': {
@@ -71,15 +163,23 @@ const update = (state: SeqState, action: SeqCtion): SeqState => {
     case 'playing': {
       switch (action.type) {
         case 'stop': {
-          throw new Error('not implemented');
+          const noteOffs = sequencerNoteOffs(state.iter.getState());
+          if (noteOffs.length > 0) {
+            for (const noteOff of noteOffs) state.midiOutput.send(noteOff.data);
+          }
+          state.clock.stop();
+          return { type: 'finished' };
         }
         case 'set-tempo': {
-          throw new Error('not implemented');
+          state.clock.setInterval(stepDurationSeconds(action.tempo) * 1000);
+          return { ...state, params: { ...state.params, tempo: action.tempo } };
         }
-        default: {
-          throw new Error('not implemented');
+        case 'play-next-step': {
+          advance(state.iter, state.params.tempo, state.midiOutput);
+          return state;
         }
       }
+      return state;
     }
     case 'finished': {
       return state;
@@ -116,7 +216,7 @@ const createSeq = (params: SeqParams): Seq => {
   let state: SeqState = { type: 'initializing' };
   const seq = {
     dispatch: (action: SeqCtion) => {
-      state = update(state, action);
+      state = update(seq, state, action);
     },
   };
   init(seq, params);
@@ -169,7 +269,7 @@ export const playPatternOverMidi = (
         performance.now() + (message.tick / ticksPerSecond) * 1000,
       );
 
-    for (const { state, messages } of sequencerMidiIter(steps)) {
+    for (const { state, messages } of makeSequencerIterable(steps)) {
       for (const message of messages) send(message);
       const cancelled = await delay(stepDuration);
       if (cancelled) {
