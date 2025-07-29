@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { WaveformSelect } from './waveform-select';
+import { Waveform, WaveformSelect } from './waveform-select';
 
 const FormWrapper = ({ children }: { children: React.ReactNode }) => {
   const methods = useForm();
@@ -27,5 +27,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     name: 'waveform',
+    defaultValue: Waveform.Sawtooth,
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    name: 'waveform',
+    disabled: true,
   },
 };
