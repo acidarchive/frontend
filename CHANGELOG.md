@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Use toggle-group in waveform select
+
+
+## [0.0.1-alpha.50] - 2025-07-25
+
 ### ⚙️ Miscellaneous
 
 - Init playwright
@@ -494,7 +501,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..HEAD
+[0.0.1-alpha.50]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..v0.0.1-alpha.50
 [0.0.1-alpha.49]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..v0.0.1-alpha.49
 [0.0.1-alpha.48]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..v0.0.1-alpha.48
 [0.0.1-alpha.47]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..v0.0.1-alpha.47
