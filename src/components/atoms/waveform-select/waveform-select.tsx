@@ -1,8 +1,8 @@
 'use client';
 
-import { Radio, RadioGroup } from '@headlessui/react';
-import { clsx } from 'clsx';
 import { Controller, useFormContext } from 'react-hook-form';
+
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 
 import { Sawtooth } from './sawtooth';
 import { Square } from './square';
@@ -20,7 +20,7 @@ export interface WaveformSelectProps {
 
 export const WaveformSelect = ({
   name,
-  defaultValue = Waveform.Sawtooth,
+  defaultValue,
   disabled = false,
 }: WaveformSelectProps) => {
   const { control } = useFormContext();
@@ -31,41 +31,20 @@ export const WaveformSelect = ({
       control={control}
       defaultValue={defaultValue}
       render={({ field: { onChange, value } }) => (
-        <RadioGroup
-          name={name}
-          value={value}
-          className={clsx(
-            'flex items-center justify-center',
-            disabled && 'pointer-events-none',
-          )}
+        <ToggleGroup
+          type="single"
+          variant="outline"
+          onValueChange={onChange}
+          defaultValue={value}
           disabled={disabled}
-          onChange={onChange}
         >
-          <div className="flex gap-4">
-            <Radio
-              value={Waveform.Sawtooth}
-              className={({ checked }) =>
-                clsx(
-                  'w-8 h-6 hover:bg-gray-200',
-                  checked && 'border border-black',
-                )
-              }
-            >
-              <Sawtooth />
-            </Radio>
-            <Radio
-              value={Waveform.Square}
-              className={({ checked }) =>
-                clsx(
-                  'w-8 h-6 hover:bg-gray-200',
-                  checked && 'border border-black',
-                )
-              }
-            >
-              <Square />
-            </Radio>
-          </div>
-        </RadioGroup>
+          <ToggleGroupItem value={Waveform.Sawtooth} className="h-8 w-12">
+            <Sawtooth />
+          </ToggleGroupItem>
+          <ToggleGroupItem value={Waveform.Square} className="h-8 w-10">
+            <Square />
+          </ToggleGroupItem>
+        </ToggleGroup>
       )}
     />
   );
