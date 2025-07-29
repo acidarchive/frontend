@@ -1,5 +1,5 @@
+import { CyclableInput } from '@/components/atoms/cyclable-input';
 import { GridCheckbox } from '@/components/atoms/grid-checkbox';
-import { GridSelect } from '@/components/atoms/grid-select';
 import { SequencerRow } from '@/components/molecules/sequencer-row';
 import { StepNumberRow } from '@/components/molecules/step-number-row';
 import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/enums';
@@ -12,12 +12,12 @@ export function EditableTB303Sequencer() {
         label="note"
         renderCell={(index, step) => {
           return (
-            <GridSelect
+            <CyclableInput
               name={`steps.${index}.note`}
               id={`note-select-${index}`}
-              allowEmpty
               options={NOTE_OPTIONS}
               defaultValue={step?.note ?? ''}
+              clearable
             />
           );
         }}
@@ -25,12 +25,12 @@ export function EditableTB303Sequencer() {
       <SequencerRow
         label="octave"
         renderCell={(index, step) => (
-          <GridSelect
+          <CyclableInput
             name={`steps.${index}.transpose`}
             id={`transpose-select-${index}`}
-            allowEmpty
             options={TRANSPOSE_OPTIONS}
             defaultValue={step?.transpose ?? ''}
+            clearable
           />
         )}
       />
@@ -57,12 +57,12 @@ export function EditableTB303Sequencer() {
       <SequencerRow
         label="time"
         renderCell={(index, step) => (
-          <GridSelect
+          <CyclableInput
             name={`steps.${index}.time`}
             id={`time-select-${index}`}
-            allowEmpty
             options={TIME_OPTIONS}
             defaultValue={step?.time ?? ''}
+            clearable
           />
         )}
       />
