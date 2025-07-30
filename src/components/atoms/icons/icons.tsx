@@ -1,4 +1,6 @@
 import {
+  AlertCircle,
+  CheckCircle,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
@@ -11,6 +13,7 @@ import {
   RefreshCw,
   UserCircle,
   X,
+  XCircle,
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
@@ -27,4 +30,7 @@ export const Icons = {
   userCircle: UserCircle,
   home: House,
   menu: Menu,
+  xCircle: XCircle,
+  checkCircle: CheckCircle,
+  alertCircle: AlertCircle,
 };

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { cookies } from 'next/headers';
 
-import { AppSidebar } from '@/components/organisms/app-sidebar';
 import { DashboardHeader } from '@/components/organisms/dashboard-header';
+import { Sidebar } from '@/components/organisms/sidebar';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar />
+      <Sidebar />
       <SidebarInset>
         <DashboardHeader />
         {children}

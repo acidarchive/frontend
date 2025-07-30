@@ -1,8 +1,8 @@
+import { Icons } from '@/components/atoms/icons';
+
 export interface SuccessMessageProps {
   message?: string;
 }
-
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
 export function SuccessMessage({ message }: { message: string }) {
   if (!message) return;
@@ -11,7 +11,7 @@ export function SuccessMessage({ message }: { message: string }) {
     <div className="rounded-md bg-green-50 p-4 mb-4">
       <div className="flex">
         <div className="shrink-0">
-          <CheckCircleIcon
+          <Icons.checkCircle
             aria-hidden="true"
             className="size-5 text-green-400"
           />

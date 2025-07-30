@@ -34,3 +34,8 @@ export const TIME_OPTIONS: SelectOption<Time>[] = [
   { value: Time.tied, label: '○' },
   { value: Time.rest, label: '▬' },
 ];
+
+export const BOOLEAN_OPTIONS: SelectOption<boolean>[] = [
+  { value: true, label: '●' },
+  { value: false, label: '' },
+];
