@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Cyclable input
+
+
+## [0.0.1-alpha.51] - 2025-07-29
+
 ### 🔧 Fixed
 
 - Use toggle-group in waveform select
@@ -501,7 +508,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.51..HEAD
+[0.0.1-alpha.51]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..v0.0.1-alpha.51
 [0.0.1-alpha.50]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..v0.0.1-alpha.50
 [0.0.1-alpha.49]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..v0.0.1-alpha.49
 [0.0.1-alpha.48]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..v0.0.1-alpha.48
