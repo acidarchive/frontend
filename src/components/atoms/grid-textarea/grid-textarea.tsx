@@ -1,12 +1,16 @@
-import { Textarea as HeadlessTextarea } from '@headlessui/react';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 
 type GridTextareaProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-export function GridTextarea({ ...props }: GridTextareaProps) {
+export function GridTextarea({ className, ...props }: GridTextareaProps) {
   return (
-    <HeadlessTextarea
+    <Textarea
+      className={cn(
+        'h-full w-full resize-none border-none bg-transparent p-4 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent',
+        className,
+      )}
       {...props}
-      className="w-full h-full border-none text-sm bg-transparent p-4 resize-none focus:ring-0 focus:outline-none"
     />
   );
 }

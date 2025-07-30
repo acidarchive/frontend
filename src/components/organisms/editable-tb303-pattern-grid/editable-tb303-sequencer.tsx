@@ -1,8 +1,12 @@
 import { CyclableInput } from '@/components/atoms/cyclable-input';
-import { GridCheckbox } from '@/components/atoms/grid-checkbox';
 import { SequencerRow } from '@/components/molecules/sequencer-row';
 import { StepNumberRow } from '@/components/molecules/step-number-row';
-import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/enums';
+import {
+  BOOLEAN_OPTIONS,
+  NOTE_OPTIONS,
+  TIME_OPTIONS,
+  TRANSPOSE_OPTIONS,
+} from '@/enums';
 
 export function EditableTB303Sequencer() {
   return (
@@ -37,20 +41,22 @@ export function EditableTB303Sequencer() {
       <SequencerRow
         label="accent"
         renderCell={(index, step) => (
-          <GridCheckbox
+          <CyclableInput
             name={`steps.${index}.accent`}
             id={`accent-checkbox-${index}`}
-            checked={step?.accent ?? false}
+            options={BOOLEAN_OPTIONS}
+            defaultValue={step?.accent ?? false}
           />
         )}
       />
       <SequencerRow
         label="slide"
         renderCell={(index, step) => (
-          <GridCheckbox
+          <CyclableInput
             name={`steps.${index}.slide`}
             id={`slide-checkbox-${index}`}
-            checked={step?.slide ?? false}
+            options={BOOLEAN_OPTIONS}
+            defaultValue={step?.slide ?? false}
           />
         )}
       />

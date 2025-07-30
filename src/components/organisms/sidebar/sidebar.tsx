@@ -1,89 +1,179 @@
 'use client';
 
-import { clsx } from 'clsx';
-import { Drum, KeyboardMusic, Settings } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import * as React from 'react';
 
+import { Icons } from '@/components/atoms/icons';
+import { SignOutButton } from '@/components/atoms/sign-out-button';
 import { Smiley } from '@/components/atoms/smiley';
+import { UserAvatarProfile } from '@/components/molecules/user-avatar-profile';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Sidebar as UISidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarRail,
+  useSidebar,
+} from '@/components/ui/sidebar';
+import { navItems } from '@/constants/data';
+import { useUser } from '@/context/user-context';
 
-const navigation = [
-  {
-    name: 'TB-303',
-    href: '/dashboard/tb303',
-    icon: KeyboardMusic,
-    current: true,
-  },
-  { name: 'TR-606', href: '/dashboard/tr606', icon: Drum, current: false },
-];
-
-export function Sidebar({ isStatic = false }) {
-  const pathName = usePathname();
-
-  const sidebarContent = (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
-      <div className="flex h-16 shrink-0 items-center">
-        <Smiley />
-        <h1 className="hidden text-[1.65rem] font-bold text-gray-100 md:block absolute translate-x-[1.5em] translate-y-[0.1em]">
-          Acid Archive
-        </h1>
-      </div>
-      <nav className="flex flex-1 flex-col">
-        <ul role="list" className="flex flex-1 flex-col gap-y-7">
-          <li>
-            <ul role="list" className="-mx-2 space-y-1">
-              {navigation.map(item => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className={clsx(
-                      'group flex gap-x-3 p-2 text-sm/6 font-semibold',
-                      {
-                        'bg-gray-800 text-white': pathName === item.href,
-                        'text-gray-400 hover:bg-gray-800 hover:text-white':
-                          pathName !== item.href,
-                      },
-                    )}
-                  >
-                    <item.icon aria-hidden="true" className="size-6 shrink-0" />
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-          <li className="mt-auto">
-            <Link
-              href="/dashboard/settings"
-              className={clsx(
-                'group -mx-2 flex gap-x-3 p-2 text-sm/6 font-semibold',
-                {
-                  'bg-gray-800 text-white': pathName === '/dashboard/settings',
-                  'text-gray-400 hover:bg-gray-800 hover:text-white':
-                    pathName !== '/dashboard/settings',
-                },
-              )}
-            >
-              <Settings aria-hidden="true" className="size-6 shrink-0" />
-              Settings
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  );
-
-  if (isStatic) {
-    return (
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
-        {sidebarContent}
-      </div>
-    );
-  }
+export function Sidebar() {
+  const pathname = usePathname();
+  const { user } = useUser();
+  const router = useRouter();
+  const { open } = useSidebar();
 
   return (
-    <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
-      {sidebarContent}
-    </div>
+    <UISidebar collapsible="icon">
+      <SidebarHeader>
+        <Smiley />
+        {open && (
+          <h1 className="text-[1.5rem] font-bold absolute translate-x-[2.5rem]">
+            Acid Archive
+          </h1>
+        )}
+      </SidebarHeader>
+      <SidebarContent className="overflow-x-hidden">
+        <SidebarGroup>
+          <SidebarGroupLabel>Archive</SidebarGroupLabel>
+          <SidebarMenu>
+            {navItems.map(item => {
+              const Icon = item.icon ? Icons[item.icon] : Icons.logo;
+              return item?.items && item?.items?.length > 0 ? (
+                <Collapsible
+                  key={item.title}
+                  asChild
+                  defaultOpen={item.isActive}
+                  className="group/collapsible"
+                >
+                  <SidebarMenuItem>
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton
+                        tooltip={item.title}
+                        isActive={pathname === item.url}
+                      >
+                        {item.icon && <Icon />}
+                        <span>{item.title}</span>
+                        <Icons.chevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {item.items?.map(subItem => (
+                          <SidebarMenuSubItem key={subItem.title}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={pathname === subItem.url}
+                            >
+                              <Link href={subItem.url}>
+                                <span>{subItem.title}</span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </SidebarMenuItem>
+                </Collapsible>
+              ) : (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    tooltip={item.title}
+                    isActive={pathname === item.url}
+                  >
+                    <Link href={item.url}>
+                      <Icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton
+                  size="lg"
+                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                >
+                  {user && (
+                    <UserAvatarProfile
+                      className="h-8 w-8 rounded-lg"
+                      showInfo
+                      user={user}
+                    />
+                  )}
+                  <Icons.chevronDown className="ml-auto size-4" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+                side="bottom"
+                align="end"
+                sideOffset={4}
+              >
+                <DropdownMenuLabel className="p-0 font-normal">
+                  <div className="px-1 py-1.5">
+                    {user && (
+                      <UserAvatarProfile
+                        className="h-8 w-8 rounded-lg"
+                        showInfo
+                        user={user}
+                      />
+                    )}
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    onClick={() => router.push('/dashboard/profile')}
+                  >
+                    <Icons.userCircle className="mr-2 h-4 w-4" />
+                    Profile
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Icons.x className="mr-2 h-4 w-4" />
+                  <SignOutButton>Sign Out</SignOutButton>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+      <SidebarRail />
+    </UISidebar>
   );
 }

@@ -1,6 +1,7 @@
-import { ExclamationCircleIcon } from '@heroicons/react/16/solid';
 import { clsx } from 'clsx';
 import { InputHTMLAttributes } from 'react';
+
+import { Icons } from '@/components/atoms/icons';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: boolean;
@@ -21,7 +22,7 @@ export function Input({ error, ...props }: InputProps) {
         {...props}
       />
       {error && (
-        <ExclamationCircleIcon
+        <Icons.alertCircle
           aria-hidden="true"
           className="pointer-events-none col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-red-500 sm:size-4"
         />
