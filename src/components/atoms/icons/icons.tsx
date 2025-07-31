@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   type LucideIcon,
   Menu,
+  Pencil,
   RefreshCw,
   UserCircle,
   X,
@@ -33,4 +34,5 @@ export const Icons = {
   xCircle: XCircle,
   checkCircle: CheckCircle,
   alertCircle: AlertCircle,
+  pencil: Pencil,
 };
