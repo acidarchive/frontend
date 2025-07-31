@@ -1,30 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { PatternTB303Form } from './pattern-tb303-form';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: false,
-    },
-    mutations: {
-      retry: false,
-    },
-  },
-});
-
 const FormWrapper = ({ children }: { children: React.ReactNode }) => {
   const methods = useForm();
-  return (
-    <QueryClientProvider client={queryClient}>
-      <FormProvider {...methods}>{children}</FormProvider>
-    </QueryClientProvider>
-  );
+  return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
-const meta = {
+const meta: Meta<typeof PatternTB303Form> = {
   title: 'Organisms/PatternTB303Form',
   component: PatternTB303Form,
   decorators: [
@@ -34,19 +18,17 @@ const meta = {
       </FormWrapper>
     ),
   ],
-  tags: ['autodocs'],
-} satisfies Meta<typeof PatternTB303Form>;
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof PatternTB303Form>;
 
 export const Default: Story = {
-  parameters: {
-    nextjs: {
-      appDirectory: true,
-      router: {
-        basePath: '/',
-      },
-    },
+  args: {},
+};
+
+export const WithError: Story = {
+  args: {
+    error: 'Failed to save pattern. Please try again.',
   },
 };

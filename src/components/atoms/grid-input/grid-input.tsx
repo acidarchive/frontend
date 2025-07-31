@@ -1,6 +1,10 @@
 'use client';
 
-import { type RegisterOptions, useFormContext } from 'react-hook-form';
+import {
+  Controller,
+  type RegisterOptions,
+  useFormContext,
+} from 'react-hook-form';
 
 import { Input } from '@/components/ui/input';
 
@@ -21,26 +25,33 @@ export function GridInput({
   name,
   disabled,
 }: GridInputProps) {
-  const { register } = useFormContext();
-
-  const options =
-    type === 'number'
-      ? {
-          ...validation,
-          setValueAs: (value: string) =>
-            value === '' ? undefined : Number(value),
-        }
-      : validation;
+  const { control } = useFormContext();
 
   return (
     <div className="w-full h-full">
-      <Input
-        id={id}
-        type={type}
-        className="w-full h-full border-none focus:ring-0 focus:outline-none"
-        placeholder={placeholder}
-        disabled={disabled}
-        {...register(name, options)}
+      <Controller
+        name={name}
+        control={control}
+        rules={validation}
+        render={({ field }) => (
+          <Input
+            {...field}
+            id={id}
+            type={type}
+            className="w-full h-full border-none focus:ring-0 focus:outline-none"
+            placeholder={placeholder}
+            disabled={disabled}
+            onChange={event => {
+              if (type === 'number') {
+                const value = event.target.value;
+                field.onChange(value === '' ? undefined : Number(value));
+              } else {
+                field.onChange(event);
+              }
+            }}
+            value={field.value ?? ''}
+          />
+        )}
       />
     </div>
   );

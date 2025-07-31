@@ -10,7 +10,7 @@ export function EditableTB303PatternGrid() {
     <div className="grid sm:grid-rows-[auto_6fr_5fr_auto] grid-rows-[auto] border relative">
       <EditablePatternHeader />
       <EditableTB303Sequencer />
-      <GridTextarea />
+      <GridTextarea name="description" />
       <EditableTB303Settings />
       <EditableTB303Controls />
     </div>
