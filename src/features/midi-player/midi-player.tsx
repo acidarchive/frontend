@@ -13,13 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { TempoInput } from '@/features/midi-player/tempo-input';
 import {
   MidiOutput,
   MidiOutputsStateType,
   useMidiOutputs,
-  useMidiPlayer,
 } from '@/features/midi-player/webmidi';
-import { TempoInput } from '@/features/midi-player/tempo-input';
+import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer2';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -76,26 +76,31 @@ const MidiOutputSelect = (props: {
 
 type State = {
   selectedMidiOutput: MidiOutput | undefined;
+  tempo: number;
   playing: boolean;
 };
 
 type Action =
   | { type: 'select-midi-output'; midiOutput: MidiOutput }
+  | { type: 'update-tempo'; newTempo: number }
   | { type: 'play' }
   | { type: 'stop' };
 
 const reducer = (state: State, action: Action): State => {
-  if (action.type === 'select-midi-output') {
-    console.log(action);
-    return { ...state, selectedMidiOutput: action.midiOutput };
+  switch (action.type) {
+    case 'select-midi-output': {
+      return { ...state, selectedMidiOutput: action.midiOutput };
+    }
+    case 'play': {
+      return { ...state, playing: true };
+    }
+    case 'stop': {
+      return { ...state, playing: false };
+    }
+    case 'update-tempo': {
+      return { ...state, tempo: action.newTempo };
+    }
   }
-  if (action.type === 'play') {
-    return { ...state, playing: true };
-  }
-  if (action.type === 'stop') {
-    return { ...state, playing: false };
-  }
-  return state;
 };
 
 const MidiPlayerControls = (props: MidiPlayerProps) => {
@@ -103,8 +108,14 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
     selectedMidiOutput: undefined,
     playing: false,
+    tempo: props.pattern.tempo ?? 120,
   });
-  useMidiPlayer(props.pattern, state.selectedMidiOutput, state.playing);
+  useMidiPlayer(
+    props.pattern,
+    state.selectedMidiOutput,
+    state.playing,
+    state.tempo,
+  );
   useEffect(() => {
     if (
       midiOutputsState.type === MidiOutputsStateType.Ready &&
@@ -120,6 +131,8 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
     state.playing ? dispatch({ type: 'stop' }) : dispatch({ type: 'play' });
   const handleSelectMidiOutput = (midiOutput: MidiOutput) =>
     dispatch({ type: 'select-midi-output', midiOutput });
+  const handleChangeTempo = (newTempo: number) =>
+    dispatch({ type: 'update-tempo', newTempo });
   if (midiOutputsState.type === MidiOutputsStateType.NoOutputs) {
     return (
       <>
@@ -159,7 +172,7 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
             isPlaying={state.playing}
             onClick={handleClickPlayButton}
           />
-          <TempoInput />
+          <TempoInput tempo={state.tempo} onChange={handleChangeTempo} />
           <MidiOutputSelect
             selected={state.selectedMidiOutput}
             all={midiOutputsState.outputs}
