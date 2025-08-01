@@ -23,11 +23,10 @@ interface SeqParams {
 }
 
 enum SeqStateT {
-  New = 'New',
-  Initializing = 'Initializing',
-  Playing = 'Playing',
-  Finished = 'Finished',
-  Error = 'Error',
+  Initializing,
+  Playing,
+  Idle,
+  Error,
 }
 
 enum SeqActionT {
@@ -59,7 +58,7 @@ export const createClock = (
   let inCallback = false;
   const next = () => {
     const now = performance.now();
-    const drift = now - nextTime;
+    const drift = nextTime - now;
     if (stopped) return;
     inCallback = true;
     callback(drift);
@@ -103,27 +102,26 @@ type SeqState =
       currentStep: number;
       tempo: number;
       output: MIDIOutput;
-      timeoutId: TimeoutId;
+      clock: Clock;
     }
-  | { type: SeqStateT.Finished }
+  | { type: SeqStateT.Idle }
   | { type: SeqStateT.Error; error: string };
 
 type SeqAction =
   | { type: SeqActionT.Stop }
   | { type: SeqActionT.UpdateParams; newParams: SeqParams }
-  | { type: SeqActionT.Timeout }
+  | { type: SeqActionT.Timeout; drift: number }
   | { type: SeqActionT.InitializeOk; midiAccess: MIDIAccess };
 
 interface Seq {
   stop: () => void;
   updateParams: (newParams: SeqParams) => void;
-  debug: () => void;
 }
 
 const finishPlaying = (state: State): State => {
   if (state.state.type === SeqStateT.Playing) {
     const s = state.state;
-    clearTimeout(state.state.timeoutId);
+    state.state.clock.stop();
     for (const message of sequencerNoteOffs(s.sequencerState)) {
       s.output.send(
         message.data,
@@ -131,8 +129,7 @@ const finishPlaying = (state: State): State => {
           (message.tick / tempoToTicksPerSecond(s.tempo)) * 1000,
       );
     }
-    state.state.output.close();
-    return { ...state, state: { type: SeqStateT.Finished } };
+    return { ...state, state: { type: SeqStateT.Idle } };
   }
   return state;
 };
@@ -141,10 +138,7 @@ const initialize = (
   state: State,
   dispatch: (action: SeqAction) => void,
 ): State => {
-  if (
-    state.state.type === SeqStateT.New ||
-    state.state.type === SeqStateT.Finished
-  ) {
+  if (state.state.type === SeqStateT.Idle) {
     navigator.requestMIDIAccess().then(midiAccess => {
       dispatch({
         type: SeqActionT.InitializeOk,
@@ -156,6 +150,40 @@ const initialize = (
       state: { type: SeqStateT.Initializing },
     };
   }
+  return state;
+};
+
+const updatePattern = (state: State, pattern: TB303Pattern): State => {
+  if (state.state.type === SeqStateT.Playing) {
+    const s = state.state;
+    const steps = parseSteps(pattern.steps);
+    return {
+      ...state,
+      params: { ...state.params, pattern },
+      state: {
+        ...s,
+        steps,
+        currentStep: 0,
+      },
+    };
+  }
+  return state;
+};
+
+const updateTempo = (state: State, tempo: number): State => {
+  if (state.state.type === SeqStateT.Playing) {
+    const s = state.state;
+    s.clock.setInterval(stepDurationSeconds(tempo) * 1000);
+    return {
+      ...state,
+      params: { ...state.params, tempo },
+      state: {
+        ...s,
+        tempo,
+      },
+    };
+  }
+  return state;
 };
 
 const update = (
@@ -186,9 +214,9 @@ const update = (
         const tempo = state.params.tempo;
         const sequencerState = sequencerInit();
         const steps = parseSteps(state.params.pattern.steps);
-        const timeoutId = setTimeout(
-          () => dispatch({ type: SeqActionT.Timeout }),
-          stepDurationSeconds(tempo),
+        const clock = createClock(
+          drift => dispatch({ type: SeqActionT.Timeout, drift }),
+          stepDurationSeconds(tempo) * 1000,
         );
         return {
           ...state,
@@ -199,7 +227,7 @@ const update = (
             currentStep: 0,
             steps,
             tempo,
-            timeoutId,
+            clock,
           },
         };
       }
@@ -212,21 +240,15 @@ const update = (
         };
       }
       if (state.state.type === SeqStateT.Playing) {
-        const s = state.state;
-        const tempo = action.newParams.tempo === s.tempo;
-        const pattern = action.newParams.pattern.id === state.params.pattern.id;
         const midiOutput =
           action.newParams.midiOutput.id === state.params.midiOutput.id;
-        if (pattern && midiOutput) {
-          return {
-            ...state,
-            params: action.newParams,
-            state: {
-              ...s,
-              tempo: action.newParams.tempo,
-            },
-          };
+        if (!midiOutput) {
+          return initialize(finishPlaying(state), dispatch);
         }
+        return updateTempo(
+          updatePattern(state, action.newParams.pattern),
+          action.newParams.tempo,
+        );
       }
       return initialize(finishPlaying(state), dispatch);
     }
@@ -238,14 +260,15 @@ const update = (
         return state;
       }
       const s = state.state;
-      const stepDuration = stepDurationSeconds(s.tempo);
       const ticksPerSecond = tempoToTicksPerSecond(s.tempo);
       const step = s.steps[s.currentStep % s.steps.length];
       const update = sequencerAdvance(s.sequencerState, step);
+      const adjust = Math.max(0, -1 * action.drift);
+      const now = performance.now() + adjust;
       for (const message of update.messages) {
         s.output.send(
           message.data,
-          performance.now() + (message.tick / ticksPerSecond) * 1000,
+          now + (message.tick / ticksPerSecond) * 1000,
         );
       }
       return {
@@ -254,10 +277,6 @@ const update = (
           ...s,
           sequencerState: update.state,
           currentStep: s.currentStep + 1,
-          timeoutId: setTimeout(
-            () => dispatch({ type: SeqActionT.Timeout }),
-            stepDuration * 1000,
-          ),
         },
       };
     }
@@ -265,7 +284,7 @@ const update = (
 };
 
 const createSeq = (params: SeqParams) => {
-  let state: State = { params, state: { type: SeqStateT.New } };
+  let state: State = { params, state: { type: SeqStateT.Idle } };
   const dispatch = (action: SeqAction) => {
     state = update(state, action, dispatch);
   };
@@ -275,7 +294,6 @@ const createSeq = (params: SeqParams) => {
     updateParams: (newParams: SeqParams) => {
       dispatch({ type: SeqActionT.UpdateParams, newParams });
     },
-    debug: () => console.log(state.state.type),
   };
 };
 
@@ -308,5 +326,4 @@ export const useMidiPlayer = (
   } else {
     seqRef.current.updateParams(params);
   }
-  seqRef.current?.debug();
 };
