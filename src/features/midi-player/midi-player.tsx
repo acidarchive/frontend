@@ -19,7 +19,7 @@ import {
   MidiOutputsStateType,
   useMidiOutputs,
 } from '@/features/midi-player/webmidi';
-import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer2';
+import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
