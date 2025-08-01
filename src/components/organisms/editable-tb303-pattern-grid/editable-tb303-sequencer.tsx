@@ -1,8 +1,12 @@
-import { GridCheckbox } from '@/components/atoms/grid-checkbox';
-import { GridSelect } from '@/components/atoms/grid-select';
+import { CyclableInput } from '@/components/atoms/cyclable-input';
 import { SequencerRow } from '@/components/molecules/sequencer-row';
 import { StepNumberRow } from '@/components/molecules/step-number-row';
-import { NOTE_OPTIONS, TIME_OPTIONS, TRANSPOSE_OPTIONS } from '@/enums';
+import {
+  BOOLEAN_OPTIONS,
+  NOTE_OPTIONS,
+  TIME_OPTIONS,
+  TRANSPOSE_OPTIONS,
+} from '@/enums';
 
 export function EditableTB303Sequencer() {
   return (
@@ -12,12 +16,12 @@ export function EditableTB303Sequencer() {
         label="note"
         renderCell={(index, step) => {
           return (
-            <GridSelect
+            <CyclableInput
               name={`steps.${index}.note`}
               id={`note-select-${index}`}
-              allowEmpty
               options={NOTE_OPTIONS}
               defaultValue={step?.note ?? ''}
+              clearable
             />
           );
         }}
@@ -25,44 +29,46 @@ export function EditableTB303Sequencer() {
       <SequencerRow
         label="octave"
         renderCell={(index, step) => (
-          <GridSelect
+          <CyclableInput
             name={`steps.${index}.transpose`}
             id={`transpose-select-${index}`}
-            allowEmpty
             options={TRANSPOSE_OPTIONS}
             defaultValue={step?.transpose ?? ''}
+            clearable
           />
         )}
       />
       <SequencerRow
         label="accent"
         renderCell={(index, step) => (
-          <GridCheckbox
+          <CyclableInput
             name={`steps.${index}.accent`}
             id={`accent-checkbox-${index}`}
-            checked={step?.accent ?? false}
+            options={BOOLEAN_OPTIONS}
+            defaultValue={step?.accent ?? false}
           />
         )}
       />
       <SequencerRow
         label="slide"
         renderCell={(index, step) => (
-          <GridCheckbox
+          <CyclableInput
             name={`steps.${index}.slide`}
             id={`slide-checkbox-${index}`}
-            checked={step?.slide ?? false}
+            options={BOOLEAN_OPTIONS}
+            defaultValue={step?.slide ?? false}
           />
         )}
       />
       <SequencerRow
         label="time"
         renderCell={(index, step) => (
-          <GridSelect
+          <CyclableInput
             name={`steps.${index}.time`}
             id={`time-select-${index}`}
-            allowEmpty
             options={TIME_OPTIONS}
             defaultValue={step?.time ?? ''}
+            clearable
           />
         )}
       />

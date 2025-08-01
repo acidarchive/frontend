@@ -3,6 +3,29 @@
 
 ### ⚙️ Miscellaneous
 
+- Upgrade packages
+
+- Remove headlessui package
+
+
+## [0.0.1-alpha.52] - 2025-07-30
+
+### 🌀 Added
+
+- Cyclable input
+
+
+## [0.0.1-alpha.51] - 2025-07-29
+
+### 🔧 Fixed
+
+- Use toggle-group in waveform select
+
+
+## [0.0.1-alpha.50] - 2025-07-25
+
+### ⚙️ Miscellaneous
+
 - Init playwright
 
 
@@ -494,7 +517,10 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.52..HEAD
+[0.0.1-alpha.52]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.51..v0.0.1-alpha.52
+[0.0.1-alpha.51]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..v0.0.1-alpha.51
+[0.0.1-alpha.50]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..v0.0.1-alpha.50
 [0.0.1-alpha.49]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.48..v0.0.1-alpha.49
 [0.0.1-alpha.48]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.47..v0.0.1-alpha.48
 [0.0.1-alpha.47]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.46..v0.0.1-alpha.47
