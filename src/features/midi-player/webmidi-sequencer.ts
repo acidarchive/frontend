@@ -23,17 +23,18 @@ interface SeqParams {
 }
 
 enum SeqStateT {
-  InitializingMidi,
-  Playing,
-  Finished,
-  Error,
+  New = 'New',
+  Initializing = 'Initializing',
+  Playing = 'Playing',
+  Finished = 'Finished',
+  Error = 'Error',
 }
 
 enum SeqActionT {
   Stop,
   Timeout,
   InitializeOk,
-  UpdateTempo,
+  UpdateParams,
 }
 
 interface State {
@@ -43,8 +44,58 @@ interface State {
 
 type TimeoutId = ReturnType<typeof setTimeout>;
 
+interface Clock {
+  stop: () => void;
+  setInterval: (newInterval: number) => void;
+}
+
+export const createClock = (
+  callback: (drift: number) => void,
+  interval: number,
+): Clock => {
+  let stopped = false;
+  let nextTime = performance.now();
+  let timeoutId: TimeoutId | undefined = undefined;
+  let inCallback = false;
+  const next = () => {
+    const now = performance.now();
+    const drift = now - nextTime;
+    if (stopped) return;
+    inCallback = true;
+    callback(drift);
+    inCallback = false;
+    if (stopped) return;
+    nextTime = nextTime + interval;
+    timeoutId = setTimeout(next, Math.max(0, nextTime - performance.now()));
+  };
+  timeoutId = setTimeout(next, 0);
+  return {
+    setInterval: (newInterval: number) => {
+      if (stopped) return;
+      if (inCallback) {
+        interval = newInterval;
+      } else {
+        const now = performance.now();
+        const remaining = Math.max(0, nextTime - now);
+        const amount = remaining / interval;
+        nextTime = now + newInterval * amount;
+        interval = newInterval;
+        clearTimeout(timeoutId);
+        setTimeout(next, Math.max(0, nextTime - now));
+      }
+    },
+    stop: () => {
+      stopped = true;
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+        timeoutId = undefined;
+      }
+    },
+  };
+};
+
 type SeqState =
-  | { type: SeqStateT.InitializingMidi }
+  | { type: SeqStateT.Initializing }
   | {
       type: SeqStateT.Playing;
       steps: Step[];
@@ -59,15 +110,53 @@ type SeqState =
 
 type SeqAction =
   | { type: SeqActionT.Stop }
-  | { type: SeqActionT.UpdateTempo; tempo: number }
+  | { type: SeqActionT.UpdateParams; newParams: SeqParams }
   | { type: SeqActionT.Timeout }
   | { type: SeqActionT.InitializeOk; midiAccess: MIDIAccess };
 
 interface Seq {
   stop: () => void;
-  updateTempo: (newTempo: number) => void;
-  getParams: () => SeqParams;
+  updateParams: (newParams: SeqParams) => void;
+  debug: () => void;
 }
+
+const finishPlaying = (state: State): State => {
+  if (state.state.type === SeqStateT.Playing) {
+    const s = state.state;
+    clearTimeout(state.state.timeoutId);
+    for (const message of sequencerNoteOffs(s.sequencerState)) {
+      s.output.send(
+        message.data,
+        performance.now() +
+          (message.tick / tempoToTicksPerSecond(s.tempo)) * 1000,
+      );
+    }
+    state.state.output.close();
+    return { ...state, state: { type: SeqStateT.Finished } };
+  }
+  return state;
+};
+
+const initialize = (
+  state: State,
+  dispatch: (action: SeqAction) => void,
+): State => {
+  if (
+    state.state.type === SeqStateT.New ||
+    state.state.type === SeqStateT.Finished
+  ) {
+    navigator.requestMIDIAccess().then(midiAccess => {
+      dispatch({
+        type: SeqActionT.InitializeOk,
+        midiAccess,
+      });
+    });
+    return {
+      ...state,
+      state: { type: SeqStateT.Initializing },
+    };
+  }
+};
 
 const update = (
   state: State,
@@ -76,7 +165,7 @@ const update = (
 ): State => {
   switch (action.type) {
     case SeqActionT.InitializeOk: {
-      if (state.state.type !== SeqStateT.InitializingMidi) {
+      if (state.state.type !== SeqStateT.Initializing) {
         return state;
       }
       const output = action.midiAccess.outputs
@@ -115,51 +204,34 @@ const update = (
         };
       }
     }
-    case SeqActionT.UpdateTempo: {
-      switch (state.state.type) {
-        case SeqStateT.Playing: {
+    case SeqActionT.UpdateParams: {
+      if (state.state.type === SeqStateT.Initializing) {
+        return {
+          ...state,
+          params: action.newParams,
+        };
+      }
+      if (state.state.type === SeqStateT.Playing) {
+        const s = state.state;
+        const tempo = action.newParams.tempo === s.tempo;
+        const pattern = action.newParams.pattern.id === state.params.pattern.id;
+        const midiOutput =
+          action.newParams.midiOutput.id === state.params.midiOutput.id;
+        if (pattern && midiOutput) {
           return {
             ...state,
+            params: action.newParams,
             state: {
-              ...state.state,
-              tempo: action.tempo,
+              ...s,
+              tempo: action.newParams.tempo,
             },
           };
         }
-        case SeqStateT.InitializingMidi: {
-          return {
-            ...state,
-            params: { ...state.params, tempo: action.tempo },
-          };
-        }
-        case SeqStateT.Finished:
-        case SeqStateT.Error: {
-          return state;
-        }
       }
+      return initialize(finishPlaying(state), dispatch);
     }
     case SeqActionT.Stop: {
-      switch (state.state.type) {
-        case SeqStateT.Playing: {
-          const s = state.state;
-          clearTimeout(state.state.timeoutId);
-          for (const message of sequencerNoteOffs(s.sequencerState)) {
-            s.output.send(
-              message.data,
-              performance.now() +
-                (message.tick / tempoToTicksPerSecond(s.tempo)) * 1000,
-            );
-          }
-          state.state.output.close();
-          return { ...state, state: { type: SeqStateT.Finished } };
-        }
-        case SeqStateT.InitializingMidi: {
-          return { ...state, state: { type: SeqStateT.Finished } };
-        }
-        case SeqStateT.Error: {
-          return state;
-        }
-      }
+      return finishPlaying(state);
     }
     case SeqActionT.Timeout: {
       if (state.state.type !== SeqStateT.Playing) {
@@ -193,19 +265,17 @@ const update = (
 };
 
 const createSeq = (params: SeqParams) => {
-  let state: State = { params, state: { type: SeqStateT.InitializingMidi } };
+  let state: State = { params, state: { type: SeqStateT.New } };
   const dispatch = (action: SeqAction) => {
     state = update(state, action, dispatch);
   };
-  navigator.requestMIDIAccess().then(midiAccess => {
-    dispatch({ type: SeqActionT.InitializeOk, midiAccess });
-  });
+  dispatch({ type: SeqActionT.UpdateParams, newParams: params });
   return {
     stop: () => dispatch({ type: SeqActionT.Stop }),
-    updateTempo: (newTempo: number) => {
-      dispatch({ type: SeqActionT.UpdateTempo, tempo: newTempo });
+    updateParams: (newParams: SeqParams) => {
+      dispatch({ type: SeqActionT.UpdateParams, newParams });
     },
-    getParams: () => state.params,
+    debug: () => console.log(state.state.type),
   };
 };
 
@@ -217,35 +287,26 @@ export const useMidiPlayer = (
 ) => {
   const seqRef = useRef<Seq | undefined>(undefined);
   const teardown = () => {
-    console.log('teardown midi player');
     if (seqRef.current !== undefined) {
       seqRef.current.stop();
       seqRef.current = undefined;
     }
   };
-  useEffect(() => {
-    if (midiOutput !== undefined && playing) {
-      const params = { pattern, midiOutput, tempo };
-      console.log(params, seqRef.current);
-      if (seqRef.current === undefined) {
-        seqRef.current = createSeq(params);
-      } else {
-        const currentParams = seqRef.current.getParams();
-        if (
-          currentParams.midiOutput.id === params.midiOutput.id &&
-          currentParams.pattern.id === params.pattern.id &&
-          currentParams.tempo !== params.tempo
-        ) {
-          seqRef.current.updateTempo(params.tempo);
-        } else {
-          teardown();
-          seqRef.current = createSeq(params);
-        }
-      }
-    }
-    return () => {
-      console.log('aaa');
-      teardown();
-    };
-  }, [pattern, midiOutput, playing, tempo]);
+
+  if (midiOutput === undefined) {
+    teardown();
+    return;
+  }
+  if (!playing) {
+    teardown();
+    return;
+  }
+
+  const params: SeqParams = { pattern, midiOutput, tempo };
+  if (seqRef.current === undefined) {
+    seqRef.current = createSeq(params);
+  } else {
+    seqRef.current.updateParams(params);
+  }
+  seqRef.current?.debug();
 };
