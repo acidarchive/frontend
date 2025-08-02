@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Tempo input
+
+
+## [0.0.1-alpha.53] - 2025-07-30
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -517,7 +524,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.52..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.53..HEAD
+[0.0.1-alpha.53]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.52..v0.0.1-alpha.53
 [0.0.1-alpha.52]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.51..v0.0.1-alpha.52
 [0.0.1-alpha.51]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..v0.0.1-alpha.51
 [0.0.1-alpha.50]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.49..v0.0.1-alpha.50
