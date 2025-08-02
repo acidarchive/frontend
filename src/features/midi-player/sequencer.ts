@@ -50,6 +50,7 @@ type State =
       target: StepGate;
     };
 
+export type SequencerState = State;
 /**
  * Create an empty sequencer state.
  */
@@ -87,7 +88,10 @@ export const sequencerNoteOffs = (state: State): MidiMessage[] => {
  * Advances the sequencer by a single step.
  * A step is considered to be 1/16th note long.
  */
-const advance = (state: State, step: Step): SequencerStepResult => {
+export const sequencerAdvance = (
+  state: State,
+  step: Step,
+): SequencerStepResult => {
   if (!step.gate) {
     switch (state.type) {
       case StateType.Idle: {
@@ -197,7 +201,10 @@ const advance = (state: State, step: Step): SequencerStepResult => {
 const advanceN = (init: State, steps: Step[]): SequencerStepResult =>
   steps.reduce(
     (result: SequencerStepResult, step: Step, index: number) => {
-      const { state: newState, messages } = advance(result.state, step);
+      const { state: newState, messages } = sequencerAdvance(
+        result.state,
+        step,
+      );
       return {
         state: newState,
         messages: [
@@ -215,18 +222,29 @@ const advanceN = (init: State, steps: Step[]): SequencerStepResult =>
 export const stepsToMessages = (steps: Step[]): MidiMessage[] =>
   advanceN(IDLE, steps).messages;
 
+export type SequencerIterator = Iterator<SequencerStepResult> & {
+  getState(): State;
+};
+
+export interface SequencerIterable {
+  [Symbol.iterator](): SequencerIterator;
+}
+
 /**
  * Infinitely loops over the given steps producing state updates with midi messages.
  * This should play the "infinity" note correctly.
  */
-export const sequencerMidiIter = (steps: Step[]) => {
+export const makeSequencerIterable = (steps: Step[]): SequencerIterable => {
   return {
     [Symbol.iterator]() {
       let state = sequencerInit();
       let index = 0;
       return {
+        getState() {
+          return state;
+        },
         next() {
-          const x = advance(state, steps[index % steps.length]);
+          const x = sequencerAdvance(state, steps[index % steps.length]);
           state = x.state;
           index++;
           return {
