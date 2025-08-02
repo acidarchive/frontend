@@ -13,12 +13,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { TempoInput } from '@/features/midi-player/tempo-input';
 import {
   MidiOutput,
   MidiOutputsStateType,
   useMidiOutputs,
-  useMidiPlayer,
 } from '@/features/midi-player/webmidi';
+import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -46,52 +47,60 @@ const MidiOutputSelect = (props: {
   selected: MidiOutput;
   all: MidiOutput[];
   onChange: (midiOutput: MidiOutput) => void;
+  className?: string;
 }) => {
   const handleValueChange = (id: string) => {
     const newSelected = props.all.find(item => item.id === id);
     if (newSelected !== undefined) props.onChange(newSelected);
   };
   return (
-    <Select value={props.selected.id} onValueChange={handleValueChange}>
-      <SelectTrigger>
-        <SelectValue placeholder="Select MIDI output" />
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>MIDI Outputs</SelectLabel>
-            {props.all.map(o => (
-              <SelectItem key={o.id} value={o.id}>
-                {o.name}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </SelectTrigger>
-    </Select>
+    <div className={props.className}>
+      <Select value={props.selected.id} onValueChange={handleValueChange}>
+        <SelectTrigger>
+          <SelectValue placeholder="Select MIDI output" />
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>MIDI Outputs</SelectLabel>
+              {props.all.map(o => (
+                <SelectItem key={o.id} value={o.id}>
+                  {o.name}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </SelectTrigger>
+      </Select>
+    </div>
   );
 };
 
 type State = {
   selectedMidiOutput: MidiOutput | undefined;
+  tempo: number;
   playing: boolean;
 };
 
 type Action =
   | { type: 'select-midi-output'; midiOutput: MidiOutput }
+  | { type: 'update-tempo'; newTempo: number }
   | { type: 'play' }
   | { type: 'stop' };
 
 const reducer = (state: State, action: Action): State => {
-  if (action.type === 'select-midi-output') {
-    console.log(action);
-    return { ...state, selectedMidiOutput: action.midiOutput };
+  switch (action.type) {
+    case 'select-midi-output': {
+      return { ...state, selectedMidiOutput: action.midiOutput };
+    }
+    case 'play': {
+      return { ...state, playing: true };
+    }
+    case 'stop': {
+      return { ...state, playing: false };
+    }
+    case 'update-tempo': {
+      return { ...state, tempo: action.newTempo };
+    }
   }
-  if (action.type === 'play') {
-    return { ...state, playing: true };
-  }
-  if (action.type === 'stop') {
-    return { ...state, playing: false };
-  }
-  return state;
 };
 
 const MidiPlayerControls = (props: MidiPlayerProps) => {
@@ -99,8 +108,14 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
     selectedMidiOutput: undefined,
     playing: false,
+    tempo: props.pattern.tempo ?? 120,
   });
-  useMidiPlayer(props.pattern, state.selectedMidiOutput, state.playing);
+  useMidiPlayer(
+    props.pattern,
+    state.selectedMidiOutput,
+    state.playing,
+    state.tempo,
+  );
   useEffect(() => {
     if (
       midiOutputsState.type === MidiOutputsStateType.Ready &&
@@ -116,6 +131,8 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
     state.playing ? dispatch({ type: 'stop' }) : dispatch({ type: 'play' });
   const handleSelectMidiOutput = (midiOutput: MidiOutput) =>
     dispatch({ type: 'select-midi-output', midiOutput });
+  const handleChangeTempo = (newTempo: number) =>
+    dispatch({ type: 'update-tempo', newTempo });
   if (midiOutputsState.type === MidiOutputsStateType.NoOutputs) {
     return (
       <>
@@ -150,15 +167,17 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
       </>
     ) : (
       <>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <PlayButton
             isPlaying={state.playing}
             onClick={handleClickPlayButton}
           />
+          <TempoInput tempo={state.tempo} onChange={handleChangeTempo} />
           <MidiOutputSelect
             selected={state.selectedMidiOutput}
             all={midiOutputsState.outputs}
             onChange={handleSelectMidiOutput}
+            className="grow"
           />
         </div>
       </>

@@ -39,8 +39,14 @@ export const noteToMidi = (note: Note): number => NOTE_TO_MIDI_MAP[note];
 export const patternTempo = (pattern: TB303Pattern): number =>
   typeof pattern.tempo === 'number' ? pattern.tempo : MIDI_DEFAULT_TEMPO;
 
+export const tempoToTicksPerSecond = (tempo: number): number =>
+  (tempo * MIDI_MESSAGE_PPQN) / 60;
+
 export const patternTicksPerSecond = (pattern: TB303Pattern): number =>
-  (patternTempo(pattern) * MIDI_MESSAGE_PPQN) / 60;
+  tempoToTicksPerSecond(patternTempo(pattern));
+
+export const stepDurationSeconds = (tempo: number): number =>
+  MIDI_MESSAGE_PPQN / 4 / tempoToTicksPerSecond(tempo);
 
 export const patternDurationInTicks = (pattern: TB303Pattern): number =>
   (pattern.steps.length / 4) * MIDI_MESSAGE_PPQN;
