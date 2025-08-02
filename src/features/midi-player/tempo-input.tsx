@@ -39,7 +39,6 @@ export const TempoInput = (props: TempoInputProps) => {
   const idle = (): State => ({ type: 'idle' }) as const;
   type Action =
     | { type: 'click' }
-    | { type: 'done-updating' }
     | { type: 'change'; value: string }
     | { type: 'blur'; value: string }
     | { type: 'keydown'; key: string; value: string };
@@ -66,7 +65,7 @@ export const TempoInput = (props: TempoInputProps) => {
     return state;
   };
   const [state, dispatch] = React.useReducer((state, action: Action): State => {
-    if (state.type === 'idle') {
+    if (state.type === 'idle' || state.type === 'updated') {
       if (action.type === 'click') {
         return {
           type: 'editing',
@@ -111,8 +110,6 @@ export const TempoInput = (props: TempoInputProps) => {
           }
         }
       }
-    } else if (state.type === 'updated' && action.type === 'done-updating') {
-      return idle();
     }
     return state;
   }, idle());
@@ -121,7 +118,7 @@ export const TempoInput = (props: TempoInputProps) => {
     if (input === null) return;
     if (state.type === 'editing') {
       input.select();
-    } else if (state.type === 'idle') {
+    } else if (state.type === 'idle' || state.type === 'updated') {
       setTimeout(() => {
         input.blur();
       }, 0);
@@ -130,7 +127,6 @@ export const TempoInput = (props: TempoInputProps) => {
   useEffect(() => {
     if (state.type === 'updated' && state.value !== props.tempo) {
       props.onChange(state.value);
-      dispatch({ type: 'done-updating' });
     }
   }, [props, state]);
   const displayValue = () => {
