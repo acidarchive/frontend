@@ -86,7 +86,7 @@ export function CyclableInput<T = string>({
         <div
           id={id}
           className={clsx(
-            'flex items-center cursor-pointer w-full h-full justify-center text-md select-none',
+            'flex items-center cursor-pointer w-full h-full justify-center select-none text-sm',
             disabled && 'opacity-50 cursor-not-allowed',
             className,
           )}

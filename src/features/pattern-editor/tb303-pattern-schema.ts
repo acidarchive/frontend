@@ -52,6 +52,12 @@ export const TB303PatternSchema = z.object({
   waveform: z.preprocess(emptyToUndefined, z.enum(Waveform).optional()),
   triplets: z.preprocess(emptyToUndefined, z.boolean().optional()),
   tempo: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  tuning: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  cut_off_freq: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  resonance: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  env_mod: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  decay: z.preprocess(emptyToUndefined, z.number().int().optional()),
+  accent: z.preprocess(emptyToUndefined, z.number().int().optional()),
   steps: z.preprocess(
     steps => {
       if (!Array.isArray(steps)) return steps;

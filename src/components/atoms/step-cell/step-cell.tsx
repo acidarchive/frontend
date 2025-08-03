@@ -10,7 +10,7 @@ export function StepCell({ isLast, isHighlighted, children }: StepCellProps) {
   return (
     <div
       className={clsx(
-        'border-b border-r sm:aspect-square flex items-center justify-center',
+        'border-b border-r flex items-center justify-center p-2 min-h-8',
         isHighlighted && 'bg-accent',
         isLast && 'sm:border-r-0',
       )}

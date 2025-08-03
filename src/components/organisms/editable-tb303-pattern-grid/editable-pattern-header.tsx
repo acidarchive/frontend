@@ -6,20 +6,20 @@ import {
 
 export function EditablePatternHeader() {
   return (
-    <dl className="divide-y border-b">
-      <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
-        <dt className="text-sm font-semibold flex items-center">Title:</dt>
-        <dd className="mt-1 sm:col-span-2 sm:mt-0">
+    <div className="divide-y border-b">
+      <div className="grid grid-cols-18 items-center py-2">
+        <span className="col-span-2 font-medium px-4 text-sm">Title</span>
+        <div className="col-span-16 pr-4">
           <GridInput {...pattern_title_validation} />
-        </dd>
+        </div>
       </div>
 
-      <div className="px-2 py-2 sm:grid sm:grid-cols-8 sm:gap-2 sm:px-6">
-        <dt className="text-sm font-semibold flex items-center">Author:</dt>
-        <dd className="mt-1 sm:col-span-2 sm:mt-0">
+      <div className="grid grid-cols-18 items-center py-2">
+        <span className="col-span-2 font-medium px-4 text-sm">Author</span>
+        <div className="col-span-16 pr-4">
           <GridInput {...pattern_author_validation} />
-        </dd>
+        </div>
       </div>
-    </dl>
+    </div>
   );
 }
