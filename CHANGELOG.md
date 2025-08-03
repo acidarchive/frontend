@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Tb303 pattern editor
+
+
+## [0.0.1-alpha.54] - 2025-08-02
+
+### 🌀 Added
+
 - Tempo input
 
 
@@ -524,7 +531,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.53..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.54..HEAD
+[0.0.1-alpha.54]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.53..v0.0.1-alpha.54
 [0.0.1-alpha.53]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.52..v0.0.1-alpha.53
 [0.0.1-alpha.52]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.51..v0.0.1-alpha.52
 [0.0.1-alpha.51]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.50..v0.0.1-alpha.51
