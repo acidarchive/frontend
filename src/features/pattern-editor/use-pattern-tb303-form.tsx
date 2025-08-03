@@ -42,12 +42,6 @@ export function usePatternTB303Form({ patternId }: UsePatternTB303FormProps) {
   } = methods;
 
   useEffect(() => {
-    if (Object.keys(errors).length > 0) {
-      console.log('Form Validation Errors:', errors);
-    }
-  }, [errors]);
-
-  useEffect(() => {
     let errorToShow = errors.steps?.root?.message;
 
     if (!errorToShow && Array.isArray(errors.steps)) {

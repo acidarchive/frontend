@@ -13,8 +13,8 @@ export function EditableTB303PatternDetails() {
   } = useFormContext();
 
   return (
-    <Card>
-      <CardContent>
+    <Card className="px-4 py-4 gap-4">
+      <CardContent className="px-0">
         <InputElement {...pattern_name_validation} />
         <SwitchElement
           label="Make this pattern public"
@@ -22,11 +22,11 @@ export function EditableTB303PatternDetails() {
           name="is_public"
         />
       </CardContent>
-      <CardFooter className="flex justify-end gap-4">
+      <CardFooter className="flex justify-end gap-4 px-0">
         <Button type="button" variant="secondary" onClick={() => reset()}>
           Reset
         </Button>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting} className="w-20">
           {isSubmitting ? 'Saving...' : 'Save'}
         </Button>
       </CardFooter>

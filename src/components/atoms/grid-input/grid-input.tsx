@@ -38,7 +38,7 @@ export function GridInput({
             {...field}
             id={id}
             type={type}
-            className="w-full h-full border-none focus:ring-0 focus:outline-none"
+            className="w-full h-full border-none text-md focus:ring-0 focus:outline-none bg-transparent dark:bg-transparent focus-visible:ring-0 focus-visible:border-none"
             placeholder={placeholder}
             disabled={disabled}
             onChange={event => {

@@ -35,7 +35,7 @@ export const WaveformSelect = ({
           type="single"
           variant="outline"
           onValueChange={onChange}
-          defaultValue={value}
+          value={value}
           disabled={disabled}
         >
           <ToggleGroupItem value={Waveform.Sawtooth} className="h-8 w-12">

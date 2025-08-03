@@ -7,7 +7,7 @@ export interface FormLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
 
 export function FormLabel({ children, htmlFor, ...props }: FormLabelProps) {
   return (
-    <label htmlFor={htmlFor} className="block text-sm font-medium" {...props}>
+    <label htmlFor={htmlFor} className="block text-md font-medium" {...props}>
       {children}
     </label>
   );

@@ -133,4 +133,33 @@ describe('TB303PatternSchema', () => {
     const result = TB303PatternSchema.safeParse(validPattern);
     expect(result.success).toBe(true);
   });
+
+  it('validates knob controls', () => {
+    const validPattern = {
+      name: 'Valid Pattern',
+      tuning: 10,
+      cut_off_freq: 20,
+      resonance: 30,
+      env_mod: 40,
+      decay: 50,
+      accent: 60,
+      steps: [
+        {
+          number: 1,
+          note: Note.C,
+          time: Time.note,
+          accent: true,
+          slide: false,
+        },
+      ],
+    };
+    const result = TB303PatternSchema.safeParse(validPattern);
+    expect(result.success).toBe(true);
+    expect(result.data?.tuning).toBe(10);
+    expect(result.data?.cut_off_freq).toBe(20);
+    expect(result.data?.resonance).toBe(30);
+    expect(result.data?.env_mod).toBe(40);
+    expect(result.data?.decay).toBe(50);
+    expect(result.data?.accent).toBe(60);
+  });
 });
