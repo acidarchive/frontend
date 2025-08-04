@@ -1,6 +1,20 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Remove unused import
+
+- Remove unused code
+
+
+### 🔧 Fixed
+
+- Correct pattern editor styles
+
+
+## [0.0.1-alpha.55] - 2025-08-03
+
 ### 🌀 Added
 
 - Tb303 pattern editor
@@ -531,7 +545,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.54..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.55..HEAD
+[0.0.1-alpha.55]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.54..v0.0.1-alpha.55
 [0.0.1-alpha.54]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.53..v0.0.1-alpha.54
 [0.0.1-alpha.53]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.52..v0.0.1-alpha.53
 [0.0.1-alpha.52]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.51..v0.0.1-alpha.52
