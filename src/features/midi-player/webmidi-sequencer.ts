@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { TB303Pattern } from '@/api/generated/model';
 import {
