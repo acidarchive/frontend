@@ -1,32 +1,24 @@
 'use client';
 
 import { clsx } from 'clsx';
+import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 
-import { useGetRandomTb303Pattern } from '@/api/generated/acid';
+import { TB303Pattern } from '@/api/generated/model';
 import { Icons } from '@/components/atoms/icons';
 import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
 import { Button } from '@/components/ui/button';
 import { MidiPlayer } from '@/features/midi-player';
 
-export const RandomTB303Pattern = () => {
-  const { data, isError, isLoading, isFetching, refetch } =
-    useGetRandomTb303Pattern();
+export const RandomTB303Pattern = ({ pattern }: { pattern: TB303Pattern }) => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-center text-center p-8 min-h-[450px]">
-        <Icons.refreshCw className="h-12 w-12 animate-spin text-muted-foreground mb-4" />
-        <p className="text-muted-foreground">
-          The backend may take a moment to wake up.
-        </p>
-        <p className="text-muted-foreground">Thanks for your patience!</p>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return <div>Something went wrong</div>;
-  }
+  const handleRefresh = () => {
+    startTransition(() => {
+      router.refresh();
+    });
+  };
 
   return (
     <div className="flex flex-col">
@@ -34,25 +26,24 @@ export const RandomTB303Pattern = () => {
         <h1 className="text-xl md:text-2xl font-bold">TB-303 pattern</h1>
         <div className="w-24">
           <Button
-            onClick={() => refetch()}
-            disabled={isFetching}
-            aria-disabled={isFetching}
+            onClick={handleRefresh}
             variant="outline"
+            disabled={isPending}
           >
             Refresh
-            <Icons.refreshCw className={clsx({ 'animate-spin': isFetching })} />
+            <Icons.refreshCw
+              className={clsx({
+                'animate-spin': isPending,
+              })}
+            />
           </Button>
         </div>
       </div>
       <div>
-        {data ? (
-          <div className="mb-4">
-            <ReadonlyTB303PatternGrid pattern={data} />
-            <MidiPlayer pattern={data} />
-          </div>
-        ) : (
-          <div>No pattern found</div>
-        )}
+        <div className="mb-4">
+          <ReadonlyTB303PatternGrid pattern={pattern} />
+          <MidiPlayer pattern={pattern} />
+        </div>
       </div>
     </div>
   );
