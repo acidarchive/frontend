@@ -1,10 +1,8 @@
-import { MainLayout } from '@/components/layouts/main-layout';
+import { getRandomTB303Pattern } from '@/dal';
 import { RandomTB303Pattern } from '@/features/random-pattern';
 
-export default function RandomPatternPage() {
-  return (
-    <MainLayout>
-      <RandomTB303Pattern />
-    </MainLayout>
-  );
+export default async function RandomPatternPage() {
+  const pattern = await getRandomTB303Pattern();
+
+  return <RandomTB303Pattern pattern={pattern} />;
 }
