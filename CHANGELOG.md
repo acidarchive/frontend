@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Fetch single pattern server side
+
+
+## [0.0.1-alpha.58] - 2025-08-05
+
 ### 🔧 Fixed
 
 - Enable dynamic rendering
@@ -559,7 +566,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.57..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.58..HEAD
+[0.0.1-alpha.58]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.57..v0.0.1-alpha.58
 [0.0.1-alpha.57]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.56..v0.0.1-alpha.57
 [0.0.1-alpha.56]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.55..v0.0.1-alpha.56
 [0.0.1-alpha.55]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.54..v0.0.1-alpha.55
