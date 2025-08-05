@@ -1,14 +1,12 @@
-import { useGetTb303Pattern } from '@/api/generated/acid';
+import { TB303Pattern } from '@/api/generated/model';
 import { ReadonlyTB303PatternDetails } from '@/components/organisms/readonly-tb303-pattern-details';
 import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
 
 interface PatternTB303ViewProps {
-  patternId?: string;
+  pattern: TB303Pattern;
 }
 
-export function PatternTB303View({ patternId }: PatternTB303ViewProps) {
-  const { data: pattern } = useGetTb303Pattern(patternId!);
-
+export function PatternTB303View({ pattern }: PatternTB303ViewProps) {
   return (
     <div className="max-w-7xl">
       <div className="flex flex-col lg:flex-row gap-8">
