@@ -1,5 +1,7 @@
-/* eslint-disable import/named */
-import { createServerRunner, NextServer } from '@aws-amplify/adapter-nextjs';
+import {
+  createServerRunner,
+  type NextServer,
+} from '@aws-amplify/adapter-nextjs';
 import { fetchAuthSession, getCurrentUser } from 'aws-amplify/auth/server';
 
 import { authConfig } from './auth-config';
