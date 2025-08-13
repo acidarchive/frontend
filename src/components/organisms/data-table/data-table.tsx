@@ -28,6 +28,7 @@ export interface DataTableProps<TData, TValue> {
   data?: TData[];
   totalPages?: number;
   isLoading?: boolean;
+  onDataChange?: () => void;
 }
 
 const DEFAULT_VALUES = {
@@ -60,8 +61,9 @@ export function DataTable<TData, TValue>({
   data = DEFAULT_VALUES.data,
   totalPages = DEFAULT_VALUES.totalPages,
   isLoading = DEFAULT_VALUES.isLoading,
+  onDataChange,
 }: DataTableProps<TData, TValue>) {
-  const { filters, handlers } = useDataTableFilters();
+  const { filters, handlers } = useDataTableFilters({ onDataChange });
 
   const createSortingState = () => {
     return filters.sortColumn
@@ -171,7 +173,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-1 flex-col space-y-4">
-      <DataTableToolbar table={table} isLoading={isLoading} />
+      <DataTableToolbar
+        table={table}
+        isLoading={isLoading}
+        onDataChange={onDataChange}
+      />
       <div className="relative flex flex-1">
         <div className="absolute inset-0 flex overflow-hidden rounded-lg border">
           <ScrollArea className="h-full w-full">
@@ -187,6 +193,7 @@ export function DataTable<TData, TValue>({
         table={table}
         totalPages={totalPages}
         isLoading={isLoading}
+        onDataChange={onDataChange}
       />
     </div>
   );

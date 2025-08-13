@@ -28,13 +28,16 @@ export const visibilities = [
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
   isLoading?: boolean;
+  onDataChange?: () => void;
 }
 
 export function DataTableToolbar<TData>({
   table,
   isLoading,
+  onDataChange,
 }: DataTableToolbarProps<TData>) {
-  const { filters, handlers } = useDataTableFilters();
+  const { filters, handlers } = useDataTableFilters({ onDataChange });
+  const isDisabled = isLoading;
   const [searchInput, setSearchInput] = useState(filters.search || '');
 
   useDebounce(
@@ -80,7 +83,7 @@ export function DataTableToolbar<TData>({
           value={searchInput}
           onChange={handleSearchChange}
           className="h-8 w-[150px] lg:w-[250px]"
-          disabled={isLoading}
+          disabled={isDisabled}
         />
 
         {visibilityColumn && (
@@ -89,7 +92,7 @@ export function DataTableToolbar<TData>({
             options={visibilities}
             value={filters.isPublic}
             onValueChange={handlers.onVisibilityChange}
-            disabled={isLoading}
+            disabled={isDisabled}
           />
         )}
 
@@ -98,7 +101,7 @@ export function DataTableToolbar<TData>({
             variant="ghost"
             size="sm"
             onClick={handleReset}
-            disabled={isLoading}
+            disabled={isDisabled}
           >
             Reset
             <X className="h-4 w-4" />
