@@ -1,19 +1,16 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useErrorBoundary } from 'react-error-boundary';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { TB303Pattern } from '@/api/generated/model';
+import { parseTB303Pattern } from '@/dal/tb303-pattern';
 import {
-  getGetTb303PatternQueryKey,
-  getListTb303PatternsQueryKey,
-  useCreateTb303Pattern,
-  useGetTb303Pattern,
-  useUpdateTb303Pattern,
-} from '@/api/generated/acid';
+  useCreateTB303PatternMutation,
+  useUpdateTB303PatternMutation,
+} from '@/hooks/queries/tb303-pattern';
+import { extractTB303StepValidationError } from '@/utils/tb303-form-errors';
 
 import {
   TB303PatternSchema,
@@ -21,15 +18,12 @@ import {
 } from './tb303-pattern-schema';
 
 interface UsePatternTB303FormProps {
-  patternId?: string;
+  pattern?: TB303Pattern;
 }
 
-export function usePatternTB303Form({ patternId }: UsePatternTB303FormProps) {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const isEditMode = Boolean(patternId);
+export function usePatternTB303Form({ pattern }: UsePatternTB303FormProps) {
+  const isEditMode = Boolean(pattern);
   const [submissionError, setSubmissionError] = useState<string | undefined>();
-  const { showBoundary } = useErrorBoundary();
 
   const methods = useForm({
     resolver: zodResolver(TB303PatternSchema),
@@ -41,82 +35,48 @@ export function usePatternTB303Form({ patternId }: UsePatternTB303FormProps) {
     formState: { errors },
   } = methods;
 
+  const validationError = useMemo(
+    () => extractTB303StepValidationError(errors),
+    [errors],
+  );
+
   useEffect(() => {
-    let errorToShow = errors.steps?.root?.message;
-
-    if (!errorToShow && Array.isArray(errors.steps)) {
-      const firstStepError = errors.steps.find(step => step?.time?.message);
-      if (firstStepError?.time?.message) {
-        errorToShow = firstStepError.time.message;
-      }
-    }
-
-    setSubmissionError(errorToShow || undefined);
-  }, [errors.steps]);
-
-  const { data: pattern } = useGetTb303Pattern(patternId!, {
-    query: {
-      enabled: isEditMode,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      suspense: isEditMode ? true : undefined,
-    },
-  });
+    setSubmissionError(validationError);
+  }, [validationError]);
 
   useEffect(() => {
     if (pattern && isEditMode) {
-      reset(TB303PatternSchema.parse(pattern) as TB303PatternSchemaType);
+      reset(parseTB303Pattern(pattern));
     }
   }, [pattern, reset, isEditMode]);
 
-  const createPatternMutation = useCreateTb303Pattern({
-    mutation: {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: getListTb303PatternsQueryKey(),
-        });
-        router.push('/dashboard/tb303');
-      },
-      onError: error => {
-        showBoundary(error);
-      },
-    },
-  });
-
-  const updatePatternMutation = useUpdateTb303Pattern({
-    mutation: {
-      onSuccess: () => {
-        if (patternId) {
-          queryClient.invalidateQueries({
-            queryKey: getGetTb303PatternQueryKey(patternId),
-          });
-        }
-        queryClient.invalidateQueries({
-          queryKey: getListTb303PatternsQueryKey(),
-        });
-        router.push('/dashboard/tb303');
-      },
-      onError: error => {
-        showBoundary(error);
-      },
-    },
-  });
+  const createPatternMutation = useCreateTB303PatternMutation();
+  const updatePatternMutation = useUpdateTB303PatternMutation();
 
   const onSubmit = async (data: TB303PatternSchemaType) => {
     setSubmissionError(undefined);
 
-    await (isEditMode && patternId
+    await (isEditMode && pattern
       ? updatePatternMutation.mutateAsync({
-          patternId,
+          patternId: pattern.id as string,
           data,
         })
       : createPatternMutation.mutateAsync({ data }));
   };
 
+  const handleFormSubmit = async (data: TB303PatternSchemaType) => {
+    try {
+      await onSubmit(data);
+    } catch (error) {
+      setSubmissionError(
+        error instanceof Error ? error.message : 'Network error occurred',
+      );
+    }
+  };
+
   return {
     methods,
-    onSubmit,
-    handleSubmit,
+    onSubmit: handleSubmit(handleFormSubmit),
     pattern,
     isEditMode,
     submissionError,
