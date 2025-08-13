@@ -11,8 +11,11 @@ import {
   PaginatedResponseTB303PatternSummary,
   TB303Pattern,
 } from '@/api/generated/model';
-
-import { runWithAmplifyServerContext } from '../utils/amplify-server-utils';
+import {
+  TB303PatternSchema,
+  TB303PatternSchemaType,
+} from '@/features/pattern-editor/tb303-pattern-schema';
+import { runWithAmplifyServerContext } from '@/utils/amplify-server-utils';
 
 export async function getTB303PatternById(
   patternId: string,
@@ -80,4 +83,10 @@ export async function getTB303PatternsList(
       }
     },
   });
+}
+
+export function parseTB303Pattern(
+  pattern: TB303Pattern,
+): TB303PatternSchemaType {
+  return TB303PatternSchema.parse(pattern) as TB303PatternSchemaType;
 }

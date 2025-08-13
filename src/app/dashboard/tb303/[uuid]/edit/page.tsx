@@ -1,16 +1,22 @@
-'use client';
-
+import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
 
 import { Icons } from '@/components/atoms/icons';
 import { PatternEditorLayout } from '@/components/layouts/pattern-editor-layout/pattern-editor-layout';
 import { Button } from '@/components/ui/button';
+import { getTB303PatternById } from '@/dal';
 import { PatternEditor } from '@/features/pattern-editor';
 
-export default function TB303EditPage() {
-  const params = useParams();
-  const uuid = params.uuid as string;
+interface TB303EditPageProps {
+  params: Promise<{ uuid: string }>;
+}
+
+export default async function TB303EditPage({ params }: TB303EditPageProps) {
+  const { uuid } = await params;
+
+  const pattern = await getTB303PatternById(uuid, {
+    cookies,
+  });
 
   return (
     <PatternEditorLayout
@@ -25,7 +31,7 @@ export default function TB303EditPage() {
         </Link>
       }
     >
-      <PatternEditor patternId={uuid} />
+      <PatternEditor pattern={pattern} />
     </PatternEditorLayout>
   );
 }
