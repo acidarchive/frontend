@@ -1,58 +1,68 @@
-'use client';
-
-import { keepPreviousData } from '@tanstack/react-query';
 import { Plus } from 'lucide-react';
+import { cookies } from 'next/headers';
 import Link from 'next/link';
 
-import { useListTb303Patterns } from '@/api/generated/acid';
 import { PageContainer } from '@/components/layouts/page-container';
-import { columns, DataTable } from '@/components/organisms/data-table';
 import { Button } from '@/components/ui/button';
-import { useDataTableFilters } from '@/hooks/use-data-table-filters';
+import { getTB303PatternsList } from '@/dal/tb303-pattern';
+import { TB303PatternsList } from '@/features/tb303-patterns-list';
 
-const ErrorState = ({ message }: { message: string }) => (
-  <div className="px-4 sm:px-6 lg:px-8 py-8">
-    <div className="flex items-center justify-center h-64">
-      <div className="text-red-500">{message}</div>
-    </div>
-  </div>
-);
-
-function TB303ListPageContent() {
-  const { filters, handlers } = useDataTableFilters();
-  const { data, error, isFetching } = useListTb303Patterns(
-    {
-      page_size: filters.pageSize,
-      sort_column: filters.sortColumn ?? undefined,
-      sort_direction: filters.sortDirection ?? undefined,
-      search: filters.search ?? undefined,
-      is_public: filters.isPublic ?? undefined,
-      page: filters.page,
-    },
-    {
-      query: {
-        placeholderData: keepPreviousData,
-      },
-    },
-  );
-
-  if (error) {
-    return <ErrorState message="Error loading patterns" />;
-  }
-
-  return (
-    <DataTable
-      columns={columns}
-      data={data?.records}
-      totalPages={data?.total_pages || 0}
-      isLoading={isFetching}
-      {...handlers}
-      {...filters}
-    />
-  );
+interface SearchParams {
+  page?: string;
+  page_size?: string;
+  sort_column?: string;
+  sort_direction?: string;
+  search?: string;
+  is_public?: string;
+  [key: string]: string | undefined;
 }
 
-export default function TB303ListPage() {
+interface TB303ListPageProps {
+  searchParams: Promise<SearchParams>;
+}
+
+function parseSearchParams(searchParams: Record<string, string | undefined>) {
+  const page = Number(searchParams.page) || 1;
+  const pageSize = Number(searchParams.page_size) || 10;
+  const sortColumn = searchParams.sort_column || undefined;
+  const sortDirection = searchParams.sort_direction as
+    | 'ascending'
+    | 'descending'
+    | undefined;
+  const search = searchParams.search || undefined;
+  const isPublic = searchParams.is_public
+    ? searchParams.is_public === 'true'
+    : undefined;
+
+  return {
+    page,
+    pageSize,
+    sortColumn,
+    sortDirection,
+    search,
+    isPublic,
+  };
+}
+
+export default async function TB303ListPage({
+  searchParams,
+}: TB303ListPageProps) {
+  const resolvedSearchParams = await searchParams;
+  const { page, pageSize, sortColumn, sortDirection, search, isPublic } =
+    parseSearchParams(resolvedSearchParams);
+
+  const data = await getTB303PatternsList(
+    {
+      page,
+      page_size: pageSize,
+      sort_column: sortColumn,
+      sort_direction: sortDirection,
+      search,
+      is_public: isPublic,
+    },
+    { cookies },
+  );
+
   return (
     <PageContainer scrollable={false}>
       <div className="flex flex-1 flex-col gap-8">
@@ -72,7 +82,11 @@ export default function TB303ListPage() {
             </Button>
           </Link>
         </div>
-        <TB303ListPageContent />
+
+        <TB303PatternsList
+          data={data?.records}
+          totalPages={data?.total_pages || 0}
+        />
       </div>
     </PageContainer>
   );

@@ -20,14 +20,16 @@ interface DataTablePaginationProps<TData> {
   table: Table<TData>;
   totalPages: number;
   isLoading?: boolean;
+  onDataChange?: () => void;
 }
 
 export function DataTablePagination<TData>({
   table,
   totalPages,
   isLoading = false,
+  onDataChange,
 }: DataTablePaginationProps<TData>) {
-  const { filters, handlers } = useDataTableFilters();
+  const { filters, handlers } = useDataTableFilters({ onDataChange });
   const { page: currentPage, pageSize } = filters;
   const { onPageChange, onPageSizeChange } = handlers;
   const selectedRowsCount = table.getFilteredSelectedRowModel().rows.length;

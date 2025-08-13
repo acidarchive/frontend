@@ -11,7 +11,7 @@ import { useCallback } from 'react';
 const SORT_DIRECTIONS = ['ascending', 'descending'] as const;
 export type SortDirection = (typeof SORT_DIRECTIONS)[number];
 
-const filterParsers = {
+export const filterParsers = {
   page: parseAsInteger.withDefault(1),
   page_size: parseAsInteger.withDefault(10),
   sort_column: parseAsString,
@@ -20,7 +20,12 @@ const filterParsers = {
   is_public: parseAsBoolean,
 };
 
-export function useDataTableFilters() {
+interface UseDataTableFiltersOptions {
+  onDataChange?: () => void;
+}
+
+export function useDataTableFilters(options: UseDataTableFiltersOptions = {}) {
+  const { onDataChange } = options;
   const [filters, setFilters] = useQueryStates(filterParsers, {
     history: 'replace',
     shallow: true,
@@ -28,45 +33,50 @@ export function useDataTableFilters() {
   });
 
   const handlePageChange = useCallback(
-    (page: number) => {
-      setFilters({ page });
+    async (page: number) => {
+      await setFilters({ page });
+      onDataChange?.();
     },
-    [setFilters],
+    [setFilters, onDataChange],
   );
 
   const handlePageSizeChange = useCallback(
-    (page_size: number) => {
-      setFilters({ page: 1, page_size });
+    async (page_size: number) => {
+      await setFilters({ page: 1, page_size });
+      onDataChange?.();
     },
-    [setFilters],
+    [setFilters, onDataChange],
   );
 
   const handleSortChange = useCallback(
-    (sort_column: string, sort_direction: SortDirection) => {
-      setFilters({ page: 1, sort_column, sort_direction });
+    async (sort_column: string, sort_direction: SortDirection) => {
+      await setFilters({ page: 1, sort_column, sort_direction });
+      onDataChange?.();
     },
-    [setFilters],
+    [setFilters, onDataChange],
   );
 
   const handleSearchChange = useCallback(
-    (search: string) => {
-      setFilters({ page: 1, search: search.trim() || null });
+    async (search: string) => {
+      await setFilters({ page: 1, search: search.trim() || null });
+      onDataChange?.();
     },
-    [setFilters],
+    [setFilters, onDataChange],
   );
 
   const handleVisibilityChange = useCallback(
-    (is_public?: boolean) => {
-      setFilters({
+    async (is_public?: boolean) => {
+      await setFilters({
         page: 1,
         is_public: is_public === undefined ? undefined : is_public,
       });
+      onDataChange?.();
     },
-    [setFilters],
+    [setFilters, onDataChange],
   );
 
-  const handleResetFilters = useCallback(() => {
-    setFilters({
+  const handleResetFilters = useCallback(async () => {
+    await setFilters({
       page: 1,
       page_size: 10,
       sort_column: null,
@@ -74,7 +84,8 @@ export function useDataTableFilters() {
       search: null,
       is_public: null,
     });
-  }, [setFilters]);
+    onDataChange?.();
+  }, [setFilters, onDataChange]);
 
   return {
     filters: {
