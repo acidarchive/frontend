@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Fetch patterns list server side
+
+
+## [0.0.1-alpha.59] - 2025-08-05
+
+### 🌀 Added
+
 - Fetch single pattern server side
 
 
@@ -566,7 +573,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.58..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.59..HEAD
+[0.0.1-alpha.59]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.58..v0.0.1-alpha.59
 [0.0.1-alpha.58]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.57..v0.0.1-alpha.58
 [0.0.1-alpha.57]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.56..v0.0.1-alpha.57
 [0.0.1-alpha.56]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.55..v0.0.1-alpha.56
