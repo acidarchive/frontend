@@ -32,7 +32,7 @@ export function GridTextarea({
           disabled={disabled}
           value={field.value ?? ''}
           className={cn(
-            'h-full w-full resize-none border-none bg-transparent p-4 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent',
+            'h-full w-full resize-none border-none bg-transparent p-4 pt-0 text-sm shadow-none focus-visible:ring-0 dark:bg-transparent',
             className,
           )}
         />
