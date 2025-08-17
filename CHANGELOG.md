@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Add title to efx/notes section
+
+
+## [0.0.1-alpha.62] - 2025-08-17
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -592,7 +599,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..HEAD
+[0.0.1-alpha.62]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..v0.0.1-alpha.62
 [0.0.1-alpha.61]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.60..v0.0.1-alpha.61
 [0.0.1-alpha.60]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.59..v0.0.1-alpha.60
 [0.0.1-alpha.59]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.58..v0.0.1-alpha.59
