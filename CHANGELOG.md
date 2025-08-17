@@ -1,6 +1,18 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Upgrade packages
+
+
+### 📚 Documentation
+
+- Update readme
+
+
+## [0.0.1-alpha.61] - 2025-08-17
+
 ### 🔧 Fixed
 
 - Fetch intial pattern for edit server side
@@ -580,7 +592,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.60..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..HEAD
+[0.0.1-alpha.61]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.60..v0.0.1-alpha.61
 [0.0.1-alpha.60]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.59..v0.0.1-alpha.60
 [0.0.1-alpha.59]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.58..v0.0.1-alpha.59
 [0.0.1-alpha.58]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.57..v0.0.1-alpha.58
