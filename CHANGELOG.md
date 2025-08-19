@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Hide placeholder when disabled
+
+
+## [0.0.1-alpha.64] - 2025-08-19
+
 ### 🌀 Added
 
 - Tb303 pattern grid
@@ -606,7 +613,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.63..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.64..HEAD
+[0.0.1-alpha.64]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.63..v0.0.1-alpha.64
 [0.0.1-alpha.63]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..v0.0.1-alpha.63
 [0.0.1-alpha.62]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..v0.0.1-alpha.62
 [0.0.1-alpha.61]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.60..v0.0.1-alpha.61
