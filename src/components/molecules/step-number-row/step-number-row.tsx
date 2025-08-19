@@ -1,5 +1,6 @@
-import { StepNumber } from '@/components/atoms/step-number';
 import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
+
+import { StepNumber } from './step-number';
 
 export function StepNumberRow() {
   return (

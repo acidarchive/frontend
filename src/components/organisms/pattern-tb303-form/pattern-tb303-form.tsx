@@ -3,8 +3,8 @@
 import { FormEventHandler } from 'react';
 
 import { ErrorAlert } from '@/components/molecules/error-alert';
-import { EditableTB303PatternDetails } from '@/components/organisms/editable-tb303-pattern-details';
-import { EditableTB303PatternGrid } from '@/components/organisms/editable-tb303-pattern-grid';
+import { TB303PatternDetails } from '@/components/organisms/tb303-pattern-details';
+import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
 
 interface PatternTB303FormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
@@ -23,10 +23,10 @@ export function PatternTB303Form({ error, onSubmit }: PatternTB303FormProps) {
 
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:flex-1">
-          <EditableTB303PatternGrid />
+          <TB303PatternGrid />
         </div>
         <div className="lg:w-100 lg:flex-shrink-0">
-          <EditableTB303PatternDetails />
+          <TB303PatternDetails />
         </div>
       </div>
     </form>

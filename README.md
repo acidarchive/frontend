@@ -37,8 +37,3 @@ Open http://localhost:3000
 - `pnpm test` - Run tests
 - `pnpm lint` - Lint code
 - `pnpm storybook` - Component development
-
-## MIDI
-
-Export documented patterns to TB-303 or compatible hardware via USB/MIDI. Enable
-browser MIDI permissions when prompted.

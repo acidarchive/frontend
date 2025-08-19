@@ -1,6 +1,10 @@
 import { KnobElement } from '@/components/molecules/knob-element';
 
-export function EditableTB303Controls() {
+interface TB303ControlsProps {
+  readonly?: boolean;
+}
+
+export function TB303Controls({ readonly = false }: TB303ControlsProps) {
   const knobs = [
     { label: 'tuning', name: 'tuning' },
     { label: 'cut off freq', name: 'cut_off_freq' },
@@ -12,9 +16,14 @@ export function EditableTB303Controls() {
 
   return (
     <div className="border-t flex flex-col items-center justify-center">
-      <div className="flex flex-row w-full justify-between gap-2 sm:gap-6 px-1 py-2 sm:px-4">
+      <div className="flex flex-row w-full justify-between gap-2 sm:gap-6 px-1 py-2 sm:px-8">
         {knobs.map(({ name, label }) => (
-          <KnobElement key={label} name={name} label={label} />
+          <KnobElement
+            key={label}
+            name={name}
+            label={label}
+            disabled={readonly}
+          />
         ))}
       </div>
     </div>

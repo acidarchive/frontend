@@ -2,17 +2,29 @@
 
 import { clsx } from 'clsx';
 import { useRouter } from 'next/navigation';
-import { useTransition } from 'react';
+import { useEffect, useTransition } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { TB303Pattern } from '@/api/generated/model';
 import { Icons } from '@/components/atoms/icons';
-import { ReadonlyTB303PatternGrid } from '@/components/organisms/readonly-tb303-pattern-grid';
+import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
 import { Button } from '@/components/ui/button';
 import { MidiPlayer } from '@/features/midi-player';
 
-export const RandomTB303Pattern = ({ pattern }: { pattern: TB303Pattern }) => {
+interface RandomTB303PatternProps {
+  pattern: TB303Pattern;
+}
+
+export const RandomTB303Pattern = ({ pattern }: RandomTB303PatternProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const form = useForm({
+    defaultValues: pattern,
+  });
+
+  useEffect(() => {
+    form.reset(pattern);
+  }, [pattern, form]);
 
   const handleRefresh = () => {
     startTransition(() => {
@@ -41,7 +53,9 @@ export const RandomTB303Pattern = ({ pattern }: { pattern: TB303Pattern }) => {
       </div>
       <div>
         <div className="mb-4">
-          <ReadonlyTB303PatternGrid pattern={pattern} />
+          <FormProvider {...form}>
+            <TB303PatternGrid readonly />
+          </FormProvider>
           <MidiPlayer pattern={pattern} />
         </div>
       </div>
