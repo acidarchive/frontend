@@ -44,7 +44,7 @@ export function InputElement({
         <Input
           id={id}
           type={type}
-          placeholder={placeholder}
+          placeholder={disabled ? '' : placeholder}
           disabled={disabled}
           {...register(name, validation)}
         />

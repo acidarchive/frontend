@@ -50,9 +50,8 @@ describe('InputElement', () => {
       />,
     );
 
-    expect(
-      screen.getByPlaceholderText('This field is disabled'),
-    ).toBeDisabled();
+    expect(screen.getByRole('textbox')).toBeDisabled();
+    expect(screen.getByRole('textbox')).toHaveAttribute('placeholder', '');
   });
 
   it('applies various input types correctly', () => {
