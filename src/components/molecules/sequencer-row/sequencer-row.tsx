@@ -1,15 +1,13 @@
-import { TB303Step } from '@/api/generated/model';
 import { RowLabel } from '@/components/atoms/row-label';
-import { StepCell } from '@/components/atoms/step-cell';
 import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
+
+import { StepCell } from './step-cell';
 
 interface SequencerRowProps {
   label: string;
-  steps?: TB303Step[];
-  disabled?: boolean;
-  renderCell: (index: number, step: TB303Step | undefined) => React.ReactNode;
+  renderCell: (index: number) => React.ReactNode;
 }
-export function SequencerRow({ label, steps, renderCell }: SequencerRowProps) {
+export function SequencerRow({ label, renderCell }: SequencerRowProps) {
   return (
     <>
       <RowLabel label={label} />
@@ -19,7 +17,7 @@ export function SequencerRow({ label, steps, renderCell }: SequencerRowProps) {
           isLast={index === TOTAL_STEPS - 1}
           isHighlighted={HIGHLIGHT_STEPS.has(index)}
         >
-          {renderCell(index, steps?.[index])}
+          {renderCell(index)}
         </StepCell>
       ))}
     </>
