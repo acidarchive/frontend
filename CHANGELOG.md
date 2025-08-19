@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Tb303 pattern grid
+
+
+## [0.0.1-alpha.63] - 2025-08-17
+
 ### 🔧 Fixed
 
 - Add title to efx/notes section
@@ -599,7 +606,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.63..HEAD
+[0.0.1-alpha.63]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..v0.0.1-alpha.63
 [0.0.1-alpha.62]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..v0.0.1-alpha.62
 [0.0.1-alpha.61]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.60..v0.0.1-alpha.61
 [0.0.1-alpha.60]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.59..v0.0.1-alpha.60
