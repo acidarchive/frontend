@@ -1,10 +1,11 @@
 import {
   Note,
+  NoteEnum,
   TB303Pattern,
   TB303Step,
-  Time,
-  Transpose,
-} from '@/api/generated/model';
+  TimeEnum,
+  TransposeEnum,
+} from '@/types/api';
 
 export interface MidiMessage {
   data: number[];
@@ -19,19 +20,19 @@ const MIDI_BASE_KEY = 36;
 const MIDI_DEFAULT_TEMPO = 120;
 
 const NOTE_TO_MIDI_MAP: Record<Note, number> = {
-  [Note.C]: 0,
-  [Note['C#']]: 1,
-  [Note.D]: 2,
-  [Note['D#']]: 3,
-  [Note.E]: 4,
-  [Note.F]: 5,
-  [Note['F#']]: 6,
-  [Note.G]: 7,
-  [Note['G#']]: 8,
-  [Note.A]: 9,
-  [Note['A#']]: 10,
-  [Note.B]: 11,
-  [Note.Chigh]: 12,
+  [NoteEnum.C]: 0,
+  [NoteEnum['C#']]: 1,
+  [NoteEnum.D]: 2,
+  [NoteEnum['D#']]: 3,
+  [NoteEnum.E]: 4,
+  [NoteEnum.F]: 5,
+  [NoteEnum['F#']]: 6,
+  [NoteEnum.G]: 7,
+  [NoteEnum['G#']]: 8,
+  [NoteEnum.A]: 9,
+  [NoteEnum['A#']]: 10,
+  [NoteEnum.B]: 11,
+  [NoteEnum.Chigh]: 12,
 };
 
 export const noteToMidi = (note: Note): number => NOTE_TO_MIDI_MAP[note];
@@ -80,7 +81,8 @@ export interface StepRest {
 
 export type Step = StepGate | StepRest;
 
-const isNote = (s: unknown): s is Note => typeof s === 'string' && s in Note;
+const isNote = (s: unknown): s is Note =>
+  typeof s === 'string' && s in NoteEnum;
 
 export const parseSteps = (steps: TB303Step[]): Step[] => {
   const result: Step[] = [];
@@ -89,19 +91,19 @@ export const parseSteps = (steps: TB303Step[]): Step[] => {
       throw new Error(
         `MIDI: step at index ${index} has number ${step.number}, expected ${index + 1}`,
       );
-    if (step.time === Time.rest) {
+    if (step.time === TimeEnum.rest) {
       result.push({ gate: false });
       continue;
     }
-    if (step.time === Time.note) {
+    if (step.time === TimeEnum.note) {
       if (!isNote(step.note))
         throw new Error(`MIDI: step ${step.number} has no note`);
       const pitch =
         MIDI_BASE_KEY +
         noteToMidi(step.note) +
-        (step.transpose === Transpose.up
+        (step.transpose === TransposeEnum.up
           ? 12
-          : step.transpose === Transpose.down
+          : step.transpose === TransposeEnum.down
             ? -12
             : 0);
       result.push({
@@ -113,7 +115,7 @@ export const parseSteps = (steps: TB303Step[]): Step[] => {
       });
       continue;
     }
-    if (step.time === Time.tied) {
+    if (step.time === TimeEnum.tied) {
       const previous = result.pop();
       if (previous === undefined || !previous.gate)
         throw new Error(

@@ -55,6 +55,7 @@
     "@storybook/addon-onboarding": "^9.1.2",
     "@storybook/nextjs": "^9.1.2",
     "@tailwindcss/postcss": "^4.1.12",
+    "@tanstack/eslint-plugin-query": "^5.86.0",
     "@tanstack/react-query": "^5.85.3",
     "@tanstack/react-query-devtools": "^5.85.3",
     "@tanstack/react-table": "^8.21.3",

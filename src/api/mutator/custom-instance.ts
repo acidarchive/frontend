@@ -1,3 +1,5 @@
+'use client';
+
 import { fetchAuthSession } from 'aws-amplify/auth';
 import axios, { type AxiosRequestConfig } from 'axios';
 
@@ -14,14 +16,16 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async config => {
     try {
-      const session = await fetchAuthSession();
+      const session = await fetchAuthSession({ forceRefresh: false });
       const idToken = session.tokens?.idToken?.toString();
 
       if (idToken) {
         config.headers.Authorization = `Bearer ${idToken}`;
+      } else {
+        console.warn('No ID token available in session');
       }
     } catch (error) {
-      console.warn('Failed to get Cognito ID token:', error);
+      console.error('Failed to get Cognito ID token:', error);
     }
 
     return config;

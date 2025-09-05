@@ -1,5 +1,5 @@
-import { TB303Step } from '@/api/generated/model';
 import { stepsToMessages } from '@/features/midi-player/sequencer';
+import { TB303Step } from '@/types/api';
 
 import {
   MIDI_MESSAGE_PPQN,

@@ -1,11 +1,9 @@
-import { cookies } from 'next/headers';
 import Link from 'next/link';
 
 import { Icons } from '@/components/atoms/icons';
 import { PatternEditorLayout } from '@/components/layouts/pattern-editor-layout/pattern-editor-layout';
-import { PatternTB303View } from '@/components/organisms/pattern-tb303-view';
 import { Button } from '@/components/ui/button';
-import { getTB303PatternById } from '@/dal';
+import { PatternTB303View } from '@/features/pattern-tb303-view';
 
 interface ViewTB303PatternPage {
   params: Promise<{ uuid: string }>;
@@ -14,7 +12,6 @@ export default async function ViewTB303PatternPage({
   params,
 }: ViewTB303PatternPage) {
   const { uuid } = await params;
-  const pattern = await getTB303PatternById(uuid, { cookies });
 
   return (
     <PatternEditorLayout
@@ -29,7 +26,7 @@ export default async function ViewTB303PatternPage({
         </Link>
       }
     >
-      <PatternTB303View pattern={pattern} />
+      <PatternTB303View patternId={uuid} />
     </PatternEditorLayout>
   );
 }

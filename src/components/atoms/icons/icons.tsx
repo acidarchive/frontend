@@ -1,9 +1,12 @@
 import {
   AlertCircle,
+  ArrowDown,
+  ArrowUp,
   CheckCircle,
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronsUpDown,
   Command,
   CreditCard,
   House,
@@ -35,4 +38,7 @@ export const Icons = {
   checkCircle: CheckCircle,
   alertCircle: AlertCircle,
   pencil: Pencil,
+  arrowUp: ArrowUp,
+  arrowDown: ArrowDown,
+  chevronsUpDown: ChevronsUpDown,
 };
