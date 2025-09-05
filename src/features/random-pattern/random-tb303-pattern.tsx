@@ -1,36 +1,37 @@
 'use client';
 
-import { clsx } from 'clsx';
-import { useRouter } from 'next/navigation';
-import { useEffect, useTransition } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import { TB303Pattern } from '@/api/generated/model';
 import { Icons } from '@/components/atoms/icons';
 import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
 import { Button } from '@/components/ui/button';
+import { fetchPatternTB303Random } from '@/dal';
 import { MidiPlayer } from '@/features/midi-player';
 
-interface RandomTB303PatternProps {
-  pattern: TB303Pattern;
-}
-
-export const RandomTB303Pattern = ({ pattern }: RandomTB303PatternProps) => {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const form = useForm({
-    defaultValues: pattern,
+export function RandomTB303Pattern() {
+  const { data, isFetching, refetch, isLoading, error } = useQuery({
+    queryKey: ['randomTB303Pattern'],
+    queryFn: () => fetchPatternTB303Random(),
+    refetchOnWindowFocus: false,
   });
 
-  useEffect(() => {
-    form.reset(pattern);
-  }, [pattern, form]);
+  const form = useForm();
 
-  const handleRefresh = () => {
-    startTransition(() => {
-      router.refresh();
-    });
-  };
+  useEffect(() => {
+    if (data) {
+      form.reset(data);
+    }
+  }, [data, form]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="flex flex-col">
@@ -38,16 +39,12 @@ export const RandomTB303Pattern = ({ pattern }: RandomTB303PatternProps) => {
         <h1 className="text-xl md:text-2xl font-bold">TB-303 pattern</h1>
         <div className="w-24">
           <Button
-            onClick={handleRefresh}
+            onClick={() => refetch()}
             variant="outline"
-            disabled={isPending}
+            disabled={isFetching}
           >
             Refresh
-            <Icons.refreshCw
-              className={clsx({
-                'animate-spin': isPending,
-              })}
-            />
+            <Icons.refreshCw className={isFetching ? 'animate-spin' : ''} />
           </Button>
         </div>
       </div>
@@ -56,9 +53,9 @@ export const RandomTB303Pattern = ({ pattern }: RandomTB303PatternProps) => {
           <FormProvider {...form}>
             <TB303PatternGrid readonly />
           </FormProvider>
-          <MidiPlayer pattern={pattern} />
+          <MidiPlayer pattern={data!} />
         </div>
       </div>
     </div>
   );
-};
+}

@@ -1,1 +1,1 @@
-export * from './tb303-pattern';
+export * from './patterns-tb303';

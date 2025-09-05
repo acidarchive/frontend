@@ -3,8 +3,10 @@
 import { FormEventHandler } from 'react';
 
 import { ErrorAlert } from '@/components/molecules/error-alert';
-import { TB303PatternDetails } from '@/components/organisms/tb303-pattern-details';
+import { InputElement } from '@/components/molecules/input-element';
+import { SwitchElement } from '@/components/molecules/switch-element';
 import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
+import { pattern_name_validation } from '@/utils/input-validations';
 
 interface PatternTB303FormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
@@ -21,13 +23,17 @@ export function PatternTB303Form({ error, onSubmit }: PatternTB303FormProps) {
         </div>
       )}
 
-      <div className="flex flex-col lg:flex-row gap-8">
+      <div className="flex flex-col gap-4">
+        <InputElement {...pattern_name_validation} disabled={false} />
         <div className="lg:flex-1">
           <TB303PatternGrid />
         </div>
-        <div className="lg:w-100 lg:flex-shrink-0">
-          <TB303PatternDetails />
-        </div>
+        <SwitchElement
+          label="Make this pattern public"
+          description="If enabled, this pattern will be visible to other users."
+          name="is_public"
+          disabled={false}
+        />
       </div>
     </form>
   );

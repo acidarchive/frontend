@@ -1,4 +1,11 @@
-import { Note, Time, Transpose } from '@/api/generated/model';
+import {
+  Note,
+  NoteEnum,
+  Time,
+  TimeEnum,
+  Transpose,
+  TransposeEnum,
+} from '@/types/api';
 
 export const TOTAL_STEPS = 16;
 export const HIGHLIGHT_STEPS = new Set([0, 4, 8, 12]);
@@ -9,30 +16,30 @@ export interface SelectOption<T = string> {
 }
 
 export const NOTE_OPTIONS: SelectOption<Note>[] = [
-  { value: Note['C'], label: 'C' },
-  { value: Note['C#'], label: 'C#' },
-  { value: Note['D'], label: 'D' },
-  { value: Note['D#'], label: 'D#' },
-  { value: Note['E'], label: 'E' },
-  { value: Note['F'], label: 'F' },
-  { value: Note['F#'], label: 'F#' },
-  { value: Note['G'], label: 'G' },
-  { value: Note['G#'], label: 'G#' },
-  { value: Note['A'], label: 'A' },
-  { value: Note['A#'], label: 'A#' },
-  { value: Note['B'], label: 'B' },
-  { value: Note['Chigh'], label: "C'" },
+  { value: NoteEnum['C'], label: 'C' },
+  { value: NoteEnum['C#'], label: 'C#' },
+  { value: NoteEnum['D'], label: 'D' },
+  { value: NoteEnum['D#'], label: 'D#' },
+  { value: NoteEnum['E'], label: 'E' },
+  { value: NoteEnum['F'], label: 'F' },
+  { value: NoteEnum['F#'], label: 'F#' },
+  { value: NoteEnum['G'], label: 'G' },
+  { value: NoteEnum['G#'], label: 'G#' },
+  { value: NoteEnum['A'], label: 'A' },
+  { value: NoteEnum['A#'], label: 'A#' },
+  { value: NoteEnum['B'], label: 'B' },
+  { value: NoteEnum['Chigh'], label: "C'" },
 ];
 
 export const TRANSPOSE_OPTIONS: SelectOption<Transpose>[] = [
-  { value: Transpose.up, label: '▲' },
-  { value: Transpose.down, label: '▼' },
+  { value: TransposeEnum.up, label: '▲' },
+  { value: TransposeEnum.down, label: '▼' },
 ];
 
 export const TIME_OPTIONS: SelectOption<Time>[] = [
-  { value: Time.note, label: '●' },
-  { value: Time.tied, label: '○' },
-  { value: Time.rest, label: '▬' },
+  { value: TimeEnum.note, label: '●' },
+  { value: TimeEnum.tied, label: '○' },
+  { value: TimeEnum.rest, label: '▬' },
 ];
 
 export const BOOLEAN_OPTIONS: SelectOption<boolean>[] = [

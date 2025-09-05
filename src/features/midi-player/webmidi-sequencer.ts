@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 
-import { TB303Pattern } from '@/api/generated/model';
 import {
   parseSteps,
   Step,
@@ -13,6 +12,7 @@ import {
   sequencerNoteOffs,
   SequencerState,
 } from '@/features/midi-player/sequencer';
+import { TB303Pattern } from '@/types/api';
 
 import { MidiOutput } from './webmidi';
 

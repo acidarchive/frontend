@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { ButtonHTMLAttributes, useEffect } from 'react';
 
-import { TB303Pattern } from '@/api/generated/model';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import {
@@ -20,6 +19,7 @@ import {
   useMidiOutputs,
 } from '@/features/midi-player/webmidi';
 import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
+import { TB303Pattern } from '@/types/api';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
