@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Single page experience
+
+
+## [0.0.1-alpha.65] - 2025-08-19
+
 ### 🔧 Fixed
 
 - Hide placeholder when disabled
@@ -613,7 +620,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.64..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.65..HEAD
+[0.0.1-alpha.65]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.64..v0.0.1-alpha.65
 [0.0.1-alpha.64]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.63..v0.0.1-alpha.64
 [0.0.1-alpha.63]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..v0.0.1-alpha.63
 [0.0.1-alpha.62]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.61..v0.0.1-alpha.62
