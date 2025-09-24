@@ -46,3 +46,10 @@ export const updatePatternTB303 = async (
     data,
   });
 };
+
+export const deletePatternTB303 = async (id: string) => {
+  return await customInstance<void>({
+    url: `/v1/patterns/tb303/${id}`,
+    method: 'DELETE',
+  });
+};
