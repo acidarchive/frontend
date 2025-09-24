@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Delete pattern
+
+
+## [0.0.1-alpha.66] - 2025-09-23
+
+### 🌀 Added
+
 - Single page experience
 
 
@@ -620,7 +627,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.65..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.66..HEAD
+[0.0.1-alpha.66]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.65..v0.0.1-alpha.66
 [0.0.1-alpha.65]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.64..v0.0.1-alpha.65
 [0.0.1-alpha.64]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.63..v0.0.1-alpha.64
 [0.0.1-alpha.63]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.62..v0.0.1-alpha.63
