@@ -83,11 +83,13 @@ export const columns: ColumnDef<TB303PatternSummary>[] = [
     id: 'actions',
     cell: ({ row }) => {
       const id = row.original.pattern_id;
+      const name = row.original.name;
       return (
         <div className="text-center">
           <RowActions
             editLink={`/dashboard/tb303/edit/${id}`}
-            deleteLink={`/dashboard/tb303/delete/${id}`}
+            patternId={id}
+            patternName={name}
           />
         </div>
       );
