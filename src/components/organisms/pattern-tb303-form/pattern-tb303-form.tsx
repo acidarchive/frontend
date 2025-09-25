@@ -10,11 +10,16 @@ import { pattern_name_validation } from '@/utils/input-validations';
 
 interface PatternTB303FormProps {
   onSubmit: FormEventHandler<HTMLFormElement>;
+  readonly?: boolean;
   error?: string;
   isSubmitting?: boolean;
 }
 
-export function PatternTB303Form({ error, onSubmit }: PatternTB303FormProps) {
+export function PatternTB303Form({
+  readonly,
+  error,
+  onSubmit,
+}: PatternTB303FormProps) {
   return (
     <form onSubmit={onSubmit}>
       {error && (
@@ -24,15 +29,15 @@ export function PatternTB303Form({ error, onSubmit }: PatternTB303FormProps) {
       )}
 
       <div className="flex flex-col gap-4">
-        <InputElement {...pattern_name_validation} disabled={false} />
+        <InputElement {...pattern_name_validation} disabled={readonly} />
         <div className="lg:flex-1">
-          <TB303PatternGrid />
+          <TB303PatternGrid readonly={readonly} />
         </div>
         <SwitchElement
           label="Make this pattern public"
           description="If enabled, this pattern will be visible to other users."
           name="is_public"
-          disabled={false}
+          disabled={readonly}
         />
       </div>
     </form>

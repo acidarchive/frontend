@@ -15,10 +15,11 @@ interface PatternModalProps {
   description?: string;
   initialData?: PatternFormData;
   onClose?: () => void;
-  onSubmit: (data: PatternFormData) => Promise<void>;
+  onSubmit?: (data: PatternFormData) => Promise<void>;
   error?: string;
   isLoading?: boolean;
   onReset?: () => void;
+  readonly?: boolean;
 }
 
 export function PatternModal({
@@ -30,6 +31,7 @@ export function PatternModal({
   onSubmit,
   error: externalError,
   onReset: externalReset,
+  readonly,
 }: PatternModalProps) {
   const methods = useForm({
     resolver: zodResolver(PatternFormSchema),
@@ -55,7 +57,9 @@ export function PatternModal({
   const error = validationError || externalError;
 
   const handleFormSubmit = async (data: PatternFormData) => {
-    await onSubmit(data);
+    if (onSubmit) {
+      await onSubmit(data);
+    }
   };
 
   const handleReset = () => {
@@ -70,11 +74,14 @@ export function PatternModal({
       description={description}
       error={error}
       onClose={onClose}
-      onSubmit={handleSubmit(handleFormSubmit)}
-      onReset={handleReset}
+      onSubmit={onSubmit ? handleSubmit(handleFormSubmit) : undefined}
+      onReset={onSubmit ? handleReset : undefined}
     >
       <FormProvider {...methods}>
-        <PatternTB303Form onSubmit={handleSubmit(handleFormSubmit)} />
+        <PatternTB303Form
+          onSubmit={handleSubmit(handleFormSubmit)}
+          readonly={readonly}
+        />
       </FormProvider>
     </BaseModal>
   );

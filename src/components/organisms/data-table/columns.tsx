@@ -45,7 +45,7 @@ export const columns: ColumnDef<TB303PatternSummary>[] = [
     cell: ({ row }) => (
       <Link
         className="hover:underline underline-offset-4 font-medium truncate min-w-0"
-        href={`/dashboard/tb303/${row.original.pattern_id}`}
+        href={`/dashboard/tb303/view/${row.original.pattern_id}`}
       >
         {row.getValue('name')}
       </Link>
