@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { CreatePattern } from '@/features/pattern-tb303-editor';
 
-export default function CreatePatternModalPage() {
+export default function CreatePatternModal() {
   const router = useRouter();
 
   const handleClose = () => {

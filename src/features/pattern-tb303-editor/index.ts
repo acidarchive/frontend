@@ -3,3 +3,4 @@ export * from './delete-pattern';
 export * from './edit-pattern';
 export * from './pattern-modal';
 export * from './use-pattern-modal';
+export * from './view-pattern';
