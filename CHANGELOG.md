@@ -1,6 +1,23 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Upgrade packages
+
+
+### 🌀 Added
+
+- Improve pattern form style
+
+
+### 🔧 Fixed
+
+- Correct redirects
+
+
+## [0.0.1-alpha.68] - 2025-09-25
+
 ### 🌀 Added
 
 - View single pattern inside modal
@@ -634,7 +651,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.67..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.68..HEAD
+[0.0.1-alpha.68]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.67..v0.0.1-alpha.68
 [0.0.1-alpha.67]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.66..v0.0.1-alpha.67
 [0.0.1-alpha.66]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.65..v0.0.1-alpha.66
 [0.0.1-alpha.65]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.64..v0.0.1-alpha.65
