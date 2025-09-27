@@ -11,7 +11,10 @@ import {
 import { CreateTB303Pattern } from '@/types/api';
 
 import { PatternModal } from './pattern-modal';
-import { usePatternModal } from './use-pattern-modal';
+
+const getErrorMessage = (error: unknown): string | undefined => {
+  return (error as Error)?.message;
+};
 
 interface EditPatternProps {
   patternId: string;
@@ -43,12 +46,9 @@ export function EditPattern({
     },
   });
 
-  const { handleSuccess, getErrorMessage } = usePatternModal({ onSuccess });
-
   const handleSubmit = async (data: PatternFormData) => {
     const payload = formDataToApiPayload(data);
     await updatePatternMutation.mutateAsync(payload);
-    handleSuccess();
   };
 
   const handleReset = () => {

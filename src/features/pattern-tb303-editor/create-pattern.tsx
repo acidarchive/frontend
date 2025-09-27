@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createPatternTB303 } from '@/dal';
 import {
@@ -10,7 +10,10 @@ import {
 import { CreateTB303Pattern } from '@/types/api';
 
 import { PatternModal } from './pattern-modal';
-import { usePatternModal } from './use-pattern-modal';
+
+const getErrorMessage = (error: unknown): string | undefined => {
+  return (error as Error)?.message;
+};
 
 interface CreatePatternProps {
   isOpen?: boolean;
@@ -23,19 +26,19 @@ export function CreatePattern({
   onClose,
   onSuccess,
 }: CreatePatternProps) {
+  const queryClient = useQueryClient();
+
   const createPatternMutation = useMutation({
     mutationFn: (data: CreateTB303Pattern) => createPatternTB303(data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/v1/patterns/tb303'] });
       if (onSuccess) onSuccess();
     },
   });
 
-  const { handleSuccess, getErrorMessage } = usePatternModal({ onSuccess });
-
   const handleSubmit = async (formData: PatternFormData) => {
     const payload = formDataToApiPayload(formData);
     await createPatternMutation.mutateAsync(payload);
-    handleSuccess();
   };
 
   const handleReset = () => {
