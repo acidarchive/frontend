@@ -13,7 +13,7 @@ import {
 
 interface BaseModalProps {
   isOpen?: boolean;
-  title: string;
+  title?: string;
   description?: string;
   error?: string;
   children: React.ReactNode;
@@ -41,18 +41,21 @@ export function BaseModal({
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[900px]">
-        <DialogHeader>
-          <DialogTitle>{title}</DialogTitle>
-          {description && <DialogDescription>{description}</DialogDescription>}
-        </DialogHeader>
-
+        {title || description ? (
+          <DialogHeader>
+            {title && <DialogTitle>{title}</DialogTitle>}
+            {description && (
+              <DialogDescription>{description}</DialogDescription>
+            )}
+          </DialogHeader>
+        ) : undefined}
         {error && (
           <div className="mb-4">
             <ErrorAlert title="Error" message={error} />
           </div>
         )}
 
-        <div className="flex-1">{children}</div>
+        <div>{children}</div>
 
         <DialogFooter>
           {onReset && (

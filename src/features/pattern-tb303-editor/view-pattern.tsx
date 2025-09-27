@@ -25,10 +25,10 @@ export function ViewPattern({ patternId, isOpen, onClose }: ViewPatternProps) {
 
   return (
     <PatternModal
-      isOpen={isOpen}
       title="View TB-303 Pattern"
-      initialData={formData}
       readonly
+      isOpen={isOpen}
+      initialData={formData}
       onClose={onClose}
     />
   );

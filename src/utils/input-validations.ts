@@ -113,21 +113,3 @@ export const pattern_name_validation: Validation = {
     maxLength: { value: 50, message: 'Maximum 50 characters' },
   },
 };
-
-export const pattern_title_validation: Validation = {
-  name: 'title',
-  label: 'Pattern Title',
-  type: 'text',
-  id: 'title',
-  placeholder: 'Enter pattern title',
-  validation: {},
-};
-
-export const pattern_author_validation: Validation = {
-  name: 'author',
-  label: 'Author',
-  type: 'text',
-  id: 'author',
-  placeholder: 'Enter author name',
-  validation: {},
-};

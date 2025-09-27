@@ -87,7 +87,6 @@ export function CyclableInput<T = string>({
           id={id}
           className={clsx(
             'flex items-center cursor-pointer w-full h-full justify-center select-none text-sm',
-            disabled && 'opacity-50 cursor-not-allowed',
             className,
           )}
           onClick={() => handleClick(field.value)}

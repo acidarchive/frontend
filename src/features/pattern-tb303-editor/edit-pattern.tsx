@@ -29,7 +29,7 @@ export function EditPattern({
   const queryClient = useQueryClient();
 
   const { data: pattern, isLoading: isLoadingPattern } = useQuery({
-    queryKey: ['patternsTB303', patternId],
+    queryKey: ['/v1/patterns/tb303', patternId],
     queryFn: () => fetchPatternTB303(patternId),
     throwOnError: true,
   });
@@ -62,14 +62,14 @@ export function EditPattern({
 
   return (
     <PatternModal
-      isOpen={isOpen}
       title="Edit TB-303 Pattern"
+      isOpen={isOpen}
       initialData={formData}
+      error={error}
+      isLoading={isLoading}
       onClose={onClose}
       onSubmit={handleSubmit}
       onReset={handleReset}
-      error={error}
-      isLoading={isLoading}
     />
   );
 }

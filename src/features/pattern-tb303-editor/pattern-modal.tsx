@@ -12,20 +12,18 @@ import { extractTB303StepValidationError } from '@/utils/tb303-form-errors';
 interface PatternModalProps {
   isOpen?: boolean;
   title?: string;
-  description?: string;
   initialData?: PatternFormData;
-  onClose?: () => void;
-  onSubmit?: (data: PatternFormData) => Promise<void>;
   error?: string;
   isLoading?: boolean;
-  onReset?: () => void;
   readonly?: boolean;
+  onReset?: () => void;
+  onClose?: () => void;
+  onSubmit?: (data: PatternFormData) => Promise<void>;
 }
 
 export function PatternModal({
   isOpen = true,
-  title = 'Pattern',
-  description,
+  title,
   initialData,
   onClose,
   onSubmit,
@@ -71,7 +69,6 @@ export function PatternModal({
     <BaseModal
       isOpen={isOpen}
       title={title}
-      description={description}
       error={error}
       onClose={onClose}
       onSubmit={onSubmit ? handleSubmit(handleFormSubmit) : undefined}
@@ -79,8 +76,8 @@ export function PatternModal({
     >
       <FormProvider {...methods}>
         <PatternTB303Form
-          onSubmit={handleSubmit(handleFormSubmit)}
           readonly={readonly}
+          onSubmit={handleSubmit(handleFormSubmit)}
         />
       </FormProvider>
     </BaseModal>

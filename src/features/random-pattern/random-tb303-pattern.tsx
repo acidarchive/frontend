@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Icons } from '@/components/atoms/icons';
-import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
+import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 import { Button } from '@/components/ui/button';
 import { fetchPatternTB303Random } from '@/dal';
 import { MidiPlayer } from '@/features/midi-player';
@@ -51,7 +51,7 @@ export function RandomTB303Pattern() {
       <div>
         <div className="mb-4">
           <FormProvider {...form}>
-            <TB303PatternGrid readonly />
+            <PatternTB303Form readonly />
           </FormProvider>
           <MidiPlayer pattern={data!} />
         </div>
