@@ -46,7 +46,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextTopLoader showSpinner={false} />
+          <NextTopLoader
+            showSpinner={false}
+            color="hsl(53deg 100% 50%)"
+            height={0.5}
+          />
           <ConfigureAmplifyClientSide />
           <UserProvider>
             <QueryProvider>
