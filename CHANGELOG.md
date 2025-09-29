@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Style toploader
+
+
+## [0.0.1-alpha.69] - 2025-09-27
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -651,7 +658,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.68..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.69..HEAD
+[0.0.1-alpha.69]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.68..v0.0.1-alpha.69
 [0.0.1-alpha.68]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.67..v0.0.1-alpha.68
 [0.0.1-alpha.67]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.66..v0.0.1-alpha.67
 [0.0.1-alpha.66]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.65..v0.0.1-alpha.66
