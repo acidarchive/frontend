@@ -1,6 +1,6 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -11,7 +11,7 @@ import { fetchPatternTB303Random } from '@/dal';
 import { MidiPlayer } from '@/features/midi-player';
 
 export function RandomTB303Pattern() {
-  const { data, isFetching, refetch, isLoading, error } = useQuery({
+  const { data, isFetching, refetch, error } = useSuspenseQuery({
     queryKey: ['randomTB303Pattern'],
     queryFn: () => fetchPatternTB303Random(),
     refetchOnWindowFocus: false,
@@ -24,10 +24,6 @@ export function RandomTB303Pattern() {
       form.reset(data);
     }
   }, [data, form]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   if (error) {
     return <div>Error: {error.message}</div>;

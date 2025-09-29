@@ -108,7 +108,7 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
   const [state, dispatch] = React.useReducer(reducer, {
     selectedMidiOutput: undefined,
     playing: false,
-    tempo: props.pattern.tempo ?? 120,
+    tempo: props.pattern?.tempo ?? 120,
   });
   useMidiPlayer(
     props.pattern,
