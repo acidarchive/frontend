@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Random pattern loading state
+
+
+## [0.0.1-alpha.70] - 2025-09-29
+
+### 🌀 Added
+
 - Style toploader
 
 
@@ -658,7 +665,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.69..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.70..HEAD
+[0.0.1-alpha.70]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.69..v0.0.1-alpha.70
 [0.0.1-alpha.69]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.68..v0.0.1-alpha.69
 [0.0.1-alpha.68]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.67..v0.0.1-alpha.68
 [0.0.1-alpha.67]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.66..v0.0.1-alpha.67
