@@ -8,7 +8,7 @@ const meta: Meta<typeof ErrorFallback> = {
   component: ErrorFallback,
   tags: ['autodocs'],
   args: {
-    resetErrorBoundary: fn(),
+    reset: fn(),
   },
 };
 

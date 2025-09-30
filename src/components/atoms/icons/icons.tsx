@@ -1,5 +1,6 @@
 import {
   AlertCircle,
+  AlertTriangle,
   ArrowDown,
   ArrowUp,
   CheckCircle,
@@ -41,4 +42,5 @@ export const Icons = {
   arrowUp: ArrowUp,
   arrowDown: ArrowDown,
   chevronsUpDown: ChevronsUpDown,
+  alertTriangle: AlertTriangle,
 };
