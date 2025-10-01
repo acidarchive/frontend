@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Use suspense for random pattern fetching
+
+
+## [0.0.1-alpha.72] - 2025-09-30
+
+### 🌀 Added
+
 - Handle errors in random pattern page
 
 
@@ -672,7 +679,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.71..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.72..HEAD
+[0.0.1-alpha.72]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.71..v0.0.1-alpha.72
 [0.0.1-alpha.71]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.70..v0.0.1-alpha.71
 [0.0.1-alpha.70]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.69..v0.0.1-alpha.70
 [0.0.1-alpha.69]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.68..v0.0.1-alpha.69
