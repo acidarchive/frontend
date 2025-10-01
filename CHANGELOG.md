@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- 404 page
+
+
+## [0.0.1-alpha.73] - 2025-10-01
+
+### 🌀 Added
+
 - Use suspense for random pattern fetching
 
 
@@ -679,7 +686,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.72..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.73..HEAD
+[0.0.1-alpha.73]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.72..v0.0.1-alpha.73
 [0.0.1-alpha.72]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.71..v0.0.1-alpha.72
 [0.0.1-alpha.71]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.70..v0.0.1-alpha.71
 [0.0.1-alpha.70]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.69..v0.0.1-alpha.70
