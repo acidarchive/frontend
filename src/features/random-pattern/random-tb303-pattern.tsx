@@ -1,11 +1,10 @@
 'use client';
 
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Icons } from '@/components/atoms/icons';
-import { Loader } from '@/components/atoms/loader';
 import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 import { Button } from '@/components/ui/button';
 import { fetchPatternTB303Random } from '@/dal';
@@ -14,11 +13,10 @@ import { cn } from '@/lib/utils';
 
 export function RandomTB303Pattern() {
   const queryClient = useQueryClient();
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, error, isFetching } = useSuspenseQuery({
     queryKey: ['/v1/patterns/tb303/random'],
     queryFn: () => fetchPatternTB303Random(),
     refetchOnWindowFocus: false,
-    throwOnError: true,
     retry: false,
   });
 
@@ -30,8 +28,8 @@ export function RandomTB303Pattern() {
     }
   }, [data, form]);
 
-  if (isLoading) {
-    return <Loader />;
+  if (error && !isFetching) {
+    throw error;
   }
 
   return (
