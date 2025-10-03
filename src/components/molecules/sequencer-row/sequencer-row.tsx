@@ -1,5 +1,5 @@
 import { RowLabel } from '@/components/atoms/row-label';
-import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
+import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/types';
 
 import { StepCell } from './step-cell';
 

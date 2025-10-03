@@ -1,4 +1,4 @@
-import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/enums';
+import { HIGHLIGHT_STEPS, TOTAL_STEPS } from '@/types';
 
 import { StepNumber } from './step-number';
 
