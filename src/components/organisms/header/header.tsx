@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    ...(user ? [{ name: 'Dashboard', href: '/dashboard' }] : []),
+    ...(user ? [{ name: 'Dashboard', href: '/dashboard/tb303' }] : []),
     { name: 'About', href: '/about' },
   ];
 

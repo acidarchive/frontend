@@ -1,31 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import * as React from 'react';
+import { usePathname } from 'next/navigation';
 
 import { Icons } from '@/components/atoms/icons';
-import { SignOutButton } from '@/components/atoms/sign-out-button';
 import { Smiley } from '@/components/atoms/smiley';
-import { UserAvatarProfile } from '@/components/molecules/user-avatar-profile';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import {
   Sidebar as UISidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
@@ -38,13 +25,23 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { navItems } from '@/constants/data';
-import { useUser } from '@/context/user-context';
+import { NavItem } from '@/types';
+
+export const navItems: NavItem[] = [
+  {
+    title: 'Home',
+    url: '/',
+    icon: 'home',
+  },
+  {
+    title: 'TB-303',
+    url: '/dashboard/tb303',
+    icon: 'keyboardMusic',
+  },
+];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { user } = useUser();
-  const router = useRouter();
   const { open } = useSidebar();
 
   return (
@@ -117,62 +114,7 @@ export function Sidebar() {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton
-                  size="lg"
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                >
-                  {user && (
-                    <UserAvatarProfile
-                      className="h-8 w-8 rounded-lg"
-                      showInfo
-                      user={user}
-                    />
-                  )}
-                  <Icons.chevronDown className="ml-auto size-4" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                side="bottom"
-                align="end"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="p-0 font-normal">
-                  <div className="px-1 py-1.5">
-                    {user && (
-                      <UserAvatarProfile
-                        className="h-8 w-8 rounded-lg"
-                        showInfo
-                        user={user}
-                      />
-                    )}
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
 
-                <DropdownMenuGroup>
-                  <DropdownMenuItem
-                    onClick={() => router.push('/dashboard/profile')}
-                  >
-                    <Icons.userCircle className="mr-2 h-4 w-4" />
-                    Profile
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Icons.x className="mr-2 h-4 w-4" />
-                  <SignOutButton>Sign Out</SignOutButton>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
       <SidebarRail />
     </UISidebar>
   );

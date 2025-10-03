@@ -11,6 +11,7 @@ import {
   Command,
   CreditCard,
   House,
+  KeyboardMusic,
   LayoutDashboard,
   type LucideIcon,
   Menu,
@@ -43,4 +44,5 @@ export const Icons = {
   arrowDown: ArrowDown,
   chevronsUpDown: ChevronsUpDown,
   alertTriangle: AlertTriangle,
+  keyboardMusic: KeyboardMusic,
 };

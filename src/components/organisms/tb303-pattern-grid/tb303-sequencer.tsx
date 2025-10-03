@@ -8,7 +8,7 @@ import {
   NOTE_OPTIONS,
   TIME_OPTIONS,
   TRANSPOSE_OPTIONS,
-} from '@/enums';
+} from '@/types';
 
 interface TB303SequencerProps {
   readonly?: boolean;
