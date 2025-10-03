@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Update dashboard side menu
+
+
+## [0.0.1-alpha.74] - 2025-10-01
+
+### 🌀 Added
+
 - 404 page
 
 
@@ -686,7 +693,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.73..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.74..HEAD
+[0.0.1-alpha.74]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.73..v0.0.1-alpha.74
 [0.0.1-alpha.73]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.72..v0.0.1-alpha.73
 [0.0.1-alpha.72]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.71..v0.0.1-alpha.72
 [0.0.1-alpha.71]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.70..v0.0.1-alpha.71
