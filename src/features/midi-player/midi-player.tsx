@@ -20,6 +20,7 @@ import {
 } from '@/features/midi-player/webmidi';
 import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 import { TB303Pattern } from '@/types/api';
+import { Tone } from 'tone/Tone/core/Tone';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -186,9 +187,14 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
 };
 
 export const MidiPlayer = (props: MidiPlayerProps) => {
+  const playAudio = () => {
+    const synth = new Tone.Synth().toDestination();
+    synth.triggerAttackRelease('C4', '8n');
+  };
   return (
     <div className="flex mt-2 gap-2">
       <MidiPlayerControls pattern={props.pattern} />
+      <Button onClick={playAudio}>Play audio</Button>
     </div>
   );
 };
