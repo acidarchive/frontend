@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ButtonHTMLAttributes, useEffect } from 'react';
+import * as Tone from 'tone';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -20,7 +21,17 @@ import {
 } from '@/features/midi-player/webmidi';
 import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 import { TB303Pattern } from '@/types/api';
-import { Tone } from 'tone/Tone/core/Tone';
+import {
+  MIDI_MESSAGE_PPQN,
+  parseSteps,
+} from '@/features/midi-player/pattern-parser';
+import {
+  sequencerAdvance,
+  sequencerInit,
+  sequencerIterable,
+  SequencerStepResult,
+} from '@/features/midi-player/sequencer';
+import { MidiNote } from 'tone/Tone/core/type/NoteUnits';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -186,15 +197,90 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
   }
 };
 
-export const MidiPlayer = (props: MidiPlayerProps) => {
+type TonePlayerState =
+  | { type: 'playing'; repeatId: number }
+  | { type: 'stopped' };
+type TonePlayerAction = { type: 'play'; repeatId: number } | { type: 'stop' };
+
+const tonePlayerReducer = (
+  state: TonePlayerState,
+  action: TonePlayerAction,
+): TonePlayerState => {
+  switch (action.type) {
+    case 'play': {
+      return { type: 'playing', repeatId: action.repeatId };
+    }
+    case 'stop': {
+      return { type: 'stopped' };
+    }
+  }
+};
+
+interface TonePlayerProps {
+  pattern: TB303Pattern;
+}
+
+export const TonePlayer = (props: TonePlayerProps) => {
+  const [state, dispatch] = React.useReducer(tonePlayerReducer, {
+    type: 'stopped',
+  });
   const playAudio = () => {
-    const synth = new Tone.Synth().toDestination();
-    synth.triggerAttackRelease('C4', '8n');
+    if (state.type === 'playing') {
+      Tone.getTransport().cancel(state.repeatId);
+      Tone.getTransport().stop();
+      dispatch({ type: 'stop' });
+    } else if (state.type === 'stopped') {
+      const steps = parseSteps(props.pattern.steps);
+      let stepIndex = 0;
+      let state = sequencerInit();
+      const s = new Tone.MonoSynth({
+        oscillator: { type: 'sawtooth' },
+        envelope: { decay: 1, release: 0.1 },
+        filter: { Q: 5, type: 'lowpass', rolloff: -24 },
+        filterEnvelope: {
+          attack: 0.001,
+          decay: 0.01,
+          baseFrequency: 500,
+          octaves: 0.6,
+        },
+      }).toDestination();
+      s.volume.value = -12;
+      //s.triggerAttackRelease('C4', '8n');
+      const iter = sequencerIterable(steps)[Symbol.iterator]();
+      const pendingMessages = [];
+      const repeat = () => {
+        //const step = steps[(stepIndex++) % steps.length];
+        //const {state:newState, messages} = sequencerAdvance(state, step);
+        //state = newState;
+        //for (const message of messages) {
+        //  console.log(message.tick);
+        //  if (message.data[0] === 0x90) {
+        //    // Note On
+        //    const note = Tone.Frequency(message.data[1], 'midi').toNote();
+        //    s.triggerAttack(note, `+${message.tick}`);
+        //  } else if (message.data[0] === 0x80) {
+        //    s.triggerRelease(`+${message.tick}`);
+        //  }
+        console.log(iter.next().value.messages.map(m => m.tick));
+      };
+      console.log(Tone.getTransport().state);
+      const repeatId = Tone.getTransport().scheduleRepeat(repeat, `32n`);
+      Tone.getTransport().bpm.value = 100;
+      Tone.getTransport().start();
+      dispatch({ type: 'play', repeatId });
+    }
   };
+  const label = state.type === 'playing' ? 'Stop' : 'Play';
+  return (
+    <div className="flex mt-2 gap-2">
+      <Button onClick={playAudio}>{label}</Button>
+    </div>
+  );
+};
+export const MidiPlayer = (props: MidiPlayerProps) => {
   return (
     <div className="flex mt-2 gap-2">
       <MidiPlayerControls pattern={props.pattern} />
-      <Button onClick={playAudio}>Play audio</Button>
     </div>
   );
 };
