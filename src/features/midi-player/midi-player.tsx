@@ -23,6 +23,7 @@ import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 import { TB303Pattern } from '@/types/api';
 import {
   MIDI_MESSAGE_PPQN,
+  MidiMessage,
   parseSteps,
 } from '@/features/midi-player/pattern-parser';
 import {
@@ -220,20 +221,71 @@ interface TonePlayerProps {
   pattern: TB303Pattern;
 }
 
+let synthRef: Tone.MonoSynth | undefined = undefined;
 export const TonePlayer = (props: TonePlayerProps) => {
   const [state, dispatch] = React.useReducer(tonePlayerReducer, {
     type: 'stopped',
   });
+  enum MidiEventKind {
+    NoteOn,
+    NoteOff,
+    Unknown,
+  }
+  type MidiEvent =
+    | {
+        kind: MidiEventKind.NoteOn;
+        note: Tone.Unit.Note;
+        velocity: number;
+      }
+    | {
+        kind: MidiEventKind.NoteOff;
+        note: Tone.Unit.Note;
+      }
+    | {
+        kind: MidiEventKind.Unknown;
+        data: number[];
+      };
+  const parseMidi = (msg: number[]): MidiEvent => {
+    if (msg.length === 3) {
+      switch (msg[0]) {
+        case 0x90: {
+          return {
+            kind: msg[2] === 0 ? MidiEventKind.NoteOff : MidiEventKind.NoteOn,
+            note: Tone.Frequency(msg[1], 'midi').toNote(),
+            velocity: msg[2],
+          };
+        }
+        case 0x80: {
+          return {
+            kind: MidiEventKind.NoteOff,
+            note: Tone.Frequency(msg[1], 'midi').toNote(),
+          };
+        }
+      }
+    }
+    return {
+      kind: MidiEventKind.Unknown,
+      data: msg,
+    };
+  };
   const playAudio = () => {
     if (state.type === 'playing') {
+      if (synthRef === undefined) {
+        throw new Error('FIXME 2');
+      }
+      synthRef.dispose();
+      synthRef = undefined;
+      console.log('STOP', state.type, state.repeatId);
       Tone.getTransport().cancel(state.repeatId);
       Tone.getTransport().stop();
       dispatch({ type: 'stop' });
     } else if (state.type === 'stopped') {
-      const steps = parseSteps(props.pattern.steps);
-      let stepIndex = 0;
-      let state = sequencerInit();
-      const s = new Tone.MonoSynth({
+      console.log('START');
+      if (synthRef !== undefined) {
+        throw new Error('FIXME');
+      }
+      synthRef = new Tone.MonoSynth({
+        volume: -18,
         oscillator: { type: 'sawtooth' },
         envelope: { decay: 1, release: 0.1 },
         filter: { Q: 5, type: 'lowpass', rolloff: -24 },
@@ -243,31 +295,58 @@ export const TonePlayer = (props: TonePlayerProps) => {
           baseFrequency: 500,
           octaves: 0.6,
         },
-      }).toDestination();
-      s.volume.value = -12;
-      //s.triggerAttackRelease('C4', '8n');
-      const iter = sequencerIterable(steps)[Symbol.iterator]();
-      const pendingMessages = [];
-      const repeat = () => {
-        //const step = steps[(stepIndex++) % steps.length];
-        //const {state:newState, messages} = sequencerAdvance(state, step);
-        //state = newState;
-        //for (const message of messages) {
-        //  console.log(message.tick);
-        //  if (message.data[0] === 0x90) {
-        //    // Note On
-        //    const note = Tone.Frequency(message.data[1], 'midi').toNote();
-        //    s.triggerAttack(note, `+${message.tick}`);
-        //  } else if (message.data[0] === 0x80) {
-        //    s.triggerRelease(`+${message.tick}`);
-        //  }
-        console.log(iter.next().value.messages.map(m => m.tick));
-      };
-      console.log(Tone.getTransport().state);
-      const repeatId = Tone.getTransport().scheduleRepeat(repeat, `32n`);
+      });
+
       Tone.getTransport().bpm.value = 100;
-      Tone.getTransport().start();
+      Tone.getTransport().timeSignature = 4;
+
+      const tickRatio = MIDI_MESSAGE_PPQN / Tone.getTransport().PPQ;
+      const sequencer = sequencerIterable(parseSteps(props.pattern.steps))[
+        Symbol.iterator
+      ]();
+      const scheduleAhead = Tone.Time('16n').toTicks() * 8;
+      const scheduleMargin = Tone.Time('16n').toTicks() * 8;
+      let lastScheduledTick = 0;
+
+      const scheduleMessage = (msg: MidiMessage) => {
+        const event = parseMidi(msg.data);
+        const t = Tone.Ticks(msg.tick);
+        if (synthRef === undefined) throw new Error('FIXMe3');
+        switch (event.kind) {
+          case MidiEventKind.NoteOff: {
+            const t = Tone.Ticks(msg.tick);
+            synthRef.triggerRelease(t.toBarsBeatsSixteenths());
+            break;
+          }
+          case MidiEventKind.NoteOn: {
+            synthRef.triggerAttack(event.note, t.toBarsBeatsSixteenths());
+            break;
+          }
+          case MidiEventKind.Unknown: {
+            console.warn('Unknown MIDI message', event.data);
+            break;
+          }
+        }
+      };
+
+      const schedule = () => {
+        const now = tickRatio * Tone.getTransport().ticks;
+        if (now + scheduleAhead >= lastScheduledTick) {
+          while (lastScheduledTick <= scheduleAhead + now + scheduleMargin) {
+            const messages = sequencer.next().value.messages;
+            for (const msg of messages) {
+              scheduleMessage(msg);
+              lastScheduledTick = msg.tick;
+            }
+          }
+        }
+      };
+
+      const repeatId = Tone.getTransport().scheduleRepeat(schedule, `4n`);
       dispatch({ type: 'play', repeatId });
+
+      synthRef.toDestination();
+      Tone.getTransport().start();
     }
   };
   const label = state.type === 'playing' ? 'Stop' : 'Play';
