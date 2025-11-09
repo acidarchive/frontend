@@ -271,7 +271,7 @@ export const TonePlayer = (props: TonePlayerProps) => {
   const playAudio = () => {
     if (state.type === 'playing') {
       if (synthRef === undefined) {
-        throw new Error('FIXME 2');
+        throw new Error('DEBUG: Playing but synthRef is destroyed!');
       }
       synthRef.dispose();
       synthRef = undefined;
@@ -282,7 +282,7 @@ export const TonePlayer = (props: TonePlayerProps) => {
     } else if (state.type === 'stopped') {
       console.log('START');
       if (synthRef !== undefined) {
-        throw new Error('FIXME');
+        throw new Error('DEBUG: Not playing but synthRef is here?');
       }
       synthRef = new Tone.MonoSynth({
         volume: -18,
@@ -292,7 +292,7 @@ export const TonePlayer = (props: TonePlayerProps) => {
         filterEnvelope: {
           attack: 0.001,
           decay: 0.01,
-          baseFrequency: 500,
+          baseFrequency: 700,
           octaves: 0.6,
         },
       });
