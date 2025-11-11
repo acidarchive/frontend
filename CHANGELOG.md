@@ -1,6 +1,15 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- About page
+
+- Home page
+
+
+## [0.0.1-alpha.76] - 2025-11-06
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -705,7 +714,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.75..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.76..HEAD
+[0.0.1-alpha.76]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.75..v0.0.1-alpha.76
 [0.0.1-alpha.75]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.74..v0.0.1-alpha.75
 [0.0.1-alpha.74]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.73..v0.0.1-alpha.74
 [0.0.1-alpha.73]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.72..v0.0.1-alpha.73
