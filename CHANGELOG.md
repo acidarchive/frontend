@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Add transparent smiley logo
+
+
+## [0.0.1-alpha.77] - 2025-11-11
+
+### 🌀 Added
+
 - About page
 
 - Home page
@@ -714,7 +721,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.76..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.77..HEAD
+[0.0.1-alpha.77]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.76..v0.0.1-alpha.77
 [0.0.1-alpha.76]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.75..v0.0.1-alpha.76
 [0.0.1-alpha.75]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.74..v0.0.1-alpha.75
 [0.0.1-alpha.74]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.73..v0.0.1-alpha.74
