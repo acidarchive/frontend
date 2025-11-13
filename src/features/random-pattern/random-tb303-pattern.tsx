@@ -8,7 +8,7 @@ import { Icons } from '@/components/atoms/icons';
 import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 import { Button } from '@/components/ui/button';
 import { fetchPatternTB303Random } from '@/dal';
-import { MidiPlayer } from '@/features/midi-player';
+import { MidiPlayer, TonePlayer } from '@/features/midi-player';
 import { cn } from '@/lib/utils';
 
 export function RandomTB303Pattern() {
@@ -57,6 +57,7 @@ export function RandomTB303Pattern() {
             <PatternTB303Form readonly />
           </FormProvider>
           <MidiPlayer pattern={data!} />
+          <TonePlayer pattern={data!} />
         </div>
       </div>
     </div>

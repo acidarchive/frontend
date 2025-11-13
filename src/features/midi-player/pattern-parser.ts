@@ -12,7 +12,7 @@ export interface MidiMessage {
   tick: number;
 }
 
-export const MIDI_MESSAGE_PPQN = 24;
+export const MIDI_MESSAGE_PPQN = 192;
 
 const MIDI_ACCENT_VELOCITY = 127;
 const MIDI_NORMAL_VELOCITY = 1;
