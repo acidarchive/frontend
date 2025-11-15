@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/nextjs';
+import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { UserProvider } from '@/context/user-context';

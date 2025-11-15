@@ -2,7 +2,7 @@
 
 import { Table } from '@tanstack/react-table';
 import { X } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useDebounce } from 'react-use';
 
 import { Button } from '@/components/ui/button';
@@ -52,24 +52,18 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
     [searchInput, nameColumn],
   );
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     setSearchInput('');
     table.resetColumnFilters();
-  }, [table]);
+  };
 
-  const handleVisibilityChange = useCallback(
-    (value?: boolean) => {
-      visibilityColumn?.setFilterValue(value);
-    },
-    [visibilityColumn],
-  );
+  const handleVisibilityChange = (value?: boolean) => {
+    visibilityColumn?.setFilterValue(value);
+  };
 
-  const handleSearchChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchInput(event.target.value);
-    },
-    [],
-  );
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(event.target.value);
+  };
 
   return (
     <div className="flex items-center justify-between">

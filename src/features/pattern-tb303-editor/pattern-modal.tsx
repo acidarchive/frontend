@@ -2,12 +2,25 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useMemo } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { type FieldErrors, FormProvider, useForm } from 'react-hook-form';
 
 import { BaseModal } from '@/components/organisms/base-modal';
 import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 import { PatternFormData, PatternFormSchema } from '@/schemas/tb303/patterns';
-import { extractTB303StepValidationError } from '@/utils/tb303-form-errors';
+
+function getStepValidationError(
+  errors: FieldErrors<{ steps?: unknown }>,
+): string | undefined {
+  if (errors.steps?.root?.message) {
+    return errors.steps.root.message;
+  }
+  if (Array.isArray(errors.steps)) {
+    const firstStepError = errors.steps.find(step => step?.time?.message);
+    if (firstStepError?.time?.message) {
+      return firstStepError.time.message;
+    }
+  }
+}
 
 interface PatternModalProps {
   isOpen?: boolean;
@@ -49,7 +62,7 @@ export function PatternModal({
   }, [initialData, reset]);
 
   const validationError = useMemo(() => {
-    return extractTB303StepValidationError(errors);
+    return getStepValidationError(errors);
   }, [errors]);
 
   const error = validationError || externalError;
