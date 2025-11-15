@@ -1,9 +1,7 @@
 import {
   BookOpen,
   Code,
-  Coffee,
   Github,
-  Heart,
   Mail,
   MessageSquare,
   Palette,

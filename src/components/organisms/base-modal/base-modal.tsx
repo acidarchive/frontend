@@ -1,6 +1,6 @@
 'use client';
 
-import { ErrorAlert } from '@/components/molecules/error-alert';
+import { Alert } from '@/components/molecules/alert';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -51,7 +51,7 @@ export function BaseModal({
         ) : undefined}
         {error && (
           <div className="mb-4">
-            <ErrorAlert title="Error" message={error} />
+            <Alert title="Error">{error}</Alert>
           </div>
         )}
 

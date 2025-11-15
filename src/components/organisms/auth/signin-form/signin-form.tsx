@@ -1,80 +1,94 @@
 'use client';
+
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 
-import { ErrorMessage } from '@/components/atoms/error-message';
-import { InputElement } from '@/components/molecules/input-element';
+import { PasswordInput } from '@/components/atoms/password-input';
+import { Alert } from '@/components/molecules/alert';
 import { Button } from '@/components/ui/button';
-import { useUser } from '@/context/user-context';
-import { handleSignIn } from '@/lib/cognito-actions';
+import { Card, CardContent } from '@/components/ui/card';
 import {
-  signin_password_validation,
-  signin_username_validation,
-} from '@/utils/input-validations';
+  Field,
+  FieldDescription,
+  FieldLabel,
+  FieldSet,
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 
-type SigninFormValues = {
-  username: string;
-  password: string;
-};
-export function SigninForm() {
-  const router = useRouter();
-  const methods = useForm<SigninFormValues>();
-  const [error, setError] = useState<string>('');
+interface SigninFormProps {
+  onSubmit: (data: { username: string; password: string }) => void;
+  error?: string;
+  isPending?: boolean;
+  defaultUsername?: string;
+}
 
-  const { refreshUser } = useUser();
+export function SigninForm({
+  onSubmit,
+  error,
+  isPending = false,
+  defaultUsername,
+}: SigninFormProps) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
-
-  const onSubmit = handleSubmit(async data => {
-    setError('');
-    const result = await handleSignIn(data);
-
-    if (result?.error) {
-      setError(result.error);
-    } else {
-      await refreshUser();
-      router.push('/dashboard/tb303');
-    }
-  });
+    onSubmit({
+      username: formData.get('username') as string,
+      password: formData.get('password') as string,
+    });
+  }
 
   return (
-    <>
-      <ErrorMessage message={error} />
-      <FormProvider {...methods}>
-        <form
-          onSubmit={event => event.preventDefault()}
-          noValidate
-          autoComplete="off"
-        >
-          <InputElement {...signin_username_validation} />
-          <InputElement
-            {...signin_password_validation}
-            labelAction={
-              <Link
-                href="/auth/reset-password/submit"
-                className="font-semibold hover:underline"
-              >
-                Forgot password?
-              </Link>
-            }
-          />
-          <div className="mt-6">
-            <Button
-              className="w-full"
-              type="submit"
-              onClick={onSubmit}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Signing in...' : 'Sign in'}
-            </Button>
-          </div>
+    <Card className="w-full max-w-lg">
+      <CardContent>
+        <form onSubmit={handleSubmit} noValidate>
+          <Alert variant="destructive" className="mb-4">
+            {error}
+          </Alert>
+          <FieldSet className="gap-4">
+            <Field>
+              <FieldLabel htmlFor="username">Username or email</FieldLabel>
+              <Input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username or email"
+                autoComplete="username"
+                defaultValue={defaultUsername}
+                required
+              />
+            </Field>
+
+            <Field>
+              <div className="flex items-center justify-between">
+                <FieldLabel htmlFor="password">Password</FieldLabel>
+                <Link
+                  href="/auth/reset-password/submit"
+                  className="text-sm font-semibold hover:underline"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+              <PasswordInput
+                id="password"
+                name="password"
+                autoComplete="current-password"
+                required
+              />
+            </Field>
+
+            <Field>
+              <Button type="submit" disabled={isPending}>
+                {isPending ? 'Signing in...' : 'Sign in'}
+              </Button>
+
+              <FieldDescription className="text-center">
+                Not a member?{' '}
+                <Link href="/auth/signup">Create a new account</Link>
+              </FieldDescription>
+            </Field>
+          </FieldSet>
         </form>
-      </FormProvider>
-    </>
+      </CardContent>
+    </Card>
   );
 }

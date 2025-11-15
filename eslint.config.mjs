@@ -1,25 +1,27 @@
-import { FlatCompat } from '@eslint/eslintrc';
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-});
-const eslintConfig = [
-  ...compat.config({
-    extends: [
-      'next/core-web-vitals',
-      'next/typescript',
-      'plugin:unicorn/recommended',
-      'plugin:import/recommended',
-      'plugin:prettier/recommended',
-    ],
-    plugins: ['simple-import-sort'],
-    ignorePatterns: ['src/api/**/*'],
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
+import nextTypescript from 'eslint-config-next/typescript';
+import prettier from 'eslint-config-prettier/flat';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import unicorn from 'eslint-plugin-unicorn';
+
+const eslintConfig = defineConfig([
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  unicorn.configs['flat/recommended'],
+  prettier,
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
     rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
       'unicorn/no-array-callback-reference': 'off',
       'unicorn/no-array-for-each': 'off',
       'unicorn/no-array-reduce': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-useless-undefined': 'off',
       'unicorn/prevent-abbreviations': [
         'error',
         {
@@ -34,6 +36,14 @@ const eslintConfig = [
         },
       ],
     },
-  }),
-];
+  },
+  globalIgnores([
+    'src/api/**/*',
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+  ]),
+]);
+
 export default eslintConfig;

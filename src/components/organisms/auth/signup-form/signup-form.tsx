@@ -1,83 +1,108 @@
 'use client';
-import { useState } from 'react';
-import { FormProvider, useForm, useWatch } from 'react-hook-form';
 
-import { ErrorMessage } from '@/components/atoms/error-message';
-import { InputElement } from '@/components/molecules/input-element';
+import Link from 'next/link';
+
+import { PasswordInput } from '@/components/atoms/password-input';
+import { Alert } from '@/components/molecules/alert';
 import { Button } from '@/components/ui/button';
-import { handleSignUp } from '@/lib/cognito-actions';
+import { Card, CardContent } from '@/components/ui/card';
 import {
-  email_validation,
-  password_validation,
-  username_validation,
-} from '@/utils/input-validations';
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+  FieldSet,
+} from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+import type { SignupFormState } from '@/lib/definitions';
 
-type SignupFormValues = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+interface SignupFormProps {
+  action: (formData: FormData) => void;
+  formError?: string;
+  fieldErrors?: SignupFormState['fieldErrors'];
+  defaultValues?: SignupFormState['data'];
+  isPending?: boolean;
+}
 
-export function SignupForm() {
-  const methods = useForm<SignupFormValues>();
-  const [error, setError] = useState<string>('');
-
-  const {
-    handleSubmit,
-    control,
-    formState: { isSubmitting },
-  } = methods;
-
-  const password = useWatch({
-    name: 'password',
-    control: control,
-  });
-
-  const onSubmit = handleSubmit(async data => {
-    setError('');
-    const result = await handleSignUp(data);
-
-    if (result?.error) {
-      setError(result.error);
-    }
-  });
-
+export function SignupForm({
+  action,
+  formError,
+  fieldErrors,
+  defaultValues,
+  isPending = false,
+}: SignupFormProps) {
   return (
-    <>
-      <ErrorMessage message={error} />
-      <FormProvider {...methods}>
-        <form
-          onSubmit={event => event.preventDefault()}
-          noValidate
-          autoComplete="off"
-        >
-          <InputElement {...username_validation} />
-          <InputElement {...email_validation} />
-          <InputElement {...password_validation} />
-          <InputElement
-            id="confirmPassword"
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="••••••••"
-            type="password"
-            validation={{
-              required: 'Please confirm your password',
-              validate: value => value === password || 'Passwords do not match',
-            }}
-          />
-          <div className="mt-6">
-            <Button
-              className="w-full"
-              type="submit"
-              onClick={onSubmit}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Signing up...' : 'Sign up'}
-            </Button>
-          </div>
+    <Card className="w-full max-w-lg">
+      <CardContent>
+        <form action={action} noValidate>
+          <Alert variant="destructive" className="mb-4">
+            {formError}
+          </Alert>
+          <FieldSet className="gap-4">
+            <Field>
+              <FieldLabel htmlFor="username">Username</FieldLabel>
+              <Input
+                id="username"
+                type="text"
+                name="username"
+                placeholder="Username"
+                defaultValue={defaultValues?.username}
+                autoComplete="username"
+                required
+              />
+              <FieldError>{fieldErrors?.username?.at(0)}</FieldError>
+            </Field>
+
+            <Field>
+              <FieldLabel htmlFor="email">Email Address</FieldLabel>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="me@example.com"
+                defaultValue={defaultValues?.email}
+                autoComplete="email"
+                required
+              />
+              <FieldError>{fieldErrors?.email?.at(0)}</FieldError>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <PasswordInput
+                id="password"
+                name="password"
+                defaultValue={defaultValues?.password}
+                autoComplete="new-password"
+                required
+              />
+              <FieldError>{fieldErrors?.password?.at(0)}</FieldError>
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="confirm-password">
+                Confirm Password
+              </FieldLabel>
+              <PasswordInput
+                id="confirm-password"
+                name="confirmPassword"
+                defaultValue={defaultValues?.confirmPassword}
+                autoComplete="new-password"
+                required
+              />
+              <FieldError>{fieldErrors?.confirmPassword?.at(0)}</FieldError>
+            </Field>
+            <Field>
+              <Button type="submit" disabled={isPending}>
+                {isPending ? 'Signing up...' : 'Sign up'}
+              </Button>
+
+              <FieldDescription className="text-center">
+                Already have an account?{' '}
+                <Link href="/auth/signin">Sign In</Link>
+              </FieldDescription>
+            </Field>
+          </FieldSet>
         </form>
-      </FormProvider>
-    </>
+      </CardContent>
+    </Card>
   );
 }

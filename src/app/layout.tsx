@@ -7,10 +7,9 @@ import NextTopLoader from 'nextjs-toploader';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { UserProvider } from '@/context/user-context';
-import ConfigureAmplifyClientSide from '@/lib/cognito-config';
+import ConfigureAmplifyClientSide from '@/lib/amplify/client';
 import QueryProvider from '@/providers/query-provider';
 import { ThemeProvider } from '@/providers/theme-provider';
-
 const oxanium = Oxanium({
   subsets: ['latin'],
   display: 'swap',

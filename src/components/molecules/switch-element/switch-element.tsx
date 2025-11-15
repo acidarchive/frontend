@@ -1,11 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
-import {
-  FormControl,
-  FormDescription,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form';
+import { FormControl, FormDescription, FormItem } from '@/components/ui/form';
 import { Switch } from '@/components/ui/switch';
 
 export interface SwitchElementProps {
@@ -34,7 +29,7 @@ export function SwitchElement({
         render={({ field: { onChange, value } }) => (
           <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
             <div className="space-y-0.5">
-              <FormLabel>{label}</FormLabel>
+              <label>{label}</label>
               <FormDescription>{description}</FormDescription>
             </div>
             <FormControl>

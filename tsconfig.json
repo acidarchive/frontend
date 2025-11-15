@@ -13,7 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["vitest", "@testing-library/jest-dom"],
+    "types": ["vitest", "@testing-library/jest-dom", "@storybook/nextjs-vite"],
     "plugins": [
       {
         "name": "next"

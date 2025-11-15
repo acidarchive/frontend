@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import {
   parseSteps,
@@ -304,26 +304,31 @@ export const useMidiPlayer = (
   tempo: number,
 ) => {
   const seqRef = useRef<Seq | undefined>(undefined);
-  const teardown = () => {
-    if (seqRef.current !== undefined) {
-      seqRef.current.stop();
-      seqRef.current = undefined;
+
+  useEffect(() => {
+    const teardown = () => {
+      if (seqRef.current !== undefined) {
+        seqRef.current.stop();
+        seqRef.current = undefined;
+      }
+    };
+
+    if (midiOutput === undefined) {
+      teardown();
+      return;
     }
-  };
+    if (!playing) {
+      teardown();
+      return;
+    }
 
-  if (midiOutput === undefined) {
-    teardown();
-    return;
-  }
-  if (!playing) {
-    teardown();
-    return;
-  }
+    const params: SeqParams = { pattern, midiOutput, tempo };
+    if (seqRef.current === undefined) {
+      seqRef.current = createSeq(params);
+    } else {
+      seqRef.current.updateParams(params);
+    }
 
-  const params: SeqParams = { pattern, midiOutput, tempo };
-  if (seqRef.current === undefined) {
-    seqRef.current = createSeq(params);
-  } else {
-    seqRef.current.updateParams(params);
-  }
+    return teardown;
+  }, [pattern, midiOutput, playing, tempo]);
 };

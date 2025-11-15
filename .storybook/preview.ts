@@ -1,7 +1,6 @@
 import '../src/styles/globals.css';
-process.env.NEXT_PUBLIC_APP_VERSION = 'storybook-version';
 
-import type { Preview } from '@storybook/nextjs';
+import type { Preview } from '@storybook/nextjs-vite';
 const preview: Preview = {
   parameters: {
     options: {
