@@ -1,10 +1,10 @@
 import { MainLayout } from '@/components/layouts/main-layout';
-import { HomePage } from '@/features/home-page';
+import { AboutPage } from '@/features/about-page';
 
-export default function Home() {
+export default function About() {
   return (
     <MainLayout>
-      <HomePage />
+      <AboutPage />
     </MainLayout>
   );
 }
