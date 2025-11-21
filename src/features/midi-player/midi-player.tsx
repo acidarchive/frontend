@@ -33,6 +33,7 @@ import {
   SequencerStepResult,
 } from '@/features/midi-player/sequencer';
 import { MidiNote } from 'tone/Tone/core/type/NoteUnits';
+import TonePlayer from '@/features/tone-player';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -115,7 +116,6 @@ const reducer = (state: State, action: Action): State => {
     }
   }
 };
-
 const MidiPlayerControls = (props: MidiPlayerProps) => {
   const { state: midiOutputsState, requestMidiAccess } = useMidiOutputs();
   const [state, dispatch] = React.useReducer(reducer, {
@@ -198,190 +198,6 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
   }
 };
 
-type TonePlayerState =
-  | { type: 'playing'; repeatId: number }
-  | { type: 'stopped' };
-type TonePlayerAction = { type: 'play'; repeatId: number } | { type: 'stop' };
-
-const tonePlayerReducer = (
-  state: TonePlayerState,
-  action: TonePlayerAction,
-): TonePlayerState => {
-  switch (action.type) {
-    case 'play': {
-      return { type: 'playing', repeatId: action.repeatId };
-    }
-    case 'stop': {
-      return { type: 'stopped' };
-    }
-  }
-};
-
-interface TonePlayerProps {
-  pattern: TB303Pattern;
-}
-
-export const TonePlayer = (props: TonePlayerProps) => {
-  const synthRef = useRef<Tone.MonoSynth | undefined>(undefined);
-  const repeatIdRef = useRef<number | undefined>(undefined);
-  const [state, dispatch] = React.useReducer(tonePlayerReducer, {
-    type: 'stopped',
-  });
-  enum MidiEventKind {
-    NoteOn,
-    NoteOff,
-    Unknown,
-  }
-  type MidiEvent =
-    | {
-        kind: MidiEventKind.NoteOn;
-        note: Tone.Unit.Note;
-        velocity: number;
-      }
-    | {
-        kind: MidiEventKind.NoteOff;
-        note: Tone.Unit.Note;
-      }
-    | {
-        kind: MidiEventKind.Unknown;
-        data: number[];
-      };
-  const parseMidi = (msg: number[]): MidiEvent => {
-    if (msg.length === 3) {
-      switch (msg[0]) {
-        case 0x90: {
-          return {
-            kind: msg[2] === 0 ? MidiEventKind.NoteOff : MidiEventKind.NoteOn,
-            note: Tone.Frequency(msg[1], 'midi').toNote(),
-            velocity: msg[2],
-          };
-        }
-        case 0x80: {
-          return {
-            kind: MidiEventKind.NoteOff,
-            note: Tone.Frequency(msg[1], 'midi').toNote(),
-          };
-        }
-      }
-    }
-    return {
-      kind: MidiEventKind.Unknown,
-      data: msg,
-    };
-  };
-  useEffect(() => {
-    return () => {
-      if (synthRef.current) {
-        synthRef.current.dispose();
-        synthRef.current = undefined;
-      }
-      if (repeatIdRef.current !== undefined) {
-        Tone.getTransport().cancel(repeatIdRef.current);
-        repeatIdRef.current = undefined;
-      }
-      Tone.getTransport().stop();
-    };
-  }, []);
-
-  const playAudio = async () => {
-    if (state.type === 'playing') {
-      if (synthRef.current === undefined) {
-        throw new Error('DEBUG: Playing but synthRef is destroyed!');
-      }
-      synthRef.current.dispose();
-      synthRef.current = undefined;
-      console.log('STOP', state.type, state.repeatId);
-      if (repeatIdRef.current !== undefined) {
-        Tone.getTransport().cancel(repeatIdRef.current);
-        repeatIdRef.current = undefined;
-      }
-      Tone.getTransport().stop();
-      dispatch({ type: 'stop' });
-    } else if (state.type === 'stopped') {
-      console.log('START');
-      if (synthRef.current !== undefined) {
-        throw new Error('DEBUG: Not playing but synthRef is here?');
-      }
-      
-      await Tone.start();
-      
-      Tone.getTransport().stop();
-      Tone.getTransport().cancel();
-      Tone.getTransport().position = 0;
-      
-      synthRef.current = new Tone.MonoSynth({
-        volume: -18,
-        oscillator: { type: 'sawtooth' },
-        envelope: { decay: 1, release: 0.1 },
-        filter: { Q: 5, type: 'lowpass', rolloff: -24 },
-        filterEnvelope: {
-          attack: 0.001,
-          decay: 0.01,
-          baseFrequency: 700,
-          octaves: 0.6,
-        },
-      });
-
-      Tone.getTransport().bpm.value = 100;
-      Tone.getTransport().timeSignature = 4;
-
-      const tickRatio = MIDI_MESSAGE_PPQN / Tone.getTransport().PPQ;
-      const sequencer = sequencerIterable(parseSteps(props.pattern.steps))[
-        Symbol.iterator
-      ]();
-      const scheduleAhead = Tone.Time('16n').toTicks() * 8;
-      const scheduleMargin = Tone.Time('16n').toTicks() * 8;
-      let lastScheduledTick = 0;
-
-      const scheduleMessage = (msg: MidiMessage) => {
-        const event = parseMidi(msg.data);
-        const t = Tone.Ticks(msg.tick);
-        if (synthRef.current === undefined) throw new Error('FIXMe3');
-        switch (event.kind) {
-          case MidiEventKind.NoteOff: {
-            const t = Tone.Ticks(msg.tick);
-            synthRef.current.triggerRelease(t.toBarsBeatsSixteenths());
-            break;
-          }
-          case MidiEventKind.NoteOn: {
-            synthRef.current.triggerAttack(event.note, t.toBarsBeatsSixteenths());
-            break;
-          }
-          case MidiEventKind.Unknown: {
-            console.warn('Unknown MIDI message', event.data);
-            break;
-          }
-        }
-      };
-
-      const schedule = () => {
-        const now = tickRatio * Tone.getTransport().ticks;
-        if (now + scheduleAhead >= lastScheduledTick) {
-          while (lastScheduledTick <= scheduleAhead + now + scheduleMargin) {
-            const messages = sequencer.next().value.messages;
-            for (const msg of messages) {
-              scheduleMessage(msg);
-              lastScheduledTick = msg.tick;
-            }
-          }
-        }
-      };
-
-      const repeatId = Tone.getTransport().scheduleRepeat(schedule, `4n`);
-      repeatIdRef.current = repeatId;
-      dispatch({ type: 'play', repeatId });
-
-      synthRef.current.toDestination();
-      Tone.getTransport().start();
-    }
-  };
-  const label = state.type === 'playing' ? 'Stop' : 'Play';
-  return (
-    <div className="flex mt-2 gap-2">
-      <Button onClick={playAudio}>{label}</Button>
-    </div>
-  );
-};
 export const MidiPlayer = (props: MidiPlayerProps) => {
   return (
     <div className="flex mt-2 gap-2">
