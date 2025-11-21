@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ButtonHTMLAttributes, useEffect } from 'react';
+import { ButtonHTMLAttributes, useEffect, useRef } from 'react';
+import * as Tone from 'tone';
 
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -20,6 +21,19 @@ import {
 } from '@/features/midi-player/webmidi';
 import { useMidiPlayer } from '@/features/midi-player/webmidi-sequencer';
 import { TB303Pattern } from '@/types/api';
+import {
+  MIDI_MESSAGE_PPQN,
+  MidiMessage,
+  parseSteps,
+} from '@/features/midi-player/pattern-parser';
+import {
+  sequencerAdvance,
+  sequencerInit,
+  sequencerIterable,
+  SequencerStepResult,
+} from '@/features/midi-player/sequencer';
+import { MidiNote } from 'tone/Tone/core/type/NoteUnits';
+import TonePlayer from '@/features/tone-player';
 
 interface MidiPlayerProps {
   pattern: TB303Pattern;
@@ -102,7 +116,6 @@ const reducer = (state: State, action: Action): State => {
     }
   }
 };
-
 const MidiPlayerControls = (props: MidiPlayerProps) => {
   const { state: midiOutputsState, requestMidiAccess } = useMidiOutputs();
   const [state, dispatch] = React.useReducer(reducer, {
