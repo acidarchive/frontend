@@ -14,7 +14,7 @@ const FULL_STEP = MIDI_MESSAGE_PPQN / 4;
  * Tag type for the state of sequencer state machine.
  * See `State` for the possible states.
  */
-enum StateType {
+export enum StateType {
   Idle,
   SingleNoteHeld,
   TwoNotesHeld,
