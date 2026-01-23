@@ -1,8 +1,8 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { SignOutButton } from '@/components/atoms/sign-out-button';
-import { UserAvatarProfile } from '@/components/molecules/user-avatar-profile';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -17,17 +17,21 @@ import { useUser } from '@/context/user-context';
 
 export function UserNavigation() {
   const { user, isLoading } = useUser();
-  const router = useRouter();
 
   if (isLoading || !user) {
-    return;
+    return null;
   }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <UserAvatarProfile user={user} />
+          <Avatar>
+            <AvatarImage src={user.image} alt={user.username} />
+            <AvatarFallback className="rounded-lg">
+              {user.username.slice(0, 2).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
@@ -37,17 +41,13 @@ export function UserNavigation() {
         forceMount
       >
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm leading-none font-medium">{user.username}</p>
-            <p className="text-muted-foreground text-xs leading-none"></p>
-          </div>
+          <p className="text-sm leading-none font-medium">{user.username}</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
-            Profile
-          </DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <Link href="/dashboard/settings">
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+          </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
