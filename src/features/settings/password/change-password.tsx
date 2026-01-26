@@ -9,7 +9,7 @@ import { useUser } from '@/context/user-context';
 import { changePassword, handleSignOut } from '@/dal/auth';
 import type { ChangePasswordFormState } from '@/lib/definitions';
 
-export function ChangePasswordPage() {
+export function ChangePassword() {
   const router = useRouter();
   const { refreshUser } = useUser();
   const [state, setState] = useState<ChangePasswordFormState>({

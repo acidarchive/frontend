@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronsUpDown,
+  CloudUpload,
   Command,
   CreditCard,
   House,
@@ -49,4 +50,5 @@ export const Icons = {
   keyboardMusic: KeyboardMusic,
   settings: Settings,
   keyRound: KeyRound,
+  cloudUpload: CloudUpload,
 };
