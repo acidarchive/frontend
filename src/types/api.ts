@@ -7,9 +7,13 @@ import { z } from 'zod';
 
 import {
   createTb303PatternBody,
+  getMeResponse,
   getTb303PatternResponse,
   listTb303PatternsResponse,
   listTb303PatternsResponseItem,
+  patchMeBody,
+  patchMeResponse,
+  presignUploadBody,
   updateTb303PatternBody,
 } from '@/api/generated/acid.zod';
 
@@ -48,3 +52,10 @@ export const TransposeEnum = transposeSchema.enum;
 export type Note = z.infer<typeof noteSchema>;
 export type Time = z.infer<typeof timeSchema>;
 export type Transpose = z.infer<typeof transposeSchema>;
+
+export type Me = z.infer<typeof getMeResponse>;
+export type UpdateMe = z.infer<typeof patchMeBody>;
+export type UpdateMeResponse = z.infer<typeof patchMeResponse>;
+
+export const presignContentTypeSchema = presignUploadBody.shape.content_type;
+export type PresignContentType = z.infer<typeof presignContentTypeSchema>;

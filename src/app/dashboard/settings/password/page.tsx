@@ -1,5 +1,5 @@
-import { ChangePasswordPage } from '@/features/settings';
+import { ChangePassword } from '@/features/settings';
 
 export default function PasswordPage() {
-  return <ChangePasswordPage />;
+  return <ChangePassword />;
 }

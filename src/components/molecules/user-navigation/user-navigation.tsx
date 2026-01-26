@@ -18,7 +18,15 @@ import { useUser } from '@/context/user-context';
 export function UserNavigation() {
   const { user, isLoading } = useUser();
 
-  if (isLoading || !user) {
+  if (isLoading) {
+    return (
+      <Avatar>
+        <AvatarFallback className="rounded-lg" />
+      </Avatar>
+    );
+  }
+
+  if (!user) {
     return null;
   }
 
@@ -27,10 +35,8 @@ export function UserNavigation() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar>
-            <AvatarImage src={user.image} alt={user.username} />
-            <AvatarFallback className="rounded-lg">
-              {user.username.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
+            <AvatarImage src={user.avatar || ''} alt={user.username} />
+            <AvatarFallback className="rounded-lg" />
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

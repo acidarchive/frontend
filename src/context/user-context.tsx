@@ -5,14 +5,16 @@ import {
   fetchUserAttributes,
   getCurrentUser,
 } from 'aws-amplify/auth';
+import { Hub } from 'aws-amplify/utils';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
+import { fetchMe } from '@/dal/users';
+
 export type AuthUser = {
+  id: string;
   username: string;
-  email?: string;
-  name?: string;
-  image?: string;
-  isAdmin: boolean;
+  email: string;
+  avatar: string | null;
 };
 
 interface UserContextType {
@@ -32,31 +34,35 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const fetchUser = async () => {
     try {
-      const session = await fetchAuthSession();
+      const [session, { username }, attributes] = await Promise.all([
+        fetchAuthSession(),
+        getCurrentUser(),
+        fetchUserAttributes(),
+      ]);
 
       if (!session.tokens) {
         setUser(undefined);
         return;
       }
 
-      const { username } = await getCurrentUser();
-      const attributes = await fetchUserAttributes();
+      const me = await fetchMe();
 
-      const groups = session.tokens.accessToken.payload['cognito:groups'] as
-        | string[]
-        | undefined;
+      if (!attributes.sub || !attributes.email || !me.avatar_url) {
+        console.error('Missing required user attributes');
+        setUser(undefined);
+        return;
+      }
 
       const userData: AuthUser = {
+        id: attributes.sub,
         username,
         email: attributes.email,
-        name: attributes.name,
-        image: attributes.picture,
-        isAdmin: groups?.includes('Admins') ?? false,
+        avatar: me.avatar_url,
       };
 
       setUser(userData);
     } catch (error) {
-      console.error('Error fetching user', error);
+      console.error('Error fetching user:', error);
       setUser(undefined);
     } finally {
       setIsLoading(false);
@@ -69,7 +75,23 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
+    const unsubscribe = Hub.listen('auth', ({ payload }) => {
+      switch (payload.event) {
+        case 'signedIn':
+        case 'tokenRefresh': {
+          fetchUser();
+          break;
+        }
+        case 'signedOut': {
+          setUser(undefined);
+          break;
+        }
+      }
+    });
+
     fetchUser();
+
+    return unsubscribe;
   }, []);
 
   return (
