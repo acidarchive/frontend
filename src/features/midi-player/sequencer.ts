@@ -14,7 +14,7 @@ const FULL_STEP = MIDI_MESSAGE_PPQN / 4;
  * Tag type for the state of sequencer state machine.
  * See `State` for the possible states.
  */
-enum StateType {
+export enum StateType {
   Idle,
   SingleNoteHeld,
   TwoNotesHeld,
@@ -59,7 +59,7 @@ export const sequencerInit = (): State => ({ type: StateType.Idle });
 /**
  * Result of each step advanced by the sequencer.
  */
-interface SequencerStepResult {
+export interface SequencerStepResult {
   state: State;
   messages: MidiMessage[];
 }
@@ -222,7 +222,10 @@ const advanceN = (init: State, steps: Step[]): SequencerStepResult =>
 export const stepsToMessages = (steps: Step[]): MidiMessage[] =>
   advanceN(IDLE, steps).messages;
 
-export type SequencerIterator = Iterator<SequencerStepResult> & {
+export type SequencerIterator = Iterator<
+  SequencerStepResult,
+  SequencerStepResult
+> & {
   getState(): State;
 };
 
@@ -234,7 +237,7 @@ export interface SequencerIterable {
  * Infinitely loops over the given steps producing state updates with midi messages.
  * This should play the "infinity" note correctly.
  */
-export const makeSequencerIterable = (steps: Step[]): SequencerIterable => {
+export const sequencerIterable = (steps: Step[]): SequencerIterable => {
   return {
     [Symbol.iterator]() {
       let state = sequencerInit();
@@ -246,10 +249,17 @@ export const makeSequencerIterable = (steps: Step[]): SequencerIterable => {
         next() {
           const x = sequencerAdvance(state, steps[index % steps.length]);
           state = x.state;
-          index++;
-          return {
-            value: x,
+          const result = {
+            value: {
+              ...x,
+              messages: x.messages.map(m => ({
+                data: m.data,
+                tick: m.tick + index * FULL_STEP,
+              })),
+            },
           };
+          index++;
+          return result;
         },
       };
     },
