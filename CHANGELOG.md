@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Upload avatar
+
+
+## [0.0.1-alpha.80] - 2026-01-24
+
+### 🌀 Added
+
 - Settings page
 
 
@@ -735,7 +742,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.79..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.80..HEAD
+[0.0.1-alpha.80]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.79..v0.0.1-alpha.80
 [0.0.1-alpha.79]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.78..v0.0.1-alpha.79
 [0.0.1-alpha.78]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.77..v0.0.1-alpha.78
 [0.0.1-alpha.77]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.76..v0.0.1-alpha.77
