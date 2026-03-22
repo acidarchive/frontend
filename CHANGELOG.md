@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Random pattern view
+
+
+## [0.0.1-alpha.83] - 2026-03-22
+
 ### 🌀 Added
 
 - Center random pattern
@@ -761,7 +768,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.82..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.83..HEAD
+[0.0.1-alpha.83]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.82..v0.0.1-alpha.83
 [0.0.1-alpha.82]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.81..v0.0.1-alpha.82
 [0.0.1-alpha.81]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.80..v0.0.1-alpha.81
 [0.0.1-alpha.80]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.79..v0.0.1-alpha.80
