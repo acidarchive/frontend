@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Update about page
+
+
+## [0.0.1-alpha.81] - 2026-03-17
+
+### 🌀 Added
+
 - Upload avatar
 
 
@@ -742,7 +749,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.80..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.81..HEAD
+[0.0.1-alpha.81]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.80..v0.0.1-alpha.81
 [0.0.1-alpha.80]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.79..v0.0.1-alpha.80
 [0.0.1-alpha.79]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.78..v0.0.1-alpha.79
 [0.0.1-alpha.78]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.77..v0.0.1-alpha.78
