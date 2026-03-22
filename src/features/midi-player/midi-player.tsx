@@ -145,7 +145,11 @@ const MidiPlayerControls = (props: MidiPlayerProps) => {
     return (
       <>
         <PlayButton isPlaying={false} disabled />
-        <Button onClick={requestMidiAccess} variant="secondary">
+        <Button
+          onClick={requestMidiAccess}
+          variant="secondary"
+          className="cursor-pointer"
+        >
           Click to enable MIDI
         </Button>
       </>
