@@ -34,7 +34,7 @@ export function RandomTB303Pattern() {
 
   return (
     <div className="flex flex-col">
-      <div className="mt-4 mb-4 flex justify-between items-center">
+      <div className="mt-12 mb-4 flex justify-between items-center">
         <h1 className="text-xl md:text-2xl font-bold">TB-303 pattern</h1>
         <div className="w-24">
           <Button
