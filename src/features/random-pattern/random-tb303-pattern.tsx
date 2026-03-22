@@ -33,25 +33,26 @@ export function RandomTB303Pattern() {
   }
 
   return (
-    <div className="flex flex-col">
-      <div className="mt-12 mb-4 flex justify-between items-center">
-        <h1 className="text-xl md:text-2xl font-bold">TB-303 pattern</h1>
-        <div className="w-24">
-          <Button
-            onClick={() =>
-              queryClient.invalidateQueries({
-                queryKey: ['/v1/patterns/tb303/random'],
-              })
-            }
-            variant="outline"
-            disabled={isFetching}
-          >
-            Refresh
-            <Icons.refreshCw className={cn(isFetching && 'animate-spin')} />
-          </Button>
-        </div>
-      </div>
+    <div className="flex flex-1 items-center justify-center">
       <div>
+        <div className="mb-4 flex justify-between items-center">
+          <h1 className="text-xl md:text-2xl font-bold">TB-303 pattern</h1>
+          <div className="w-24">
+            <Button
+              onClick={() =>
+                queryClient.invalidateQueries({
+                  queryKey: ['/v1/patterns/tb303/random'],
+                })
+              }
+              variant="outline"
+              disabled={isFetching}
+              className="cursor-pointer"
+            >
+              Refresh
+              <Icons.refreshCw className={cn(isFetching && 'animate-spin')} />
+            </Button>
+          </div>
+        </div>
         <div className="mb-4">
           <FormProvider {...form}>
             <PatternTB303Form readonly />
