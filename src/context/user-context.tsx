@@ -1,26 +1,17 @@
 'use client';
 
-import {
-  fetchAuthSession,
-  fetchUserAttributes,
-  getCurrentUser,
-} from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { set } from 'zod/v3';
 
 import { fetchMe } from '@/dal/users';
-
-export type AuthUser = {
-  id: string;
-  username: string;
-  email: string;
-  avatar: string | null;
-};
+import { Me } from '@/types/api';
 
 interface UserContextType {
-  user?: AuthUser;
+  user?: Me;
   isLoading: boolean;
-  setUser: React.Dispatch<React.SetStateAction<AuthUser | undefined>>;
+  setUser: React.Dispatch<React.SetStateAction<Me | undefined>>;
   refreshUser: () => Promise<void>;
 }
 
@@ -29,38 +20,19 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<AuthUser>();
+  const [user, setUser] = useState<Me>();
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchUser = async () => {
     try {
-      const [session, { username }, attributes] = await Promise.all([
-        fetchAuthSession(),
-        getCurrentUser(),
-        fetchUserAttributes(),
-      ]);
-
+      const session = await fetchAuthSession();
       if (!session.tokens) {
         setUser(undefined);
         return;
       }
 
       const me = await fetchMe();
-
-      if (!attributes.sub || !attributes.email || !me.avatar_url) {
-        console.error('Missing required user attributes');
-        setUser(undefined);
-        return;
-      }
-
-      const userData: AuthUser = {
-        id: attributes.sub,
-        username,
-        email: attributes.email,
-        avatar: me.avatar_url,
-      };
-
-      setUser(userData);
+      setUser(me);
     } catch (error) {
       console.error('Error fetching user:', error);
       setUser(undefined);
@@ -84,6 +56,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
         }
         case 'signedOut': {
           setUser(undefined);
+          setIsLoading(false);
           break;
         }
       }
