@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.13
+ * OpenAPI spec version: 0.0.1-alpha.16
  */
 import * as zod from 'zod';
 
@@ -180,7 +180,8 @@ export const getMeResponse = zod.object({
   "banner_url": zod.string().nullish(),
   "created_at": zod.iso.datetime({}),
   "updated_at": zod.iso.datetime({}),
-  "user_id": zod.uuid()
+  "user_id": zod.uuid(),
+  "username": zod.string()
 })
 
 
@@ -194,7 +195,8 @@ export const patchMeResponse = zod.object({
   "banner_url": zod.string().nullish(),
   "created_at": zod.iso.datetime({}),
   "updated_at": zod.iso.datetime({}),
-  "user_id": zod.uuid()
+  "user_id": zod.uuid(),
+  "username": zod.string()
 })
 
 

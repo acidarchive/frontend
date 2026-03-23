@@ -21,7 +21,6 @@ export const Header: React.FC = () => {
   const { user, isLoading } = useUser();
 
   const navigation = [
-    { name: 'Home', href: '/' },
     ...(user ? [{ name: 'Dashboard', href: '/dashboard/tb303' }] : []),
     { name: 'About', href: '/about' },
   ];

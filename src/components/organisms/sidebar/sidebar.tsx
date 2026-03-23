@@ -29,11 +29,6 @@ import { NavItem } from '@/types';
 
 export const archiveNavItems: NavItem[] = [
   {
-    title: 'Home',
-    url: '/',
-    icon: 'home',
-  },
-  {
     title: 'TB-303',
     url: '/dashboard/tb303',
     icon: 'keyboardMusic',
@@ -127,12 +122,10 @@ export function Sidebar() {
   return (
     <UISidebar collapsible="icon">
       <SidebarHeader>
-        <Smiley />
-        {open && (
-          <h1 className="text-[1.5rem] font-bold absolute translate-x-[2.5rem]">
-            Acid Archive
-          </h1>
-        )}
+        <Link href="/" className="flex items-center gap-2">
+          <Smiley />
+          {open && <h1 className="text-[1.5rem] font-bold">Acid Archive</h1>}
+        </Link>
       </SidebarHeader>
       <SidebarContent className="overflow-x-hidden">
         <SidebarGroup>
