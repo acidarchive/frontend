@@ -3,16 +3,16 @@
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { set } from 'zod/v3';
 
+import { handleSignOut } from '@/dal/auth';
 import { fetchMe } from '@/dal/users';
 import { Me } from '@/types/api';
 
 interface UserContextType {
   user?: Me;
   isLoading: boolean;
-  setUser: React.Dispatch<React.SetStateAction<Me | undefined>>;
   refreshUser: () => Promise<void>;
+  signOut: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -46,6 +46,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     await fetchUser();
   };
 
+  const signOut = async () => {
+    await handleSignOut();
+    setUser(undefined);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     const unsubscribe = Hub.listen('auth', ({ payload }) => {
       switch (payload.event) {
@@ -68,7 +74,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading, refreshUser }}>
+    <UserContext.Provider value={{ user, isLoading, refreshUser, signOut }}>
       {children}
     </UserContext.Provider>
   );
