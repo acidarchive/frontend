@@ -142,7 +142,7 @@ export function AvatarUpload() {
           >
             <div className="flex flex-col gap-2 justify-center items-center">
               <Avatar className="size-20">
-                <AvatarImage src={preview ?? user?.avatar ?? ''} />
+                <AvatarImage src={preview ?? user?.avatar_url ?? ''} />
                 <AvatarFallback />
               </Avatar>
               <p className="text-muted-foreground text-xs">
