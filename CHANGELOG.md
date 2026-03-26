@@ -1,6 +1,18 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Update user context
+
+
+### 🔧 Fixed
+
+- Remove unused menu items
+
+
+## [0.0.1-alpha.84] - 2026-03-22
+
 ### 🔧 Fixed
 
 - Random pattern view
@@ -768,7 +780,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.83..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.84..HEAD
+[0.0.1-alpha.84]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.83..v0.0.1-alpha.84
 [0.0.1-alpha.83]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.82..v0.0.1-alpha.83
 [0.0.1-alpha.82]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.81..v0.0.1-alpha.82
 [0.0.1-alpha.81]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.80..v0.0.1-alpha.81
