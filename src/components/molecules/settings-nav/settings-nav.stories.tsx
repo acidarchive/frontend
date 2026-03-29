@@ -8,17 +8,17 @@ const navItems = [
   {
     title: 'Profile',
     href: '/settings/profile',
-    icon: <Icons.userCircle className="size-4" />,
+    icon: <Icons.UserSharp className="size-4" />,
   },
   {
     title: 'Account',
     href: '/settings/account',
-    icon: <Icons.settings className="size-4" />,
+    icon: <Icons.SettingsCog className="size-4" />,
   },
   {
     title: 'Security',
     href: '/settings/security',
-    icon: <Icons.keyRound className="size-4" />,
+    icon: <Icons.LockSharp className="size-4" />,
   },
 ];
 

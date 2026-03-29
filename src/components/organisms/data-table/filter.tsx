@@ -1,8 +1,9 @@
 'use client';
 
-import { Circle, PlusCircle } from 'lucide-react';
+import type { ReactNode } from 'react';
 import { useCallback } from 'react';
 
+import { Icons } from '@/components/atoms/icons/icons';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,16 +22,29 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 
+interface FilterOption {
+  label: string;
+  value: boolean;
+  icon?: (props: { className?: string }) => ReactNode;
+}
+
 interface DataTableFilterProps {
   title?: string;
-  options: {
-    label: string;
-    value: boolean;
-    icon?: React.ComponentType<{ className?: string }>;
-  }[];
+  options: FilterOption[];
   value?: boolean;
   onValueChange?: (value?: boolean) => void;
   disabled?: boolean;
+}
+
+interface SelectionIndicatorProps {
+  isSelected: boolean;
+}
+
+function SelectionIndicator({ isSelected }: SelectionIndicatorProps) {
+  if (isSelected) {
+    return <div className="size-1.5 rounded-full bg-primary-foreground" />;
+  }
+  return <Icons.Circle className="size-3.5 text-transparent" />;
 }
 
 const getSelectionClasses = (isSelected: boolean) => {
@@ -67,13 +81,6 @@ export function Filter({
     onValueChange?.();
   }, [onValueChange]);
 
-  const getSelectionIndicator = (isSelected: boolean) => {
-    if (isSelected) {
-      return <div className="size-1.5 rounded-full bg-primary-foreground" />;
-    }
-    return <Circle className="size-3.5 text-transparent" />;
-  };
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -83,7 +90,7 @@ export function Filter({
           className="h-8 border-dashed"
           disabled={disabled}
         >
-          <PlusCircle className="h-4 w-4" />
+          <Icons.PlusCircle className="size-4" />
           {title}
           {selectedOption && (
             <>
@@ -98,7 +105,7 @@ export function Filter({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-50 p-0" align="start">
         <Command>
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
@@ -113,7 +120,7 @@ export function Filter({
                     onSelect={() => handleSelect(option.value)}
                   >
                     <div className={getSelectionClasses(isSelected)}>
-                      {getSelectionIndicator(isSelected)}
+                      <SelectionIndicator isSelected={isSelected} />
                     </div>
                     {OptionIcon && (
                       <OptionIcon className="size-4 text-muted-foreground" />

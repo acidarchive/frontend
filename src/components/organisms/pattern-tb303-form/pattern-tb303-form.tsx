@@ -3,7 +3,7 @@
 import { FormEventHandler } from 'react';
 
 import { GridInput } from '@/components/atoms/grid-input';
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { SwitchElement } from '@/components/molecules/switch-element';
 import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
 
@@ -23,7 +23,7 @@ export function PatternTB303Form({
     <form onSubmit={onSubmit}>
       {error && (
         <div className="mb-4">
-          <Alert title="Error">{error}</Alert>
+          <FormAlert title="Error" message={error} />
         </div>
       )}
 

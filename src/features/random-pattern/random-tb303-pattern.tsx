@@ -55,7 +55,7 @@ export function RandomTB303Pattern() {
               className="cursor-pointer"
             >
               Refresh
-              <Icons.refreshCw className={cn(isSpinning && 'animate-spin')} />
+              <Icons.RefreshCw className={cn(isSpinning && 'animate-spin')} />
             </Button>
           </div>
         </div>

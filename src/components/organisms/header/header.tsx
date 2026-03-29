@@ -35,7 +35,7 @@ export const Header: React.FC = () => {
               onClick={() => setMobileMenuOpen(true)}
               className="-m-3 p-3 md:hidden"
             >
-              <Icons.menu aria-hidden="true" className="size-5" />
+              <Icons.Menu aria-hidden="true" className="size-6" />
             </button>
             <Link
               href="/"

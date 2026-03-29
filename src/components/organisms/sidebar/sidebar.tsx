@@ -31,7 +31,7 @@ export const archiveNavItems: NavItem[] = [
   {
     title: 'TB-303',
     url: '/dashboard/tb303',
-    icon: 'keyboardMusic',
+    icon: 'KeyboardMusicSharp',
   },
 ];
 
@@ -39,29 +39,33 @@ export const otherNavItems: NavItem[] = [
   {
     title: 'Settings',
     url: '/dashboard/settings',
-    icon: 'settings',
+    icon: 'SettingsCog',
     items: [
       {
         title: 'Avatar',
         url: '/dashboard/settings/avatar',
-        icon: 'userCircle',
+        icon: 'UserSharp',
       },
       {
         title: 'Password',
         url: '/dashboard/settings/password',
-        icon: 'keyRound',
+        icon: 'LockSharp',
       },
     ],
   },
 ];
 
-function renderNavItem(item: NavItem, pathname: string) {
-  const Icon = item.icon ? Icons[item.icon] : Icons.logo;
+interface NavMenuItemProps {
+  item: NavItem;
+  pathname: string;
+}
 
-  if (item?.items && item?.items?.length > 0) {
+function NavMenuItem({ item, pathname }: NavMenuItemProps) {
+  const Icon = Icons[item.icon];
+
+  if (item.items && item.items.length > 0) {
     return (
       <Collapsible
-        key={item.title}
         asChild
         defaultOpen={pathname.startsWith(item.url)}
         className="group/collapsible"
@@ -69,14 +73,14 @@ function renderNavItem(item: NavItem, pathname: string) {
         <SidebarMenuItem>
           <CollapsibleTrigger asChild>
             <SidebarMenuButton tooltip={item.title}>
-              {item.icon && <Icon />}
-              <span>{item.title}</span>
-              <Icons.chevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+              {Icon && <Icon className="size-5!" />}
+              <span className="text-base">{item.title}</span>
+              <Icons.ChevronRight className="ml-auto size-5! transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
             </SidebarMenuButton>
           </CollapsibleTrigger>
           <CollapsibleContent>
             <SidebarMenuSub>
-              {item.items?.map(subItem => {
+              {item.items.map(subItem => {
                 const SubIcon = subItem.icon ? Icons[subItem.icon] : null;
                 return (
                   <SidebarMenuSubItem key={subItem.title}>
@@ -85,8 +89,8 @@ function renderNavItem(item: NavItem, pathname: string) {
                       isActive={pathname === subItem.url}
                     >
                       <Link href={subItem.url}>
-                        {SubIcon && <SubIcon className="size-4" />}
-                        <span>{subItem.title}</span>
+                        {SubIcon && <SubIcon className="size-5!" />}
+                        <span className="text-base">{subItem.title}</span>
                       </Link>
                     </SidebarMenuSubButton>
                   </SidebarMenuSubItem>
@@ -100,15 +104,15 @@ function renderNavItem(item: NavItem, pathname: string) {
   }
 
   return (
-    <SidebarMenuItem key={item.title}>
+    <SidebarMenuItem>
       <SidebarMenuButton
         asChild
         tooltip={item.title}
         isActive={pathname === item.url}
       >
         <Link href={item.url}>
-          <Icon />
-          <span>{item.title}</span>
+          {Icon && <Icon className="size-5!" />}
+          <span className="text-base">{item.title}</span>
         </Link>
       </SidebarMenuButton>
     </SidebarMenuItem>
@@ -122,7 +126,11 @@ export function Sidebar() {
   return (
     <UISidebar collapsible="icon">
       <SidebarHeader>
-        <Link href="/" className="flex items-center gap-2">
+        <Link
+          href="/"
+          aria-label="Go to homepage"
+          className="flex items-center gap-2"
+        >
           <Smiley />
           {open && <h1 className="text-[1.5rem] font-bold">Acid Archive</h1>}
         </Link>
@@ -131,13 +139,17 @@ export function Sidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>Archive</SidebarGroupLabel>
           <SidebarMenu>
-            {archiveNavItems.map(item => renderNavItem(item, pathname))}
+            {archiveNavItems.map(item => (
+              <NavMenuItem key={item.title} item={item} pathname={pathname} />
+            ))}
           </SidebarMenu>
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Other</SidebarGroupLabel>
           <SidebarMenu>
-            {otherNavItems.map(item => renderNavItem(item, pathname))}
+            {otherNavItems.map(item => (
+              <NavMenuItem key={item.title} item={item} pathname={pathname} />
+            ))}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>

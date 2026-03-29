@@ -1,5 +1,4 @@
-import { Mail } from 'lucide-react';
-
+import { Icons } from '@/components/atoms/icons';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
@@ -62,7 +61,7 @@ export function AboutPage() {
         </p>
         <Button variant="outline" asChild>
           <a href="mailto:info@acidarchive.com">
-            <Mail className="mr-2 h-4 w-4" />
+            <Icons.MailSharp className="size-6" />
             Get in Touch
           </a>
         </Button>
