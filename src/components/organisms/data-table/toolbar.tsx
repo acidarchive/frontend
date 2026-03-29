@@ -1,10 +1,11 @@
 'use client';
 
 import { Table } from '@tanstack/react-table';
-import { X } from 'lucide-react';
+import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import { useDebounce } from 'react-use';
 
+import { Icons } from '@/components/atoms/icons';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -29,8 +30,6 @@ interface ToolbarProps<TData> {
 }
 
 export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
-  const isDisabled = isLoading;
-  const tableState = table.getState();
   const visibilityColumn = table.getColumn('is_public');
   const nameColumn = table.getColumn('name');
 
@@ -41,8 +40,7 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
   const visibilityFilter = visibilityColumn?.getFilterValue() as
     | boolean
     | undefined;
-  const hasColumnFilters = tableState.columnFilters.length > 0;
-  const isFiltered = hasColumnFilters;
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   useDebounce(
     () => {
@@ -61,7 +59,7 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
     visibilityColumn?.setFilterValue(value);
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(event.target.value);
   };
 
@@ -72,8 +70,8 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
           placeholder="Search by pattern name..."
           value={searchInput}
           onChange={handleSearchChange}
-          className="h-8 w-[150px] lg:w-[250px]"
-          disabled={isDisabled}
+          className="h-8 w-37.5 lg:w-62.5"
+          disabled={isLoading}
         />
 
         {visibilityColumn && (
@@ -82,7 +80,7 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
             options={visibilities}
             value={visibilityFilter}
             onValueChange={handleVisibilityChange}
-            disabled={isDisabled}
+            disabled={isLoading}
           />
         )}
 
@@ -91,10 +89,9 @@ export function Toolbar<TData>({ table, isLoading }: ToolbarProps<TData>) {
             variant="ghost"
             size="sm"
             onClick={handleReset}
-            disabled={isDisabled}
+            disabled={isLoading}
           >
-            Reset
-            <X className="h-4 w-4" />
+            Reset <Icons.XIcon />
           </Button>
         )}
       </div>

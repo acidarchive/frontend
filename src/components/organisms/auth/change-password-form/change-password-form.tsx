@@ -1,14 +1,9 @@
 'use client';
 
 import { PasswordInput } from '@/components/atoms/password-input';
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { Button } from '@/components/ui/button';
-import {
-  Field,
-  FieldError,
-  FieldLabel,
-  FieldSet,
-} from '@/components/ui/field';
+import { Field, FieldError, FieldLabel, FieldSet } from '@/components/ui/field';
 import type { ChangePasswordFormState } from '@/lib/definitions';
 
 interface ChangePasswordFormProps {
@@ -28,9 +23,7 @@ export function ChangePasswordForm({
 }: ChangePasswordFormProps) {
   return (
     <form action={action} noValidate>
-      <Alert variant="destructive" className="mb-4">
-        {formError}
-      </Alert>
+      <FormAlert variant="destructive" className="mb-4" message={formError} />
       <FieldSet className="gap-4">
         <Field>
           <FieldLabel htmlFor="current-password">Current Password</FieldLabel>

@@ -10,13 +10,21 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
+const justifyClasses = {
+  start: 'justify-start',
+  center: 'justify-center',
+  end: 'justify-end',
+} as const;
+
+type Justify = keyof typeof justifyClasses;
+
 interface DataTableColumnHeaderProps<
   TData,
   TValue,
 > extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>;
   title: string;
-  justify?: 'start' | 'center' | 'end';
+  justify?: Justify;
 }
 
 export function ColumnHeader<TData, TValue>({
@@ -34,14 +42,16 @@ export function ColumnHeader<TData, TValue>({
   const handleSortDescending = () => column.toggleSorting(true);
 
   const getSortIcon = () => {
-    if (isDescending) return <Icons.arrowDown className="h-4 w-4" />;
-    if (isAscending) return <Icons.arrowUp className="h-4 w-4" />;
-    return <Icons.chevronsUpDown className="h-4 w-4" />;
+    if (isDescending) return <Icons.ChevronDown className="size-4" />;
+    if (isAscending) return <Icons.ChevronUp className="size-4" />;
+    return <Icons.ChevronsVertical className="size-4" />;
   };
 
   if (!canSort) {
     return (
-      <div className={cn(`flex items-center justify-${justify}`, className)}>
+      <div
+        className={cn('flex items-center', justifyClasses[justify], className)}
+      >
         {title}
       </div>
     );
@@ -49,7 +59,11 @@ export function ColumnHeader<TData, TValue>({
 
   return (
     <div
-      className={cn(`flex items-center gap-2 justify-${justify}`, className)}
+      className={cn(
+        'flex items-center gap-2',
+        justifyClasses[justify],
+        className,
+      )}
     >
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -69,7 +83,7 @@ export function ColumnHeader<TData, TValue>({
             onClick={handleSortAscending}
             className="flex items-center gap-2"
           >
-            <Icons.arrowUp className="h-4 w-4" />
+            <Icons.ChevronUp className="size-4" />
             <span>Asc</span>
           </DropdownMenuItem>
 
@@ -77,7 +91,7 @@ export function ColumnHeader<TData, TValue>({
             onClick={handleSortDescending}
             className="flex items-center gap-2"
           >
-            <Icons.arrowDown className="h-4 w-4" />
+            <Icons.ChevronDown className="size-4" />
             <span>Desc</span>
           </DropdownMenuItem>
         </DropdownMenuContent>

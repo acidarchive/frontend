@@ -1,22 +1,22 @@
 'use client';
 
-import { useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 import { ErrorFallback } from '@/components/molecules/error-fallback';
 
-export default function Error({
-  error,
-  reset,
-}: {
+interface ErrorProps {
   error: Error & { digest?: string };
   reset: () => void;
-}) {
-  const queryClient = useQueryClient();
+}
 
-  const handleRetry = () => {
-    queryClient.removeQueries({ queryKey: ['/v1/patterns/tb303/random'] });
-    reset();
-  };
+export default function Error({ error, reset }: ErrorProps) {
+  useEffect(() => {
+    console.error('Error caught:', {
+      message: error.message,
+      digest: error.digest,
+      ...(process.env.NODE_ENV === 'development' && { stack: error.stack }),
+    });
+  }, [error]);
 
-  return <ErrorFallback error={error} reset={handleRetry} />;
+  return <ErrorFallback error={error} reset={reset} />;
 }

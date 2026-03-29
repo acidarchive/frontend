@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Field, FieldError, FieldLabel, FieldSet } from '@/components/ui/field';
@@ -32,10 +32,12 @@ export function ConfirmSignupForm({
     <Card className="w-full max-w-lg">
       <CardContent>
         <form action={confirmSignUpAction} noValidate autoComplete="off">
-          <Alert className="mb-4">{message}</Alert>
-          <Alert variant="destructive" className="mb-4">
-            {formError}
-          </Alert>
+          <FormAlert className="mb-4" message={message} />
+          <FormAlert
+            variant="destructive"
+            className="mb-4"
+            message={formError}
+          />
           <FieldSet className="gap-4">
             <Field>
               <FieldLabel htmlFor="username-display">Username</FieldLabel>

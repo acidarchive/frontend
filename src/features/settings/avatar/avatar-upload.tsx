@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useReducer } from 'react';
 
 import { Icons } from '@/components/atoms/icons';
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { ImageDropzone } from '@/components/molecules/image-dropzone';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -156,7 +156,7 @@ export function AvatarUpload() {
               <div className="flex gap-2">
                 <Button onClick={handleUpload} disabled={isUploading}>
                   {isUploading && (
-                    <Icons.refreshCw className="mr-2 h-4 w-4 animate-spin" />
+                    <Icons.RefreshCw className="mr-2 h-4 w-4 animate-spin" />
                   )}
                   Save
                 </Button>
@@ -176,9 +176,11 @@ export function AvatarUpload() {
           MB.
         </p>
         {error && (
-          <Alert variant="destructive" title="Upload Error">
-            {error}
-          </Alert>
+          <FormAlert
+            variant="destructive"
+            title="Upload Error"
+            message={error}
+          />
         )}
       </div>
     </div>

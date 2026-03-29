@@ -1,6 +1,6 @@
 'use client';
 
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -51,7 +51,7 @@ export function BaseModal({
         ) : undefined}
         {error && (
           <div className="mb-4">
-            <Alert title="Error">{error}</Alert>
+            <FormAlert title="Error" message={error} />
           </div>
         )}
 

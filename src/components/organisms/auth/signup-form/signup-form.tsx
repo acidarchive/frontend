@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { PasswordInput } from '@/components/atoms/password-input';
-import { Alert } from '@/components/molecules/alert';
+import { FormAlert } from '@/components/molecules/form-alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -35,9 +35,11 @@ export function SignupForm({
     <Card className="w-full max-w-lg">
       <CardContent>
         <form action={action} noValidate>
-          <Alert variant="destructive" className="mb-4">
-            {formError}
-          </Alert>
+          <FormAlert
+            variant="destructive"
+            className="mb-4"
+            message={formError}
+          />
           <FieldSet className="gap-4">
             <Field>
               <FieldLabel htmlFor="username">Username</FieldLabel>

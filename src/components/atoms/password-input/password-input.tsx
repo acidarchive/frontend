@@ -1,7 +1,8 @@
 'use client';
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+
 import { useState } from 'react';
 
+import { Icons } from '@/components/atoms/icons';
 import {
   InputGroup,
   InputGroupAddon,
@@ -18,10 +19,12 @@ export function PasswordInput({
 }: PasswordInputProps) {
   const [showPassword, setShowPassword] = useState(false);
 
+  const VisibilityIcon = showPassword ? Icons.Eye : Icons.EyeOff;
+
   return (
     <InputGroup>
       <InputGroupInput
-        type={showPassword ? 'text' : 'password'}
+        type={!disabled && showPassword ? 'text' : 'password'}
         disabled={disabled}
         placeholder={placeholder}
         {...props}
@@ -30,12 +33,12 @@ export function PasswordInput({
         <InputGroupButton
           type="button"
           variant="ghost"
-          size="icon-xs"
+          size="icon-sm"
           onClick={() => setShowPassword(previous => !previous)}
           disabled={disabled}
           aria-label={showPassword ? 'Hide password' : 'Show password'}
         >
-          {showPassword ? <EyeIcon /> : <EyeOffIcon />}
+          <VisibilityIcon className="size-6" />
         </InputGroupButton>
       </InputGroupAddon>
     </InputGroup>
