@@ -1,19 +1,11 @@
 'use client';
 
 import { fetchAuthSession } from 'aws-amplify/auth';
+import { AppError, ErrorCode } from '@/lib/errors';
+import { ApiError } from '@/lib/errors/api';
 
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:8000';
-
-export class ApiError extends Error {
-  constructor(
-    public readonly status: number,
-    public readonly data: unknown,
-  ) {
-    super(`API error ${status}`);
-    this.name = 'ApiError';
-  }
-}
 
 interface RequestConfig {
   url: string;
@@ -21,6 +13,8 @@ interface RequestConfig {
   data?: unknown;
   params?: Record<string, string | number | boolean | undefined>;
 }
+
+export { ApiError };
 
 const getIdToken = async (): Promise<string | null> => {
   try {
