@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Remove axios
+
+
+## [0.0.1-alpha.87] - 2026-04-02
+
 ### ⚙️ Miscellaneous
 
 - Update nextjs version
@@ -794,7 +801,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..HEAD
+[0.0.1-alpha.87]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..v0.0.1-alpha.87
 [0.0.1-alpha.86]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.85..v0.0.1-alpha.86
 [0.0.1-alpha.85]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.84..v0.0.1-alpha.85
 [0.0.1-alpha.84]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.83..v0.0.1-alpha.84
