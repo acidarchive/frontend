@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Update nextjs version
+
+
+## [0.0.1-alpha.86] - 2026-04-02
+
 ### 🌀 Added
 
 - Update website icons
@@ -787,7 +794,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.85..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..HEAD
+[0.0.1-alpha.86]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.85..v0.0.1-alpha.86
 [0.0.1-alpha.85]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.84..v0.0.1-alpha.85
 [0.0.1-alpha.84]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.83..v0.0.1-alpha.84
 [0.0.1-alpha.83]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.82..v0.0.1-alpha.83
