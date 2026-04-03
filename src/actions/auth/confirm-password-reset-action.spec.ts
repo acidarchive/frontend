@@ -101,7 +101,7 @@ describe('confirmPasswordResetAction', () => {
     const result = await confirmPasswordResetAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Invalid verification code. Please try again.'],
+      formErrors: ['Invalid verification code.'],
       data: validFormData,
     });
     expect(redirect).not.toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe('confirmPasswordResetAction', () => {
     const result = await confirmPasswordResetAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Verification code has expired. Please request a new one.'],
+      formErrors: ['Verification code has expired. Request a new one.'],
       data: validFormData,
     });
     expect(redirect).not.toHaveBeenCalled();
@@ -148,7 +148,7 @@ describe('confirmPasswordResetAction', () => {
     const result = await confirmPasswordResetAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Something went wrong. Please try again.'],
+      formErrors: ['Unknown error'],
       data: validFormData,
     });
     expect(redirect).not.toHaveBeenCalled();

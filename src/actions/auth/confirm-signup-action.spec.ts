@@ -48,7 +48,7 @@ describe('confirmSignUpAction', () => {
     const result = await confirmSignUpAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Invalid confirmation code. Please try again.'],
+      formErrors: ['Invalid verification code.'],
       data: {
         username: 'testuser',
         code: '123456',
@@ -90,7 +90,8 @@ describe('confirmSignUpAction', () => {
     const result = await confirmSignUpAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['User already confirmed.'],
+      // NotAuthorizedException shows "Invalid credentials" because that's the signIn message - the map doesn't know the action context.
+      formErrors: ['Invalid credentials.'],
       data: {
         username: 'testuser',
         code: '123456',

@@ -11,6 +11,8 @@ import {
   ConfirmSignupFormSchema,
   ConfirmSignupFormState,
 } from '@/lib/definitions';
+import { getErrorMessage } from '@/lib/errors';
+import { toAppError } from '@/lib/errors/cognito';
 
 export async function confirmSignUpAction(
   _: unknown,
@@ -44,38 +46,14 @@ export async function confirmSignUpAction(
     if (isRedirectError(error)) {
       throw error;
     }
-
-    if (error instanceof Error) {
-      if (error.name === 'CodeMismatchException') {
-        return {
-          formErrors: ['Invalid confirmation code. Please try again.'],
-          data,
-        };
-      }
-      if (error.name === 'UserNotFoundException') {
-        return {
-          formErrors: ['User not found.'],
-          data,
-        };
-      }
-      if (error.name === 'NotAuthorizedException') {
-        return {
-          formErrors: ['User already confirmed.'],
-          data,
-        };
-      }
-      if (error.name === 'ExpiredCodeException') {
-        return {
-          formErrors: [
-            'Confirmation code has expired. Please request a new one.',
-          ],
-          data,
-        };
-      }
-    }
+    const appError = toAppError(error);
+    return {
+      formErrors: [getErrorMessage(appError)],
+      data,
+    };
   }
   return {
-    formErrors: ['Something went wrong. Please try again.'],
+    message: 'Sign up confirmed successfully',
     data,
   };
 }

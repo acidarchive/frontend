@@ -36,7 +36,7 @@ describe('resendSignupAction', () => {
     const result = await resendSignupCodeAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Failed to resend code. Please try again.'],
+      formErrors: ['Failed to resend code'],
       data: { username: 'testuser', code: '' },
     });
   });
