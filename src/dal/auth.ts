@@ -12,6 +12,8 @@ import {
   ChangePasswordFormState,
   ChangePasswordSchema,
 } from '@/lib/definitions';
+import { getErrorMessage } from '@/lib/errors';
+import { toAppError } from '@/lib/errors/cognito';
 
 export async function handleSignIn(data: {
   username: string;
@@ -32,26 +34,18 @@ export async function handleSignIn(data: {
     }
     return { success: true };
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === 'NotAuthorizedException') {
-        return { error: 'Incorrect username or password.' };
-      }
-      if (error.name === 'UserNotFoundException') {
-        return { error: 'Incorrect username or password.' };
-      }
-      if (error.name === 'UserAlreadyAuthenticatedException') {
-        return { success: true };
-      }
-    }
-    return { error: 'Something went wrong. Please try again.' };
+    const appError = toAppError(error);
+    return { error: getErrorMessage(appError) };
   }
 }
 
 export async function handleSignOut() {
   try {
     await signOut();
+    return { success: true };
   } catch (error) {
-    console.error('Sign out failed', error);
+    const appError = toAppError(error, 'Failed to sign out');
+    return { error: getErrorMessage(appError) };
   }
 }
 
@@ -80,32 +74,10 @@ export async function changePassword(data: {
       data,
     };
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === 'NotAuthorizedException') {
-        return {
-          formErrors: ['Current password is incorrect.'],
-          data,
-        };
-      }
-      if (error.name === 'LimitExceededException') {
-        return {
-          formErrors: ['Too many attempts. Please try again later.'],
-          data,
-        };
-      }
-      if (error.name === 'InvalidPasswordException') {
-        return {
-          formErrors: [
-            'New password does not meet requirements. Please try a different password.',
-          ],
-          data,
-        };
-      }
-    }
+    const appError = toAppError(error);
+    return {
+      formErrors: [getErrorMessage(appError)],
+      data,
+    };
   }
-
-  return {
-    formErrors: ['Something went wrong. Please try again.'],
-    data,
-  };
 }
