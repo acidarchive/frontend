@@ -5,6 +5,8 @@ import '@/lib/amplify/server';
 import { resendSignUpCode } from 'aws-amplify/auth';
 
 import { ConfirmSignupFormState } from '@/lib/definitions';
+import { getErrorMessage } from '@/lib/errors';
+import { toAppError } from '@/lib/errors/cognito';
 
 export async function resendSignupCodeAction(
   _: unknown,
@@ -21,9 +23,10 @@ export async function resendSignupCodeAction(
       message: 'Verification code sent successfully!',
       data: { username, code: '' },
     };
-  } catch {
+  } catch (error) {
+    const appError = toAppError(error);
     return {
-      formErrors: ['Failed to resend code. Please try again.'],
+      formErrors: [getErrorMessage(appError)],
       data: { username, code: '' },
     };
   }

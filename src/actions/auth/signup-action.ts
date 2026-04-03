@@ -8,6 +8,8 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 import { SignupFormSchema, SignupFormState } from '@/lib/definitions';
+import { getErrorMessage } from '@/lib/errors';
+import { toAppError } from '@/lib/errors/cognito';
 
 export async function signupAction(
   _: unknown,
@@ -47,16 +49,13 @@ export async function signupAction(
     if (isRedirectError(error)) {
       throw error;
     }
-    if (error instanceof Error && error.name === 'UsernameExistsException') {
-      return {
-        formErrors: ['Username already exists.'],
-        data,
-      };
-    }
+    const appError = toAppError(error);
+    return {
+      formErrors: [getErrorMessage(appError)],
+      data,
+    };
   }
-
   return {
-    formErrors: ['Something went wrong. Please try again.'],
     data,
   };
 }

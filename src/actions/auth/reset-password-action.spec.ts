@@ -76,7 +76,7 @@ describe('resetPasswordAction', () => {
     const result = await resetPasswordAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['No account found with this email address.'],
+      formErrors: ['User not found.'],
       data: { email: 'notfound@example.com' },
     });
     expect(redirect).not.toHaveBeenCalled();
@@ -107,7 +107,7 @@ describe('resetPasswordAction', () => {
     const result = await resetPasswordAction({}, formData);
 
     expect(result).toEqual({
-      formErrors: ['Something went wrong. Please try again.'],
+      formErrors: ['Unknown error'],
       data: { email: 'test@example.com' },
     });
     expect(redirect).not.toHaveBeenCalled();

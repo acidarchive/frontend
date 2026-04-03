@@ -11,6 +11,8 @@ import {
   ConfirmPasswordResetFormSchema,
   ConfirmPasswordResetFormState,
 } from '@/lib/definitions';
+import { getErrorMessage } from '@/lib/errors';
+import { toAppError } from '@/lib/errors/cognito';
 
 export async function confirmPasswordResetAction(
   _: unknown,
@@ -43,32 +45,10 @@ export async function confirmPasswordResetAction(
     if (isRedirectError(error)) {
       throw error;
     }
-    if (error instanceof Error) {
-      if (error.name === 'CodeMismatchException') {
-        return {
-          formErrors: ['Invalid verification code. Please try again.'],
-          data,
-        };
-      }
-      if (error.name === 'ExpiredCodeException') {
-        return {
-          formErrors: [
-            'Verification code has expired. Please request a new one.',
-          ],
-          data,
-        };
-      }
-      if (error.name === 'LimitExceededException') {
-        return {
-          formErrors: ['Too many attempts. Please try again later.'],
-          data,
-        };
-      }
-    }
+    const appError = toAppError(error);
+    return {
+      formErrors: [getErrorMessage(appError)],
+      data,
+    };
   }
-
-  return {
-    formErrors: ['Something went wrong. Please try again.'],
-    data,
-  };
 }
