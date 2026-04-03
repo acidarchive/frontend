@@ -9,12 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useUser } from '@/context/user-context';
-import {
-  getApiErrorMessage,
-  getPresignedUploadUrl,
-  patchMe,
-  uploadFileToS3,
-} from '@/dal';
+import { getPresignedUploadUrl, patchMe, uploadFileToS3 } from '@/dal';
 import { IMAGE_UPLOAD_CONFIG } from '@/lib/definitions';
 import { PresignContentType } from '@/types';
 
@@ -96,25 +91,41 @@ export function AvatarUpload() {
     dispatch({ type: UploadActionTypes.SET_UPLOADING, payload: true });
     dispatch({ type: UploadActionTypes.SET_ERROR, payload: undefined });
 
-    try {
-      const { upload_url, key } = await getPresignedUploadUrl({
-        content_length: selectedFile.size,
-        content_type: selectedFile.type as PresignContentType,
-        upload_type: 'avatar',
-      });
+    const presignResult = await getPresignedUploadUrl({
+      content_length: selectedFile.size,
+      content_type: selectedFile.type as PresignContentType,
+      upload_type: 'avatar',
+    });
 
-      await uploadFileToS3(upload_url, selectedFile);
-      await patchMe({ avatar_key: key });
-      await refreshUser();
-      resetState();
-    } catch (error) {
+    if ('error' in presignResult) {
       dispatch({
         type: UploadActionTypes.SET_ERROR,
-        payload: getApiErrorMessage(error),
+        payload: presignResult.error,
       });
-    } finally {
       dispatch({ type: UploadActionTypes.SET_UPLOADING, payload: false });
+      return;
     }
+
+    const { upload_url, key } = presignResult;
+
+    const uploadResult = await uploadFileToS3(upload_url, selectedFile);
+
+    if ('error' in uploadResult) {
+      dispatch({
+        type: UploadActionTypes.SET_ERROR,
+        payload: uploadResult.error,
+      });
+      dispatch({
+        type: UploadActionTypes.SET_UPLOADING,
+        payload: false,
+      });
+      return;
+    }
+
+    await patchMe({ avatar_key: key });
+    await refreshUser();
+    resetState();
+    dispatch({ type: UploadActionTypes.SET_UPLOADING, payload: false });
   }, [selectedFile, refreshUser, resetState]);
 
   const config = IMAGE_UPLOAD_CONFIG.avatar;
