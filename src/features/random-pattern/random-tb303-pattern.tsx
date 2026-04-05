@@ -38,10 +38,6 @@ export function RandomTB303Pattern() {
     }
   }, [data, form]);
 
-  if (error && !isFetching) {
-    throw error;
-  }
-
   return (
     <div className="flex flex-1 items-center justify-center">
       <div>
