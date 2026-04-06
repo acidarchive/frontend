@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createPatternTB303 } from '@/dal';
+import { getErrorMessage } from '@/lib/errors';
 import {
   formDataToApiPayload,
   PatternFormData,
@@ -10,10 +11,6 @@ import {
 import { CreateTB303Pattern } from '@/types/api';
 
 import { PatternModal } from './pattern-modal';
-
-const getErrorMessage = (error: unknown): string | undefined => {
-  return (error as Error)?.message;
-};
 
 interface CreatePatternProps {
   isOpen?: boolean;
