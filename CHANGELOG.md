@@ -3,6 +3,23 @@
 
 ### 🌀 Added
 
+- Show correct error messages in features
+
+- Add global error
+
+- Use consistent error messages in dal
+
+- Use consistent error handling in server actions
+
+- Update api client
+
+- Create error system library
+
+
+## [0.0.1-alpha.88] - 2026-04-02
+
+### 🌀 Added
+
 - Remove axios
 
 
@@ -801,7 +818,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..HEAD
+[0.0.1-alpha.88]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..v0.0.1-alpha.88
 [0.0.1-alpha.87]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..v0.0.1-alpha.87
 [0.0.1-alpha.86]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.85..v0.0.1-alpha.86
 [0.0.1-alpha.85]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.84..v0.0.1-alpha.85
