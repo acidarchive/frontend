@@ -1,15 +1,14 @@
 import { Footer } from '@/components/organisms/footer';
 import { Header } from '@/components/organisms/header';
 
-export default function MainLayout({
-  children,
-}: {
+interface MainLayoutProps {
   children: React.ReactNode;
-}) {
+}
+export default function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 flex flex-col px-4 mt-16">{children}</main>
+      <main className="flex-1 flex flex-col mt-16">{children}</main>
       <Footer />
     </div>
   );
