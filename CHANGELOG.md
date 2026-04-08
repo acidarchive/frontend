@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- View public pattern page
+
+
+## [0.0.1-alpha.89] - 2026-04-06
+
+### 🌀 Added
+
 - Show correct error messages in features
 
 - Add global error
@@ -818,7 +825,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..HEAD
+[0.0.1-alpha.89]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..v0.0.1-alpha.89
 [0.0.1-alpha.88]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..v0.0.1-alpha.88
 [0.0.1-alpha.87]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..v0.0.1-alpha.87
 [0.0.1-alpha.86]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.85..v0.0.1-alpha.86
