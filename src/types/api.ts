@@ -9,6 +9,7 @@ import {
   createTb303PatternBody,
   getMeResponse,
   getTb303PatternResponse,
+  listPublicTb303PatternsResponse,
   listTb303PatternsResponse,
   listTb303PatternsResponseItem,
   patchMeBody,
@@ -25,6 +26,13 @@ export type CreateTB303Pattern = z.infer<typeof createTb303PatternBody>;
 export type UpdateTB303Pattern = z.infer<typeof updateTb303PatternBody>;
 
 export type TB303Step = NonNullable<TB303Pattern['steps']>[number];
+
+export type PublicTB303PatternItem = z.infer<
+  typeof listPublicTb303PatternsResponse
+>['data'][number];
+export type PublicTB303PatternsList = z.infer<
+  typeof listPublicTb303PatternsResponse
+>;
 
 // TODO: extract from OpenAPI schema
 const noteSchema = z.enum([
