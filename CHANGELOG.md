@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Pattern list page
+
+
+## [0.0.1-alpha.90] - 2026-04-08
+
+### 🌀 Added
+
 - View public pattern page
 
 
@@ -825,7 +832,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.90..HEAD
+[0.0.1-alpha.90]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..v0.0.1-alpha.90
 [0.0.1-alpha.89]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..v0.0.1-alpha.89
 [0.0.1-alpha.88]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..v0.0.1-alpha.88
 [0.0.1-alpha.87]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.86..v0.0.1-alpha.87
