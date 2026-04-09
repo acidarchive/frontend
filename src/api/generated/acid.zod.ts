@@ -3,7 +3,7 @@
  * Do not edit manually.
  * acid
  * API for acidarchive.com
- * OpenAPI spec version: 0.0.1-alpha.16
+ * OpenAPI spec version: 0.0.1-alpha.18
  */
 import * as zod from 'zod';
 
@@ -50,6 +50,37 @@ export const createTb303PatternResponse = zod.object({
   "id": zod.string()
 }),
   "status": zod.string()
+})
+
+
+export const listPublicTb303PatternsQueryLimitDefault = 20;
+export const listPublicTb303PatternsQueryLimitMax = 100;
+
+export const listPublicTb303PatternsQueryOffsetDefault = 0;
+export const listPublicTb303PatternsQueryOffsetMin = 0;
+
+
+
+export const listPublicTb303PatternsQueryParams = zod.object({
+  "limit": zod.number().min(1).max(listPublicTb303PatternsQueryLimitMax).default(listPublicTb303PatternsQueryLimitDefault),
+  "offset": zod.number().min(listPublicTb303PatternsQueryOffsetMin).nullish()
+})
+
+export const listPublicTb303PatternsResponse = zod.object({
+  "data": zod.array(zod.object({
+  "author": zod.string().nullish(),
+  "avatar_url": zod.string().nullish(),
+  "created_at": zod.iso.datetime({}),
+  "is_public": zod.boolean(),
+  "name": zod.string(),
+  "pattern_id": zod.uuid(),
+  "title": zod.string().nullish(),
+  "updated_at": zod.iso.datetime({}),
+  "username": zod.string()
+})),
+  "limit": zod.number(),
+  "offset": zod.number(),
+  "total": zod.number()
 })
 
 
