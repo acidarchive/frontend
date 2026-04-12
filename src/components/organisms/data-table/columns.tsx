@@ -1,5 +1,4 @@
 import { ColumnDef } from '@tanstack/react-table';
-import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -43,12 +42,9 @@ export const columns: ColumnDef<TB303PatternSummary>[] = [
       <ColumnHeader column={column} title="Name" justify="start" />
     ),
     cell: ({ row }) => (
-      <Link
-        className="hover:underline underline-offset-4 font-medium truncate min-w-0"
-        href={`/dashboard/tb303/view/${row.original.pattern_id}`}
-      >
+      <span className="font-medium truncate min-w-0">
         {row.getValue('name')}
-      </Link>
+      </span>
     ),
     size: 0,
     minSize: 0,
