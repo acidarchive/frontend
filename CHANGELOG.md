@@ -1,6 +1,18 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### ⚙️ Miscellaneous
+
+- Upgrade packages
+
+
+### 🌀 Added
+
+- Show pattern preview in drawer
+
+
+## [0.0.1-alpha.91] - 2026-04-09
+
 ### 🌀 Added
 
 - Pattern list page
@@ -832,7 +844,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.90..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.91..HEAD
+[0.0.1-alpha.91]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.90..v0.0.1-alpha.91
 [0.0.1-alpha.90]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..v0.0.1-alpha.90
 [0.0.1-alpha.89]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..v0.0.1-alpha.89
 [0.0.1-alpha.88]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.87..v0.0.1-alpha.88
