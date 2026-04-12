@@ -6,7 +6,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import React from 'react';
 
 import {
   Table,
@@ -22,6 +21,7 @@ import { Toolbar } from './toolbar';
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  onRowClick: (row: TData) => void;
 }
 
 const getCellStyle = (size: number) => ({
@@ -31,6 +31,7 @@ const getCellStyle = (size: number) => ({
 export function DataTable<TData, TValue>({
   columns,
   data,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   // TanStack Table is incompatible with React Compiler memoization
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -69,7 +70,11 @@ export function DataTable<TData, TValue>({
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows.map(row => (
-                <TableRow key={row.id}>
+                <TableRow
+                  key={row.id}
+                  className="cursor-pointer"
+                  onClick={() => onRowClick(row.original)}
+                >
                   {row.getVisibleCells().map(cell => (
                     <TableCell
                       key={cell.id}

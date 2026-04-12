@@ -29,7 +29,6 @@ export default function TB303ListPage() {
           </Link>
         </Button>
       </div>
-
       <PatternTB303List />
     </div>
   );
