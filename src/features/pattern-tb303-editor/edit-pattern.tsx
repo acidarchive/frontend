@@ -11,24 +11,17 @@ import {
 } from '@/schemas/tb303/patterns';
 import { CreateTB303Pattern } from '@/types/api';
 
-import { PatternModal } from './pattern-modal';
+import { PatternEditor } from './pattern-editor';
 
 interface EditPatternProps {
   patternId: string;
-  isOpen?: boolean;
-  onClose?: () => void;
   onSuccess?: () => void;
 }
 
-export function EditPattern({
-  patternId,
-  isOpen,
-  onClose,
-  onSuccess,
-}: EditPatternProps) {
+export function EditPattern({ patternId, onSuccess }: EditPatternProps) {
   const queryClient = useQueryClient();
 
-  const { data: pattern, isLoading: isLoadingPattern } = useQuery({
+  const { data: pattern } = useQuery({
     queryKey: ['/v1/patterns/tb303', patternId],
     queryFn: () => fetchPatternTB303(patternId),
     throwOnError: true,
@@ -39,7 +32,7 @@ export function EditPattern({
       updatePatternTB303(patternId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/v1/patterns/tb303'] });
-      if (onSuccess) onSuccess();
+      onSuccess?.();
     },
   });
 
@@ -52,19 +45,17 @@ export function EditPattern({
     updatePatternMutation.reset();
   };
 
-  const error = getErrorMessage(updatePatternMutation.error);
-  const isLoading = isLoadingPattern || updatePatternMutation.isPending;
+  const error = updatePatternMutation.error
+    ? getErrorMessage(updatePatternMutation.error)
+    : undefined;
 
   const formData = pattern ? apiPatternToFormData(pattern) : undefined;
 
   return (
-    <PatternModal
+    <PatternEditor
       title="Edit TB-303 Pattern"
-      isOpen={isOpen}
       initialData={formData}
       error={error}
-      isLoading={isLoading}
-      onClose={onClose}
       onSubmit={handleSubmit}
       onReset={handleReset}
     />
