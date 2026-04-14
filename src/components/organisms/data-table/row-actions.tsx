@@ -40,6 +40,7 @@ export function RowActions({
             variant="ghost"
             size="icon"
             className="size-8 data-[state=open]:bg-muted"
+            onClick={event => event.stopPropagation()}
           >
             <Icons.MoreHorizontalSharp className="size-4" />
             <span className="sr-only">Open menu</span>

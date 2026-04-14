@@ -8,28 +8,21 @@ import {
   formDataToApiPayload,
   PatternFormData,
 } from '@/schemas/tb303/patterns';
-import { CreateTB303Pattern } from '@/types/api';
 
-import { PatternModal } from './pattern-modal';
+import { PatternEditor } from './pattern-editor';
 
 interface CreatePatternProps {
-  isOpen?: boolean;
-  onClose?: () => void;
   onSuccess?: () => void;
 }
 
-export function CreatePattern({
-  isOpen,
-  onClose,
-  onSuccess,
-}: CreatePatternProps) {
+export function CreatePattern({ onSuccess }: CreatePatternProps) {
   const queryClient = useQueryClient();
 
   const createPatternMutation = useMutation({
-    mutationFn: (data: CreateTB303Pattern) => createPatternTB303(data),
+    mutationFn: createPatternTB303,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/v1/patterns/tb303'] });
-      if (onSuccess) onSuccess();
+      onSuccess?.();
     },
   });
 
@@ -42,17 +35,16 @@ export function CreatePattern({
     createPatternMutation.reset();
   };
 
-  const error = getErrorMessage(createPatternMutation.error);
+  const error = createPatternMutation.error
+    ? getErrorMessage(createPatternMutation.error)
+    : undefined;
 
   return (
-    <PatternModal
-      isOpen={isOpen}
+    <PatternEditor
       title="Create TB-303 Pattern"
-      onClose={onClose}
       onSubmit={handleSubmit}
       onReset={handleReset}
       error={error}
-      isLoading={createPatternMutation.isPending}
     />
   );
 }
