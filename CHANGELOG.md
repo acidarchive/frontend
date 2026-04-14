@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- Move pattern creating and editing from modals to pages
+
+
+## [0.0.1-alpha.92] - 2026-04-12
+
 ### ⚙️ Miscellaneous
 
 - Upgrade packages
@@ -844,7 +851,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.91..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.92..HEAD
+[0.0.1-alpha.92]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.91..v0.0.1-alpha.92
 [0.0.1-alpha.91]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.90..v0.0.1-alpha.91
 [0.0.1-alpha.90]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..v0.0.1-alpha.90
 [0.0.1-alpha.89]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.88..v0.0.1-alpha.89
