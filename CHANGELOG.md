@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Update create and edit page layout
+
+
+## [0.0.1-alpha.93] - 2026-04-14
+
+### 🌀 Added
+
 - Move pattern creating and editing from modals to pages
 
 
@@ -851,7 +858,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.92..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.93..HEAD
+[0.0.1-alpha.93]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.92..v0.0.1-alpha.93
 [0.0.1-alpha.92]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.91..v0.0.1-alpha.92
 [0.0.1-alpha.91]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.90..v0.0.1-alpha.91
 [0.0.1-alpha.90]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.89..v0.0.1-alpha.90
