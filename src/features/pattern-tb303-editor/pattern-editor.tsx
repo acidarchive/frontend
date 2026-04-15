@@ -1,12 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { type FieldErrors, FormProvider, useForm } from 'react-hook-form';
 
-import { FormAlert } from '@/components/molecules/form-alert';
 import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
-import { Button } from '@/components/ui/button';
 import { PatternFormData, PatternFormSchema } from '@/schemas/tb303/patterns';
 
 function getStepValidationError(
@@ -23,7 +21,7 @@ function getStepValidationError(
   }
 }
 
-interface PatternModalProps {
+interface PatternEditorProps {
   title?: string;
   initialData?: PatternFormData;
   error?: string;
@@ -39,10 +37,10 @@ export function PatternEditor({
   error: externalError,
   onReset: externalReset,
   readonly,
-}: PatternModalProps) {
+}: PatternEditorProps) {
   const methods = useForm({
     resolver: zodResolver(PatternFormSchema),
-    defaultValues: initialData,
+    values: initialData,
   });
 
   const {
@@ -50,12 +48,6 @@ export function PatternEditor({
     reset,
     formState: { errors },
   } = methods;
-
-  useEffect(() => {
-    if (initialData) {
-      reset(initialData);
-    }
-  }, [initialData, reset]);
 
   const validationError = useMemo(() => {
     return getStepValidationError(errors);
@@ -77,21 +69,14 @@ export function PatternEditor({
   return (
     <div className="flex flex-col gap-4">
       {title && <h1 className="text-2xl font-semibold">{title}</h1>}
-      {error && <FormAlert title="Error" message={error} />}
       <FormProvider {...methods}>
         <PatternTB303Form
           readonly={readonly}
+          error={error}
           onSubmit={handleSubmit(handleFormSubmit)}
+          onReset={handleReset}
         />
       </FormProvider>
-      {onSubmit && (
-        <div className="flex justify-end gap-2">
-          <Button type="button" variant="secondary" onClick={handleReset}>
-            Reset
-          </Button>
-          <Button onClick={handleSubmit(handleFormSubmit)}>Save</Button>
-        </div>
-      )}
     </div>
   );
 }
