@@ -40,7 +40,7 @@ const stepSchema = z
 
 export const patternCreateSchema = createTb303PatternBody
   .extend({
-    name: z.string().min(1, 'Pattern name is required'),
+    name: z.string({ error: 'Pattern name is required' }).min(1, 'Pattern name is required'),
     steps: z.preprocess(
       steps => {
         if (!Array.isArray(steps)) return steps;

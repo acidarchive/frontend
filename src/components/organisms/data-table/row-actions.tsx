@@ -48,7 +48,9 @@ export function RowActions({
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-40">
           <DropdownMenuItem asChild>
-            <Link href={editLink}>Edit</Link>
+            <Link href={editLink} onClick={event => event.stopPropagation()}>
+              Edit
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
