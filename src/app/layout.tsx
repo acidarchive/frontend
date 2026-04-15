@@ -1,10 +1,10 @@
 import '@/styles/globals.css';
 
+import { Analytics } from '@vercel/analytics/next';
 import { clsx } from 'clsx';
 import type { Metadata } from 'next';
 import { Fira_Code, Oxanium } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
-import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { UserProvider } from '@/context/user-context';
 import ConfigureAmplifyClientSide from '@/lib/amplify/client';
@@ -53,7 +53,8 @@ export default function RootLayout({
           <ConfigureAmplifyClientSide />
           <UserProvider>
             <QueryProvider>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              {children}
+              <Analytics />
             </QueryProvider>
           </UserProvider>
         </ThemeProvider>
