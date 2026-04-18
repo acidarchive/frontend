@@ -50,7 +50,7 @@ export const stepDurationSeconds = (tempo: number): number =>
   MIDI_MESSAGE_PPQN / 4 / tempoToTicksPerSecond(tempo);
 
 export const patternDurationInTicks = (pattern: TB303Pattern): number =>
-  (pattern.steps.length / 4) * MIDI_MESSAGE_PPQN;
+  (pattern.bars[0].steps.length / 4) * MIDI_MESSAGE_PPQN;
 
 export const stepMidiNoteOn = (
   step: { gate: true; pitch: number; velocity: number },

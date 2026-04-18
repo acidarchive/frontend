@@ -11,22 +11,25 @@ import {
 } from '@/types';
 
 interface TB303SequencerProps {
+  barIndex: number;
   readonly?: boolean;
 }
 
-export function TB303Sequencer({ readonly = false }: TB303SequencerProps) {
+export function TB303Sequencer({
+  barIndex,
+  readonly = false,
+}: TB303SequencerProps) {
   const { getValues } = useFormContext();
-  const values = getValues();
-  const steps = values.steps;
+  const steps = getValues(`bars.${barIndex}.steps`);
   return (
-    <div className="grid sm:grid-cols-[1fr_repeat(17,_1fr)] sm:grid-rows-5 sm:grid-flow-row grid-cols-6 grid-rows-17 grid-flow-col">
+    <div className="grid sm:grid-cols-[1fr_repeat(17,1fr)] sm:grid-rows-5 sm:grid-flow-row grid-cols-6 grid-rows-17 grid-flow-col">
       <StepNumberRow />
 
       <SequencerRow
         label="note"
         renderCell={index => (
           <CyclableInput
-            name={`steps.${index}.note`}
+            name={`bars.${barIndex}.steps.${index}.note`}
             id={`note-select-${index}`}
             options={NOTE_OPTIONS}
             defaultValue={steps?.[index]?.note ?? ''}
@@ -40,7 +43,7 @@ export function TB303Sequencer({ readonly = false }: TB303SequencerProps) {
         label="octave"
         renderCell={index => (
           <CyclableInput
-            name={`steps.${index}.transpose`}
+            name={`bars.${barIndex}.steps.${index}.transpose`}
             id={`transpose-select-${index}`}
             options={TRANSPOSE_OPTIONS}
             defaultValue={steps?.[index]?.transpose ?? ''}
@@ -54,7 +57,7 @@ export function TB303Sequencer({ readonly = false }: TB303SequencerProps) {
         label="accent"
         renderCell={index => (
           <CyclableInput
-            name={`steps.${index}.accent`}
+            name={`bars.${barIndex}.steps.${index}.accent`}
             id={`accent-checkbox-${index}`}
             options={BOOLEAN_OPTIONS}
             defaultValue={steps?.[index]?.accent ?? false}
@@ -67,7 +70,7 @@ export function TB303Sequencer({ readonly = false }: TB303SequencerProps) {
         label="slide"
         renderCell={index => (
           <CyclableInput
-            name={`steps.${index}.slide`}
+            name={`bars.${barIndex}.steps.${index}.slide`}
             id={`slide-checkbox-${index}`}
             options={BOOLEAN_OPTIONS}
             defaultValue={steps?.[index]?.slide ?? false}
@@ -80,7 +83,7 @@ export function TB303Sequencer({ readonly = false }: TB303SequencerProps) {
         label="time"
         renderCell={index => (
           <CyclableInput
-            name={`steps.${index}.time`}
+            name={`bars.${barIndex}.steps.${index}.time`}
             id={`time-select-${index}`}
             options={TIME_OPTIONS}
             defaultValue={steps?.[index]?.time ?? ''}

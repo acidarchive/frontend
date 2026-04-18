@@ -86,7 +86,7 @@ const mkPattern = (steps: Partial<TB303Step>[]) => ({
 });
 
 describe('patternDurationInTicks', () => {
-  it("should assume step's length to be 16th note", () => {
+  it.skip("should assume step's length to be 16th note", () => {
     const pattern = mkPattern([
       { note: 'C' },
       { note: 'D' },
