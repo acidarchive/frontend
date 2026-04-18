@@ -25,7 +25,8 @@ export type TB303PatternsList = z.infer<typeof listTb303PatternsResponse>;
 export type CreateTB303Pattern = z.infer<typeof createTb303PatternBody>;
 export type UpdateTB303Pattern = z.infer<typeof updateTb303PatternBody>;
 
-export type TB303Step = NonNullable<TB303Pattern['steps']>[number];
+export type TB303Bar = NonNullable<TB303Pattern['bars']>[number];
+export type TB303Step = TB303Bar['steps'][number];
 
 export type PublicTB303PatternItem = z.infer<
   typeof listPublicTb303PatternsResponse

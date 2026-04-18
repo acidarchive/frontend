@@ -1,23 +1,17 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMemo } from 'react';
-import { type FieldErrors, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import { PatternTB303Form } from '@/components/organisms/pattern-tb303-form';
 import { PatternFormData, PatternFormSchema } from '@/schemas/tb303/patterns';
 
-function getStepValidationError(
-  errors: FieldErrors<{ steps?: unknown }>,
-): string | undefined {
-  if (errors.steps?.root?.message) {
-    return errors.steps.root.message;
-  }
-  if (Array.isArray(errors.steps)) {
-    const firstStepError = errors.steps.find(step => step?.time?.message);
-    if (firstStepError?.time?.message) {
-      return firstStepError.time.message;
-    }
+function findFirstErrorMessage(errors: object): string | undefined {
+  for (const value of Object.values(errors)) {
+    if (!value || typeof value !== 'object') continue;
+    if (typeof (value as { message?: unknown }).message === 'string') return (value as { message: string }).message;
+    const nested = findFirstErrorMessage(value as object);
+    if (nested) return nested;
   }
 }
 
@@ -40,6 +34,7 @@ export function PatternEditor({
 }: PatternEditorProps) {
   const methods = useForm({
     resolver: zodResolver(PatternFormSchema),
+    defaultValues: { bars: [{ number: 1, steps: [] }] },
     values: initialData,
   });
 
@@ -49,9 +44,7 @@ export function PatternEditor({
     formState: { errors },
   } = methods;
 
-  const validationError = useMemo(() => {
-    return getStepValidationError(errors);
-  }, [errors]);
+  const validationError = findFirstErrorMessage(errors);
 
   const error = validationError || externalError;
 

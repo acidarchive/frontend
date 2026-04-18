@@ -7,7 +7,7 @@ import { Icons } from '@/components/atoms/icons';
 import { PatternTB303Viewer } from '@/components/organisms/pattern-tb303-viewer';
 import { Button } from '@/components/ui/button';
 import { fetchPatternTB303Random } from '@/dal';
-import { MidiPlayer } from '@/features/midi-player';
+// import { MidiPlayer } from '@/features/midi-player';
 import { cn } from '@/lib/utils';
 
 export function RandomTB303Pattern() {
@@ -47,7 +47,7 @@ export function RandomTB303Pattern() {
         </div>
         <div className="mb-4">
           <PatternTB303Viewer data={data} />
-          <MidiPlayer pattern={data!} />
+          {/*<MidiPlayer pattern={data!} />*/}
         </div>
       </div>
     </div>

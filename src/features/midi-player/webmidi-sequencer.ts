@@ -156,7 +156,7 @@ const initialize = (
 const updatePattern = (state: State, pattern: TB303Pattern): State => {
   if (state.state.type === SeqStateT.Playing) {
     const s = state.state;
-    const steps = parseSteps(pattern.steps);
+    const steps = parseSteps(pattern.bars[0].steps);
     return {
       ...state,
       params: { ...state.params, pattern },
@@ -213,7 +213,7 @@ const update = (
       } else {
         const tempo = state.params.tempo;
         const sequencerState = sequencerInit();
-        const steps = parseSteps(state.params.pattern.steps);
+        const steps = parseSteps(state.params.pattern.bars[0].steps);
         const clock = createClock(
           drift => dispatch({ type: SeqActionT.Timeout, drift }),
           stepDurationSeconds(tempo) * 1000,

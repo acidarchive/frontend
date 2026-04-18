@@ -4,6 +4,7 @@ import {
   Circle,
   PlusCircle,
   RefreshCw,
+  X,
 } from 'lucide-react';
 import {
   CheckboxSharp,
@@ -30,8 +31,6 @@ import {
   UserSharp,
 } from 'pixelarticons/react';
 
-const XIcon = () => <span>✕</span>;
-
 export const Icons = {
   Lightbulb,
   Moon,
@@ -54,7 +53,7 @@ export const Icons = {
   PlusBoxSharp,
   MoreHorizontalSharp,
   Search,
-  XIcon,
+  XIcon: X,
   Circle,
   Plus,
   MailSharp,
