@@ -15,7 +15,7 @@ const COGNITO_ERROR_MAP: Record<
     status: 401,
   },
   UserAlreadyAuthenticatedException: {
-    code: ErrorCode.COGNITO_NOT_AUTHORIZED,
+    code: ErrorCode.COGNITO_ALREADY_AUTHENTICATED,
     message: 'Already signed in.',
     status: 400,
   },
