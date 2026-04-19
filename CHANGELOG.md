@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Sign out stale session before retrying sign in
+
+
+## [0.0.1-alpha.96] - 2026-04-19
+
 ### 🌀 Added
 
 - Show bars in tb303 sequencer grid
@@ -872,7 +879,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.95..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.96..HEAD
+[0.0.1-alpha.96]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.95..v0.0.1-alpha.96
 [0.0.1-alpha.95]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.94..v0.0.1-alpha.95
 [0.0.1-alpha.94]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.93..v0.0.1-alpha.94
 [0.0.1-alpha.93]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.92..v0.0.1-alpha.93
