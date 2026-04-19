@@ -12,7 +12,7 @@ import {
   ChangePasswordFormState,
   ChangePasswordSchema,
 } from '@/lib/definitions';
-import { getErrorMessage } from '@/lib/errors';
+import { ErrorCode, getErrorMessage } from '@/lib/errors';
 import { toAppError } from '@/lib/errors/cognito';
 
 export async function handleSignIn(data: {
@@ -35,6 +35,10 @@ export async function handleSignIn(data: {
     return { success: true };
   } catch (error) {
     const appError = toAppError(error);
+    if (appError.code === ErrorCode.COGNITO_ALREADY_AUTHENTICATED) {
+      await signOut();
+      return handleSignIn(data);
+    }
     return { error: getErrorMessage(appError) };
   }
 }
