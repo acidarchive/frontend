@@ -3,6 +3,13 @@
 
 ### 🌀 Added
 
+- Show bars in tb303 sequencer grid
+
+
+## [0.0.1-alpha.95] - 2026-04-15
+
+### 🌀 Added
+
 - Enable vercel analytics
 
 
@@ -865,7 +872,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.94..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.95..HEAD
+[0.0.1-alpha.95]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.94..v0.0.1-alpha.95
 [0.0.1-alpha.94]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.93..v0.0.1-alpha.94
 [0.0.1-alpha.93]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.92..v0.0.1-alpha.93
 [0.0.1-alpha.92]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.91..v0.0.1-alpha.92
