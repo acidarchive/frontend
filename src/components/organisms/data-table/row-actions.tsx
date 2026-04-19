@@ -29,7 +29,10 @@ export function RowActions({
 }: RowActionsProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const handleDeleteOpen = () => setIsDeleteOpen(true);
+  const handleDeleteOpen = (event: React.SyntheticEvent) => {
+    event.stopPropagation();
+    setIsDeleteOpen(true);
+  };
   const handleDeleteClose = () => setIsDeleteOpen(false);
 
   return (

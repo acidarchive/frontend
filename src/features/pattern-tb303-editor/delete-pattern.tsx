@@ -46,7 +46,7 @@ export function DeletePattern({
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
-      <AlertDialogContent>
+      <AlertDialogContent onClick={event => event.stopPropagation()}>
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Pattern</AlertDialogTitle>
           <AlertDialogDescription>
