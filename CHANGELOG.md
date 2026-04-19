@@ -3,6 +3,13 @@
 
 ### 🔧 Fixed
 
+- Prevent sheet preview from opening on delete
+
+
+## [0.0.1-alpha.97] - 2026-04-19
+
+### 🔧 Fixed
+
 - Sign out stale session before retrying sign in
 
 
@@ -879,7 +886,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.96..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.97..HEAD
+[0.0.1-alpha.97]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.96..v0.0.1-alpha.97
 [0.0.1-alpha.96]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.95..v0.0.1-alpha.96
 [0.0.1-alpha.95]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.94..v0.0.1-alpha.95
 [0.0.1-alpha.94]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.93..v0.0.1-alpha.94
