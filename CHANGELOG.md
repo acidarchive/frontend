@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🌀 Added
+
+- User avatar component
+
+
+## [0.0.1-alpha.102] - 2026-04-20
+
 ### 🔧 Fixed
 
 - Correct signout button
@@ -914,7 +921,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.101..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.102..HEAD
+[0.0.1-alpha.102]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.101..v0.0.1-alpha.102
 [0.0.1-alpha.101]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.100..v0.0.1-alpha.101
 [0.0.1-alpha.100]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.99..v0.0.1-alpha.100
 [0.0.1-alpha.99]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.98..v0.0.1-alpha.99
