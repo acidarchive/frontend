@@ -13,6 +13,7 @@ import {
   ChevronRight,
   ChevronsVertical,
   ChevronUp,
+  CoffeeSharp,
   Eye,
   EyeOff,
   KeyboardMusicSharp,
@@ -60,4 +61,5 @@ export const Icons = {
   AlertCircle,
   AlertTriangle,
   PlusCircle,
+  Coffee: CoffeeSharp,
 };
