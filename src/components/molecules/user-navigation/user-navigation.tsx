@@ -56,9 +56,7 @@ export function UserNavigation() {
           </Link>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <SignOutButton>Sign Out</SignOutButton>
-        </DropdownMenuItem>
+        <SignOutButton>Sign Out</SignOutButton>
       </DropdownMenuContent>
     </DropdownMenu>
   );

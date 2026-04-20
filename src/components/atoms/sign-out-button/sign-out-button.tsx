@@ -1,5 +1,7 @@
+'use client';
 import { useRouter } from 'next/navigation';
 
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { useUser } from '@/context/user-context';
 
 interface SignOutButtonProps {
@@ -15,8 +17,6 @@ export function SignOutButton({ children }: SignOutButtonProps) {
   };
 
   return (
-    <button onClick={handleSignOutClick} className="sign-out-button">
-      {children}
-    </button>
+    <DropdownMenuItem onClick={handleSignOutClick}>{children}</DropdownMenuItem>
   );
 }
