@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useReducer } from 'react';
 
 import { Icons } from '@/components/atoms/icons';
+import { UserAvatar } from '@/components/atoms/user-avatar';
 import { FormAlert } from '@/components/molecules/form-alert';
 import { ImageDropzone } from '@/components/molecules/image-dropzone';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { useUser } from '@/context/user-context';
@@ -152,10 +152,11 @@ export function AvatarUpload() {
             disabled={isUploading}
           >
             <div className="flex flex-col gap-2 justify-center items-center">
-              <Avatar className="size-20">
-                <AvatarImage src={preview ?? user?.avatar_url ?? ''} />
-                <AvatarFallback />
-              </Avatar>
+              <UserAvatar
+                username={user?.username ?? ''}
+                avatarUrl={preview ?? user?.avatar_url}
+                className="size-20"
+              />
               <p className="text-muted-foreground text-xs">
                 Click or drag to upload
               </p>
