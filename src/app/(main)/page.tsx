@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://acidarchive.com/smiley',
+        url: 'https://acidarchive.com/smiley.png',
         alt: 'Acid Archive',
       },
     ],
