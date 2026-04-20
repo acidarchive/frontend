@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "version": "0.0.1-alpha.100",
+  "version": "0.0.1-alpha.101",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",

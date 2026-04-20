@@ -1,6 +1,13 @@
 # 🎛️ Acid Archive Changelog
 ## [Latest]
 
+### 🔧 Fixed
+
+- Metadata image correct extenstion
+
+
+## [0.0.1-alpha.100] - 2026-04-20
+
 ### 🌀 Added
 
 - Add metadata to home page
@@ -900,7 +907,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.99..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.100..HEAD
+[0.0.1-alpha.100]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.99..v0.0.1-alpha.100
 [0.0.1-alpha.99]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.98..v0.0.1-alpha.99
 [0.0.1-alpha.98]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.97..v0.0.1-alpha.98
 [0.0.1-alpha.97]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.96..v0.0.1-alpha.97
