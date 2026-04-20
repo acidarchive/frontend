@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { UserAvatar } from '@/components/atoms/user-avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { formatRelativeTime } from '@/lib/date';
 import { PublicTB303PatternItem } from '@/types/api';
@@ -28,13 +28,11 @@ export const PatternCard: React.FC<PatternCardProps> = ({ pattern }) => {
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <Avatar className="size-9">
-              <AvatarImage
-                src={pattern.avatar_url || undefined}
-                alt={pattern.username}
-              />
-              <AvatarFallback className="text-xs" />
-            </Avatar>
+            <UserAvatar
+              username={pattern.username}
+              avatarUrl={pattern.avatar_url}
+              className="size-9"
+            />
             <span className="text-sm font-medium">{pattern.username}</span>
           </div>
         </CardContent>

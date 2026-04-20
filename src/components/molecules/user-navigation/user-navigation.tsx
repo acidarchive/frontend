@@ -2,7 +2,7 @@
 import Link from 'next/link';
 
 import { SignOutButton } from '@/components/atoms/sign-out-button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { UserAvatar } from '@/components/atoms/user-avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -19,11 +19,7 @@ export function UserNavigation() {
   const { user, isLoading } = useUser();
 
   if (isLoading) {
-    return (
-      <Avatar>
-        <AvatarFallback className="rounded-lg" />
-      </Avatar>
-    );
+    return <UserAvatar />;
   }
 
   if (!user) {
@@ -34,10 +30,7 @@ export function UserNavigation() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar>
-            <AvatarImage src={user.avatar_url || ''} alt={user.username} />
-            <AvatarFallback className="rounded-lg" />
-          </Avatar>
+          <UserAvatar username={user.username} avatarUrl={user.avatar_url} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
