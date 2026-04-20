@@ -3,6 +3,13 @@
 
 ### 🔧 Fixed
 
+- Correct signout button
+
+
+## [0.0.1-alpha.101] - 2026-04-20
+
+### 🔧 Fixed
+
 - Metadata image correct extenstion
 
 
@@ -907,7 +914,8 @@
 - Init
 
 
-[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.100..HEAD
+[unreleased]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.101..HEAD
+[0.0.1-alpha.101]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.100..v0.0.1-alpha.101
 [0.0.1-alpha.100]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.99..v0.0.1-alpha.100
 [0.0.1-alpha.99]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.98..v0.0.1-alpha.99
 [0.0.1-alpha.98]: https://github.com/acidarchive/frontend/compare/v0.0.1-alpha.97..v0.0.1-alpha.98
