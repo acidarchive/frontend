@@ -45,6 +45,7 @@ export function CreatePattern({ onSuccess }: CreatePatternProps) {
       onSubmit={handleSubmit}
       onReset={handleReset}
       error={error}
+      isSubmitting={createPatternMutation.isPending}
     />
   );
 }
