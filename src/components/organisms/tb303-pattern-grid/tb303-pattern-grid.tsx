@@ -6,6 +6,7 @@ import { TB303Notes } from './tb303-notes';
 import { TB303Sequencer } from './tb303-sequencer';
 import { TB303Settings } from './tb303-settings';
 import { usePatternBars } from './use-pattern-bars';
+import { MidiPlayer } from '@/features/midi-player';
 
 export interface TB303PatternGridProps {
   readonly?: boolean;
