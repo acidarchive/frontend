@@ -20,6 +20,7 @@ interface PatternEditorProps {
   initialData?: PatternFormData;
   error?: string;
   readonly?: boolean;
+  isSubmitting?: boolean;
   onReset?: () => void;
   onSubmit?: (data: PatternFormData) => Promise<void>;
 }
@@ -31,6 +32,7 @@ export function PatternEditor({
   error: externalError,
   onReset: externalReset,
   readonly,
+  isSubmitting,
 }: PatternEditorProps) {
   const methods = useForm({
     resolver: zodResolver(PatternFormSchema),
@@ -66,6 +68,7 @@ export function PatternEditor({
         <PatternTB303Form
           readonly={readonly}
           error={error}
+          isSubmitting={isSubmitting}
           onSubmit={handleSubmit(handleFormSubmit)}
           onReset={handleReset}
         />

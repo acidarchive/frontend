@@ -20,6 +20,7 @@ interface PatternTB303FormProps {
 export function PatternTB303Form({
   readonly,
   error,
+  isSubmitting,
   onSubmit,
   onReset,
 }: PatternTB303FormProps) {
@@ -69,10 +70,17 @@ export function PatternTB303Form({
             />
             {onSubmit && (
               <div className="flex justify-end gap-2">
-                <Button type="button" variant="secondary" onClick={onReset}>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={onReset}
+                  disabled={isSubmitting}
+                >
                   Reset
                 </Button>
-                <Button type="submit">Save</Button>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Saving...' : 'Save'}
+                </Button>
               </div>
             )}
           </div>

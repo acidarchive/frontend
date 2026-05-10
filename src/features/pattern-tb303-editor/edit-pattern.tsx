@@ -58,6 +58,7 @@ export function EditPattern({ patternId, onSuccess }: EditPatternProps) {
       error={error}
       onSubmit={handleSubmit}
       onReset={handleReset}
+      isSubmitting={updatePatternMutation.isPending}
     />
   );
 }
