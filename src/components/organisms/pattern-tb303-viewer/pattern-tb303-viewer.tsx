@@ -6,6 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { GridInput } from '@/components/atoms/grid-input';
 import { TB303PatternGrid } from '@/components/organisms/tb303-pattern-grid';
 import { TB303Pattern } from '@/types/api';
+import { MidiPlayer } from '@/features/midi-player';
 
 interface PatternTB303ViewerProps {
   data: TB303Pattern;
@@ -27,6 +28,7 @@ export function PatternTB303Viewer({ data }: PatternTB303ViewerProps) {
         </div>
       </div>
       <TB303PatternGrid readonly={true} />
+      <MidiPlayer pattern={data} />
     </FormProvider>
   );
 }

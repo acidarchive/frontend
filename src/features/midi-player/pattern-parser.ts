@@ -87,10 +87,6 @@ const isNote = (s: unknown): s is Note =>
 export const parseSteps = (steps: TB303Step[]): Step[] => {
   const result: Step[] = [];
   for (const [index, step] of steps.entries()) {
-    if (step.number !== index + 1)
-      throw new Error(
-        `MIDI: step at index ${index} has number ${step.number}, expected ${index + 1}`,
-      );
     if (step.time === TimeEnum.rest) {
       result.push({ gate: false });
       continue;
