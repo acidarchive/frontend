@@ -2,7 +2,13 @@
 
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  startTransition,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import { handleSignOut } from '@/dal/auth';
 import { fetchMe } from '@/dal/users';
@@ -23,7 +29,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<Me>();
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUser = async () => {
+  const refreshUser = async () => {
+    setIsLoading(true);
     try {
       const session = await fetchAuthSession();
       if (!session.tokens) {
@@ -41,35 +48,55 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const refreshUser = async () => {
-    setIsLoading(true);
-    await fetchUser();
-  };
-
   const signOut = async () => {
     await handleSignOut();
-    setUser(undefined);
-    setIsLoading(false);
+    startTransition(() => {
+      setUser(undefined);
+      setIsLoading(false);
+    });
   };
 
   useEffect(() => {
-    const unsubscribe = Hub.listen('auth', ({ payload }) => {
+    const fetchUser = async () => {
+      try {
+        const session = await fetchAuthSession();
+        if (!session.tokens) {
+          setUser(undefined);
+          return;
+        }
+        const me = await fetchMe();
+        setUser(me);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+        setUser(undefined);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const handleAuthEvent = async ({
+      payload,
+    }: {
+      payload: { event: string };
+    }) => {
       switch (payload.event) {
         case 'signedIn':
         case 'tokenRefresh': {
-          fetchUser();
+          await fetchUser();
           break;
         }
         case 'signedOut': {
-          setUser(undefined);
-          setIsLoading(false);
+          startTransition(() => {
+            setUser(undefined);
+            setIsLoading(false);
+          });
           break;
         }
       }
-    });
+    };
 
+    const unsubscribe = Hub.listen('auth', handleAuthEvent);
     fetchUser();
-
     return unsubscribe;
   }, []);
 
